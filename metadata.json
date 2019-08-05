@@ -2,13 +2,54 @@
   "name": "treydock-gpfs",
   "version": "0.0.1",
   "author": "treydock",
-  "summary": "gpfs Puppet module",
+  "summary": "GPFS Puppet module",
   "license": "Apache 2.0",
-  "source": "git://github.com/treydock/puppet-gpfs.git",
-  "issues_url": "https://github.com/treydock/puppet-gpfs/issues",
+  "source": "https://github.com/treydock/puppet-gpfs",
   "project_page": "https://github.com/treydock/puppet-gpfs",
+  "issues_url": "https://github.com/treydock/puppet-gpfs/issues",
   "dependencies": [
-    {"name": "puppetlabs-stdlib", "version_range": ">= 3.2.0 <5.0.0"}
-  ]
+    {
+      "name": "puppetlabs-stdlib",
+      "version_range": ">= 4.13.0 <6.0.0"
+    }
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [
+        "6",
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "OracleLinux",
+      "operatingsystemrelease": [
+        "6",
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "6",
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "Scientific",
+      "operatingsystemrelease": [
+        "6",
+        "7"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 5.0.0 < 7.0.0"
+    }
+  ],
+  "pdk-version": "1.10.0",
+  "template-url": "https://github.com/treydock/pdk-templates.git#master",
+  "template-ref": "heads/master-0-gcfe2325"
 }
-

@@ -1,20 +1,53 @@
 ---
 language: ruby
+cache: bundler
+before_install:
+  - bundle -v
+  - rm -f Gemfile.lock
+  - gem update --system $RUBYGEMS_VERSION
+  - gem --version
+  - bundle -v
+script:
+  - 'bundle exec rake $CHECK'
 bundler_args: --without system_tests
-before_install: rm Gemfile.lock || true
-script: bundle exec rake test
+rvm:
+  - 2.5.3
+stages:
+  - static
+  - spec
+  - acceptance
+  -
+    if: tag =~ ^v\d
+    name: deploy
 matrix:
   fast_finish: true
   include:
-    - rvm: 1.8.7
-      env: PUPPET_GEM_VERSION="~> 3.0"
-    - rvm: 1.9.3
-      env: PUPPET_GEM_VERSION="~> 3.0"
-    - rvm: 2.1.5
-      env: PUPPET_GEM_VERSION="~> 3.0"
-    - rvm: 2.1.5
-      env: PUPPET_GEM_VERSION="~> 3.0" FUTURE_PARSER="yes"
-    - rvm: 2.1.6
-      env: PUPPET_GEM_VERSION="~> 4.0" STRICT_VARIABLES="yes"
+    -
+      env: CHECK="check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop syntax lint metadata_lint"
+      stage: static
+    -
+      env: PUPPET_GEM_VERSION="~> 5.0" CHECK=parallel_spec
+      rvm: 2.4.5
+      stage: spec
+    -
+      env: PUPPET_GEM_VERSION="~> 6.0" CHECK=parallel_spec
+      rvm: 2.5.3
+      stage: spec
+    -
+      env: DEPLOY_TO_FORGE=yes
+      stage: deploy
+branches:
+  only:
+    - master
+    - /^v\d/
 notifications:
-  email: false
+  email: treydock@gmail.com
+deploy:
+  provider: puppetforge
+  user: treydock
+  password:
+    secure: "RgSQCAG0QMVNpBMhoIozGv7zSbZcMED+4pij7loxpJ72I/E3d/wyD0wVxYryW0ZFzqLOx48Fcq1Zzajp+BVYPqKSodXPW8FvrejdmKBk2+2BkAb6ag89YUc+OvcHfhDs312hAWTSI3PlTGTO3eOwdsqwLwrZOESc3GS3Y9o1gnneibz6xEqJuYjPaSH+KRAHIZqHctl7t+L6UCz9RblMa1N1xNhsERp4aqOB45CRxuiuzUpu/2J3QqoZQ1J7A9O2VChia1Cl6xHF3a2nzq8F50hFifk1PuQC+BCQobqmNbHqa4dGK0SNsgG+qoXv/sADqdfp8XGUxhOuWenUMeRwrJi2tLajjc8jNmfhx0mjBNLz1w3ElbIF+vKnAAttxDpXTvzAeyiBr4o1fQ39GA/C+6lg+mRFqJ98O7W8aLuGjRuI3uUswL3qetddIo1QtYMfLeZPfg/DrWm91ukZSHM9ZseHZ5ZqdUKfH50KdqlJ8AuqWiTmEdFx7aOm6GQ7CA/co64vMq2g6VME6ODBOmsB/TbCF1417Nn/uT+xlj3M1xrQtkWMPNjnhu8Y0+1EWBCI/+U4BvqPlO1NoVAYPL9livcnzElA8qRVg3Wu+biHGXDfQa7HEazA9iiMk0hNQ9WwLYS+tXFG6Ls4hy6Wbo2ooiJSwEMDafzgaW407y8QTAk="
+  on:
+    tags: true
+    all_branches: true
+    condition: "$DEPLOY_TO_FORGE = yes"
