@@ -10,6 +10,7 @@
     - set: centos-6
       collection: puppet6
   user: treydock
+  secure: "RgSQCAG0QMVNpBMhoIozGv7zSbZcMED+4pij7loxpJ72I/E3d/wyD0wVxYryW0ZFzqLOx48Fcq1Zzajp+BVYPqKSodXPW8FvrejdmKBk2+2BkAb6ag89YUc+OvcHfhDs312hAWTSI3PlTGTO3eOwdsqwLwrZOESc3GS3Y9o1gnneibz6xEqJuYjPaSH+KRAHIZqHctl7t+L6UCz9RblMa1N1xNhsERp4aqOB45CRxuiuzUpu/2J3QqoZQ1J7A9O2VChia1Cl6xHF3a2nzq8F50hFifk1PuQC+BCQobqmNbHqa4dGK0SNsgG+qoXv/sADqdfp8XGUxhOuWenUMeRwrJi2tLajjc8jNmfhx0mjBNLz1w3ElbIF+vKnAAttxDpXTvzAeyiBr4o1fQ39GA/C+6lg+mRFqJ98O7W8aLuGjRuI3uUswL3qetddIo1QtYMfLeZPfg/DrWm91ukZSHM9ZseHZ5ZqdUKfH50KdqlJ8AuqWiTmEdFx7aOm6GQ7CA/co64vMq2g6VME6ODBOmsB/TbCF1417Nn/uT+xlj3M1xrQtkWMPNjnhu8Y0+1EWBCI/+U4BvqPlO1NoVAYPL9livcnzElA8qRVg3Wu+biHGXDfQa7HEazA9iiMk0hNQ9WwLYS+tXFG6Ls4hy6Wbo2ooiJSwEMDafzgaW407y8QTAk="
 .gitlab-ci.yml:
   delete: true
 appveyor.yml:

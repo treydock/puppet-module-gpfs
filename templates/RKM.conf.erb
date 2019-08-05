@@ -1,0 +1,14 @@
+<%= @rkm_id %> {
+  type = <%= @type %>
+<% @kmip_server_uris.each_with_index do |kmip_server_uri, i| -%>
+<% num = i == 0 ? '' : i+1 -%>
+  kmipServerUri<%= num %> = <%= kmip_server_uri %>
+<% end -%>
+  keyStore = <%= @key_store %>
+  passphrase = <%= @passphrase %>
+  clientCertLabel = <%= @client_cert_label %>
+  tenantName = <%= @tenant_name %>
+  connectionTimeout = <%= @connection_timeout %>
+  connectionAttempts = <%= @connection_attempts %>
+  retrySleep = <%= @retry_sleep %>
+}
