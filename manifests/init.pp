@@ -1,4 +1,18 @@
-# See README.md for more details.
+# @summary base GPFS class
+#
+# @example
+#   include ::gpfs
+#
+# @param manage_repo
+#   Sets if GPFS repo should be managed
+# @param repo_baseurl
+#   The GPFS repo baseurl
+# @param manage_packages
+#   Determines if GPFS packages should be managed
+# @param package_ensure
+#   GPFS package ensure property
+# @param packages
+#   GPFS base packages
 class gpfs (
   Boolean $manage_repo = true,
   Optional[String] $repo_baseurl = undef,

@@ -1,4 +1,18 @@
-# See README.md for more details.
+# @summary GPFS GUI class
+#
+# @example
+#   include ::gpfs::gui
+#
+# @param manage_packages
+#   Determines if GPFS GUI packages should be managed
+# @param package_ensure
+#   GPFS GUI package ensure property
+# @param packages
+#   GPFS GUI packages
+# @param manage_firewall
+#   Determines if firewall should be managed
+# @param firewall_source
+#   Firewall source value
 class gpfs::gui (
   Boolean $manage_packages  = true,
   String $package_ensure    = 'present',

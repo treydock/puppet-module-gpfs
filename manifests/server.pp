@@ -1,4 +1,16 @@
-# See README.md for more details.
+# @summary GPFS server class
+#
+# @example
+#   include ::gpfs::server
+#
+# @param manage_packages
+#   Determines if GPFS server packages should be managed
+# @param package_ensure
+#   GPFS server package ensure property
+# @param packages
+#   GPFS server packages
+# @param bin_paths
+#   Paths to add to PATH
 class gpfs::server (
   Boolean $manage_packages  = true,
   String $package_ensure    = 'present',

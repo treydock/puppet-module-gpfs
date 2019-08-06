@@ -1,4 +1,22 @@
-# See README.md for more details.
+# @summary GPFS client class
+#
+# @example
+#   include ::gpfs::client
+#
+# @param manage_packages
+#   Determines if GPFS client packages should be managed
+# @param package_ensure
+#   GPFS client package ensure property
+# @param packages
+#   GPFS client packages
+# @param manage_ssh_authorized_keys
+#   Determines if SSH authorized_keys should be managed
+# @param ssh_user
+#   SSH user for GPFS
+# @param ssh_authorized_keys
+#   SSH authorized keys for NSDs
+# @param rkms
+#   Hash to define gpfs::client::rkm resources
 class gpfs::client (
   Boolean $manage_packages = true,
   $package_ensure       = 'present',

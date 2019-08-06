@@ -1,4 +1,5 @@
-# Private class.
+# @summary Set GPFS module parameters
+# @api private
 class gpfs::params {
 
   case $::osfamily {

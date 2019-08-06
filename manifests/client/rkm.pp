@@ -1,4 +1,17 @@
+# @summary Manage GPFS RKM
 #
+# @param rkm_id
+# @param type
+# @param kmip_server_uris
+# @param key_store
+# @param key_store_source
+# @param passphrase
+# @param client_cert_label
+# @param tenant_name
+# @param connection_timeout
+# @param connection_attempts
+# @param retry_sleep
+# @param order
 define gpfs::client::rkm (
   $rkm_id               = $name,
   $type                 = 'ISKLM',
