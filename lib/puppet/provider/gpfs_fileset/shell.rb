@@ -2,23 +2,23 @@ require File.expand_path(File.join(File.dirname(__FILE__), '..', 'gpfs'))
 require 'etc'
 require 'uri'
 
-Puppet::Type.type(:gpfs_fileset).provide(:shell, :parent => Puppet::Provider::Gpfs) do
-  desc ""
+Puppet::Type.type(:gpfs_fileset).provide(:shell, parent: Puppet::Provider::Gpfs) do
+  desc ''
 
   mk_resource_methods
 
-  defaultfor :osfamily => :redhat
+  defaultfor osfamily: :redhat
 
-  commands :chown => 'chown'
-  commands :chmod => 'chmod'
-  commands :mmlsfs => '/usr/lpp/mmfs/bin/mmlsfs'
-  commands :mmlsfileset => '/usr/lpp/mmfs/bin/mmlsfileset'
-  #commands :mmclidecode => '/usr/lpp/mmfs/bin/mmclidecode'
-  commands :mmcrfileset => '/usr/lpp/mmfs/bin/mmcrfileset'
-  commands :mmlinkfileset => '/usr/lpp/mmfs/bin/mmlinkfileset'
-  commands :mmunlinkfileset => '/usr/lpp/mmfs/bin/mmunlinkfileset'
-  commands :mmdelfileset => '/usr/lpp/mmfs/bin/mmdelfileset'
-  commands :mmchfileset => '/usr/lpp/mmfs/bin/mmchfileset'
+  commands chown: 'chown'
+  commands chmod: 'chmod'
+  commands mmlsfs: '/usr/lpp/mmfs/bin/mmlsfs'
+  commands mmlsfileset: '/usr/lpp/mmfs/bin/mmlsfileset'
+  # commands :mmclidecode => '/usr/lpp/mmfs/bin/mmclidecode'
+  commands mmcrfileset: '/usr/lpp/mmfs/bin/mmcrfileset'
+  commands mmlinkfileset: '/usr/lpp/mmfs/bin/mmlinkfileset'
+  commands mmunlinkfileset: '/usr/lpp/mmfs/bin/mmunlinkfileset'
+  commands mmdelfileset: '/usr/lpp/mmfs/bin/mmdelfileset'
+  commands mmchfileset: '/usr/lpp/mmfs/bin/mmchfileset'
 
   def self.instances
     filesets = []
@@ -44,7 +44,7 @@ Puppet::Type.type(:gpfs_fileset).provide(:shell, :parent => Puppet::Provider::Gp
         fileset[:max_num_inodes] = l[32].to_i
         fileset[:alloc_inodes] = l[33].to_i
         fileset[:owner] = nil
-        if ! fileset[:path].nil? && File.directory?(fileset[:path])
+        if !fileset[:path].nil? && File.directory?(fileset[:path])
           # Get owner
           s = File.stat(fileset[:path])
           user = Etc.getpwuid(s.uid).name
@@ -60,11 +60,11 @@ Puppet::Type.type(:gpfs_fileset).provide(:shell, :parent => Puppet::Provider::Gp
   def self.prefetch(resources)
     filesets = instances
     resources.keys.each do |name|
-      if provider = filesets.find { |fileset|
+      provider = filesets.find do |fileset|
         fileset.fileset == resources[name][:fileset] && fileset.filesystem == resources[name][:filesystem]
-      }
-        resources[name].provider = provider
       end
+      next unless provider
+      resources[name].provider = provider
     end
   end
 
@@ -76,20 +76,20 @@ Puppet::Type.type(:gpfs_fileset).provide(:shell, :parent => Puppet::Provider::Gp
       next if l[2] == 'HEADER'
       mountpoint = URI.unescape(l[8])
     end
-    fail("Unable to determine filesystem mount point for filesystem #{filesystem}") if mountpoint.nil?
+    raise("Unable to determine filesystem mount point for filesystem #{filesystem}") if mountpoint.nil?
     path = File.join(mountpoint, fileset)
     path
   end
 
   def create
-    fail("Filesystem is mandatory for #{resource.type} #{resource.name}") if resource[:filesystem].nil?
+    raise("Filesystem is mandatory for #{resource.type} #{resource.name}") if resource[:filesystem].nil?
 
     mmcrfileset_args = [resource[:filesystem], resource[:fileset]]
     if resource[:inode_space]
       mmcrfileset_args << '--inode-space'
       mmcrfileset_args << resource[:inode_space]
     end
-    if resource[:max_num_inodes] and resource[:alloc_inodes]
+    if resource[:max_num_inodes] && resource[:alloc_inodes]
       mmcrfileset_args << '--inode-limit'
       mmcrfileset_args << "#{resource[:max_num_inodes]}:#{resource[:alloc_inodes]}"
     elsif resource[:max_num_inodes]
@@ -97,11 +97,11 @@ Puppet::Type.type(:gpfs_fileset).provide(:shell, :parent => Puppet::Provider::Gp
       mmcrfileset_args << resource[:max_num_inodes]
     end
 
-    if resource[:path]
-      path = resource[:path]
-    else
-      path = default_path(resource[:filesystem], resource[:fileset])
-    end
+    path = if resource[:path]
+             resource[:path]
+           else
+             default_path(resource[:filesystem], resource[:fileset])
+           end
 
     mmlinkfileset_args = [resource[:filesystem], resource[:fileset]]
     mmlinkfileset_args << '-J'
@@ -124,7 +124,7 @@ Puppet::Type.type(:gpfs_fileset).provide(:shell, :parent => Puppet::Provider::Gp
   end
 
   def destroy
-    fail("Filesystem is mandatory for #{resource.type} #{resource.name}") if resource[:filesystem].nil?
+    raise("Filesystem is mandatory for #{resource.type} #{resource.name}") if resource[:filesystem].nil?
 
     mmunlinkfileset([resource[:filesystem], resource[:fileset]])
     mmdelfileset([resource[:filesystem], resource[:fileset]])
@@ -158,7 +158,7 @@ Puppet::Type.type(:gpfs_fileset).provide(:shell, :parent => Puppet::Provider::Gp
   end
 
   def flush
-    fail("Filesystem is mandatory for #{resource.type} #{resource.name}") if resource[:filesystem].nil?
+    raise("Filesystem is mandatory for #{resource.type} #{resource.name}") if resource[:filesystem].nil?
 
     if @property_flush[:permissions] || @property_flush[:owner]
       # Determine path
@@ -197,7 +197,7 @@ Puppet::Type.type(:gpfs_fileset).provide(:shell, :parent => Puppet::Provider::Gp
 
     if @property_flush[:max_num_inodes] || @property_flush[:alloc_inodes]
       mmchfileset_args = [resource[:filesystem], resource[:fileset]]
-      if @property_flush[:max_num_inodes] and @property_flush[:alloc_inodes]
+      if @property_flush[:max_num_inodes] && @property_flush[:alloc_inodes]
         mmchfileset_args << '--inode-limit'
         mmchfileset_args << "#{@property_flush[:max_num_inodes]}:#{@property_flush[:alloc_inodes]}"
       elsif @property_flush[:max_num_inodes]
@@ -215,5 +215,4 @@ Puppet::Type.type(:gpfs_fileset).provide(:shell, :parent => Puppet::Provider::Gp
     # resource` will show the correct values after changes have been made).
     @property_hash = resource.to_hash
   end
-
 end

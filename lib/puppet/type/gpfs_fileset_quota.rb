@@ -1,5 +1,5 @@
 Puppet::Type.newtype(:gpfs_fileset_quota) do
-  @doc = %q{Set a GPFS fileset quota'
+  @doc = "Set a GPFS fileset quota'
 
     Example:
 
@@ -10,7 +10,7 @@ Puppet::Type.newtype(:gpfs_fileset_quota) do
         files_soft_limit  => 1000000,
         files_hard_limit  => 1000000,
       }
-  }
+  "
 
   ensurable
 
@@ -56,7 +56,7 @@ Puppet::Type.newtype(:gpfs_fileset_quota) do
     desc 'blockSoftLimit of quota'
 
     validate do |value|
-      unless value =~ /^0$|^([0-9\.]+)(M|G|T)$/
+      unless value =~ %r{^0$|^([0-9\.]+)(M|G|T)$}
         raise ArgumentError, "Invalid block_soft_limit: #{value}, must be in format of [0-9]+(M|G|T)"
       end
     end
@@ -66,7 +66,7 @@ Puppet::Type.newtype(:gpfs_fileset_quota) do
     desc 'blockHardLimit of quota'
 
     validate do |value|
-      unless value =~ /^0$|^([0-9\.]+)(M|G|T)$/
+      unless value =~ %r{^0$|^([0-9\.]+)(M|G|T)$}
         raise ArgumentError, "Invalid block_hard_limit: #{value}, must be in format of [0-9]+(M|G|T)"
       end
     end
@@ -89,11 +89,11 @@ Puppet::Type.newtype(:gpfs_fileset_quota) do
   end
 
   autorequire(:gpfs_fileset) do
-    [ self[:fileset] ]
+    [self[:fileset]]
   end
 
   autorequire(:service) do
-    [ 'gpfsgui' ]
+    ['gpfsgui']
   end
 
   def self.convert_block(value)
@@ -102,9 +102,9 @@ Puppet::Type.newtype(:gpfs_fileset_quota) do
       'G' => 1024**2,
       'T' => 1024**3,
     }
-    if value =~ /^([0-9\.])(T|G|M)$/
-      v = $1.to_f
-      f = $2
+    if value =~ %r{^([0-9\.])(T|G|M)$} # rubocop:disable Style/GuardClause
+      v = Regexp.last_match(1).to_f
+      f = Regexp.last_match(2)
       factor = factors[f]
       return (v * factor)
     else
@@ -115,16 +115,15 @@ Puppet::Type.newtype(:gpfs_fileset_quota) do
   def self.convert_files(value)
     factors = {
       'M' => 10**6,
-      'K' => 10**3
+      'K' => 10**3,
     }
-    if value =~ /^(\d+)(M|K)$/
-      v = $1.to_i
-      f = $2
+    if value =~ %r{^(\d+)(M|K)$} # rubocop:disable Style/GuardClause
+      v = Regexp.last_match(1).to_i
+      f = Regexp.last_match(2)
       factor = factors[f]
       return (v * factor)
     else
       return value
     end
   end
-
 end

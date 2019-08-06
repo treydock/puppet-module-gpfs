@@ -2,8 +2,8 @@ require 'spec_helper_acceptance'
 
 describe 'gpfs_fileset_quota type:' do
   context 'create quota' do
-    it 'should run successfully' do
-      pp =<<-EOS
+    it 'runs successfully' do
+      pp = <<-EOS
       class { 'gpfs':
         packages => [
           'gpfs.adv',
@@ -35,14 +35,14 @@ describe 'gpfs_fileset_quota type:' do
       }
       EOS
 
-      apply_manifest(pp, :catch_failures => true)
-      apply_manifest(pp, :catch_changes => true)
+      apply_manifest(pp, catch_failures: true)
+      apply_manifest(pp, catch_changes: true)
     end
   end
 
   context 'quota with decimal' do
-    it 'should run successfully' do
-      pp =<<-EOS
+    it 'runs successfully' do
+      pp = <<-EOS
       class { 'gpfs':
         packages => [
           'gpfs.adv',
@@ -74,14 +74,14 @@ describe 'gpfs_fileset_quota type:' do
       }
       EOS
 
-      apply_manifest(pp, :catch_failures => true)
-      apply_manifest(pp, :catch_changes => true)
+      apply_manifest(pp, catch_failures: true)
+      apply_manifest(pp, catch_changes: true)
     end
   end
 
   context 'modify quota' do
-    it 'should run successfully' do
-      pp =<<-EOS
+    it 'runs successfully' do
+      pp = <<-EOS
       class { 'gpfs':
         packages => [
           'gpfs.adv',
@@ -113,14 +113,14 @@ describe 'gpfs_fileset_quota type:' do
       }
       EOS
 
-      apply_manifest(pp, :catch_failures => true)
-      apply_manifest(pp, :catch_changes => true)
+      apply_manifest(pp, catch_failures: true)
+      apply_manifest(pp, catch_changes: true)
     end
   end
 
   context 'delete quota' do
-    it 'should run successfully' do
-      pp =<<-EOS
+    it 'runs successfully' do
+      pp = <<-EOS
       class { 'gpfs':
         packages => [
           'gpfs.adv',
@@ -142,9 +142,8 @@ describe 'gpfs_fileset_quota type:' do
       }
       EOS
 
-      apply_manifest(pp, :catch_failures => true)
-      apply_manifest(pp, :catch_changes => true)
+      apply_manifest(pp, catch_failures: true)
+      apply_manifest(pp, catch_changes: true)
     end
   end
-
 end

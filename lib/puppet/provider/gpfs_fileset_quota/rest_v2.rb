@@ -1,12 +1,12 @@
 require File.expand_path(File.join(File.dirname(__FILE__), '..', 'gpfs'))
 
-Puppet::Type.type(:gpfs_fileset_quota).provide(:rest_v2, :parent => Puppet::Provider::Gpfs) do
-  desc ""
+Puppet::Type.type(:gpfs_fileset_quota).provide(:rest_v2, parent: Puppet::Provider::Gpfs) do
+  desc ''
 
   mk_resource_methods
   set_scalemgmt_defaults
 
-  confine :osfamily => :false
+  confine osfamily: :false
 
   def self.instances
     quotas = []
@@ -15,13 +15,13 @@ Puppet::Type.type(:gpfs_fileset_quota).provide(:rest_v2, :parent => Puppet::Prov
       'fields' => ':all:',
     }
     data = get_request('v2/filesystems/:all:/quotas', params)
-    if ! data.has_key?('quotas')
+    unless data.key?('quotas')
       return quotas
     end
-    
-    data['quotas'].collect do |q|
+
+    data['quotas'].map do |q|
       quota = {
-        :ensure => :present,
+        ensure: :present,
       }
       quota[:filesystem] = q['filesystemName']
       quota[:fileset] = q['objectName']
@@ -29,8 +29,8 @@ Puppet::Type.type(:gpfs_fileset_quota).provide(:rest_v2, :parent => Puppet::Prov
       quota[:object_name] = q['objectName']
       quota[:name] = "#{quota[:filesystem]}/#{quota[:fileset]}/#{quota[:object_name]}"
       # block limits are returned in KB but numeric inputs are treated as bytes
-      quota[:block_soft_limit] = self.human_readable_kilobytes(q['blockQuota']) if q['blockQuota']
-      quota[:block_hard_limit] = self.human_readable_kilobytes(q['blockLimit']) if q['blockLimit']
+      quota[:block_soft_limit] = human_readable_kilobytes(q['blockQuota']) if q['blockQuota']
+      quota[:block_hard_limit] = human_readable_kilobytes(q['blockLimit']) if q['blockLimit']
       quota[:files_soft_limit] = q['filesQuota'] if q['filesQuota']
       quota[:files_hard_limit] = q['filesLimit'] if q['filesLimit']
       new(quota)
@@ -40,18 +40,18 @@ Puppet::Type.type(:gpfs_fileset_quota).provide(:rest_v2, :parent => Puppet::Prov
   def self.prefetch(resources)
     quotas = instances
     resources.keys.each do |name|
-      if provider = quotas.find { |quota|
-        quota.fileset == resources[name][:fileset] && 
-        quota.filesystem == resources[name][:filesystem] &&
-        quota.object_name == resources[name][:object_name]
-      }
-        resources[name].provider = provider
+      provider = quotas.find do |quota|
+        quota.fileset == resources[name][:fileset] &&
+          quota.filesystem == resources[name][:filesystem] &&
+          quota.object_name == resources[name][:object_name]
       end
+      next unless provider
+      resources[name].provider = provider
     end
   end
 
   def create
-    fail("Filesystem is mandatory for #{resource.type} #{resource.name}") if resource[:filesystem].nil?
+    raise("Filesystem is mandatory for #{resource.type} #{resource.name}") if resource[:filesystem].nil?
 
     data = {}
     data[:operationType] = 'setQuota'
@@ -65,7 +65,7 @@ Puppet::Type.type(:gpfs_fileset_quota).provide(:rest_v2, :parent => Puppet::Prov
 
     begin
       post_request(uri_path, data)
-    rescue Exception => e
+    rescue Exception => e # rubocop:disable Lint/RescueException
       raise Puppet::Error, "POST to #{uri_path} failed\nError message: #{e.message}"
     end
 
@@ -73,7 +73,7 @@ Puppet::Type.type(:gpfs_fileset_quota).provide(:rest_v2, :parent => Puppet::Prov
   end
 
   def destroy
-    fail("Filesystem is mandatory for #{resource.type} #{resource.name}") if resource[:filesystem].nil?
+    raise("Filesystem is mandatory for #{resource.type} #{resource.name}") if resource[:filesystem].nil?
 
     data = {}
     data[:operationType] = 'setQuota'
@@ -87,7 +87,7 @@ Puppet::Type.type(:gpfs_fileset_quota).provide(:rest_v2, :parent => Puppet::Prov
 
     begin
       post_request(uri_path, data)
-    rescue Exception => e
+    rescue Exception => e # rubocop:disable Lint/RescueException
       raise Puppet::Error, "POST to #{uri_path} failed\nError message: #{e.message}"
     end
     @property_hash.clear
@@ -95,11 +95,11 @@ Puppet::Type.type(:gpfs_fileset_quota).provide(:rest_v2, :parent => Puppet::Prov
 
   def exists?
     @property_hash[:ensure] == :present &&
-    ! (@property_hash[:block_soft_limit] == '0' &&
-       @property_hash[:block_hard_limit] == '0' &&
-       @property_hash[:files_soft_limit] == 0 &&
-       @property_hash[:files_hard_limit] == 0
-      )
+      !(@property_hash[:block_soft_limit] == '0' &&
+         @property_hash[:block_hard_limit] == '0' &&
+         @property_hash[:files_soft_limit].zero? &&
+         @property_hash[:files_hard_limit].zero?
+       )
   end
 
   def initialize(value = {})
@@ -124,8 +124,8 @@ Puppet::Type.type(:gpfs_fileset_quota).provide(:rest_v2, :parent => Puppet::Prov
   end
 
   def flush
-    fail("Filesystem is mandatory for #{resource.type} #{resource.name}") if resource[:filesystem].nil?
-    if not @property_flush.empty?
+    raise("Filesystem is mandatory for #{resource.type} #{resource.name}") if resource[:filesystem].nil?
+    unless @property_flush.empty?
       data = {}
       data[:operationType] = 'setQuota'
       data[:quotaType] = resource[:type]
@@ -138,7 +138,7 @@ Puppet::Type.type(:gpfs_fileset_quota).provide(:rest_v2, :parent => Puppet::Prov
 
       begin
         post_request(uri_path, data)
-      rescue Exception => e
+      rescue Exception => e # rubocop:disable Lint/RescueException
         raise Puppet::Error, "POST to #{uri_path} failed\nError message: #{e.message}"
       end
     end
@@ -146,5 +146,4 @@ Puppet::Type.type(:gpfs_fileset_quota).provide(:rest_v2, :parent => Puppet::Prov
     # resource` will show the correct values after changes have been made).
     @property_hash = resource.to_hash
   end
-
 end

@@ -2,15 +2,15 @@ require File.expand_path(File.join(File.dirname(__FILE__), '..', 'gpfs'))
 require 'fileutils'
 require 'etc'
 
-Puppet::Type.type(:gpfs_fileset).provide(:rest_v2, :parent => Puppet::Provider::Gpfs) do
-  desc ""
+Puppet::Type.type(:gpfs_fileset).provide(:rest_v2, parent: Puppet::Provider::Gpfs) do
+  desc ''
 
   mk_resource_methods
   set_scalemgmt_defaults
 
-  confine :osfamily => :false
+  confine osfamily: :false
 
-  commands :chown => 'chown'
+  commands chown: 'chown'
 
   def self.instances
     filesets = []
@@ -18,11 +18,11 @@ Puppet::Type.type(:gpfs_fileset).provide(:rest_v2, :parent => Puppet::Provider::
       'fields' => ':all:',
     }
     data = get_request('v2/filesystems/:all:/filesets', params)
-    if ! data.has_key?('filesets')
+    unless data.key?('filesets')
       return filesets
     end
-    
-    data['filesets'].collect do |fileset|
+
+    data['filesets'].map do |fileset|
       filesystem = fileset['config']['filesystemName']
       name = fileset['config']['filesetName']
       path = fileset['config']['path']
@@ -35,38 +35,38 @@ Puppet::Type.type(:gpfs_fileset).provide(:rest_v2, :parent => Puppet::Provider::
         group = Etc.getgrgid(s.gid).name
         owner = "#{user}:#{group}"
       end
-      
+
       new(
-        :ensure         => :present,
-        :name           => "#{filesystem}/#{name}",
-        :fileset        => name,
-        :filesystem     => filesystem,
-        :path           => path,
-        :max_num_inodes => max_num_inodes,
-        :owner          => owner,
+        ensure: :present,
+        name: "#{filesystem}/#{name}",
+        fileset: name,
+        filesystem: filesystem,
+        path: path,
+        max_num_inodes: max_num_inodes,
+        owner: owner,
       )
     end
   end
 
-  #def self.instances
+  # def self.instances
   #  get_filesets.each do |fileset|
   #    new(fileset)
   #  end
-  #end
+  # end
 
   def self.prefetch(resources)
     filesets = instances
     resources.keys.each do |name|
-      if provider = filesets.find { |fileset|
+      provider = filesets.find do |fileset|
         fileset.fileset == resources[name][:fileset] && fileset.filesystem == resources[name][:filesystem]
-      }
-        resources[name].provider = provider
       end
+      next unless provider
+      resources[name].provider = provider
     end
   end
 
   def create
-    fail("Filesystem is mandatory for #{resource.type} #{resource.name}") if resource[:filesystem].nil?
+    raise("Filesystem is mandatory for #{resource.type} #{resource.name}") if resource[:filesystem].nil?
 
     data = {}
     data[:filesetName] = resource[:fileset]
@@ -80,7 +80,7 @@ Puppet::Type.type(:gpfs_fileset).provide(:rest_v2, :parent => Puppet::Provider::
 
     begin
       post_request(uri_path, data)
-    rescue Exception => e
+    rescue Exception => e # rubocop:disable Lint/RescueException
       raise Puppet::Error, "POST to #{uri_path} failed\nError message: #{e.message}"
     end
 
@@ -88,12 +88,12 @@ Puppet::Type.type(:gpfs_fileset).provide(:rest_v2, :parent => Puppet::Provider::
   end
 
   def destroy
-    fail("Filesystem is mandatory for #{resource.type} #{resource.name}") if resource[:filesystem].nil?
+    raise("Filesystem is mandatory for #{resource.type} #{resource.name}") if resource[:filesystem].nil?
 
     uri_path = "v2/filesystems/#{resource[:filesystem]}/filesets/#{resource[:fileset]}"
     begin
       delete_request(uri_path)
-    rescue Exception => e
+    rescue Exception => e # rubocop:disable Lint/RescueException
       raise Puppet::Error, "DELETE to #{uri_path} failed\nError message: #{e.message}"
     end
 
@@ -126,7 +126,7 @@ Puppet::Type.type(:gpfs_fileset).provide(:rest_v2, :parent => Puppet::Provider::
   end
 
   def flush
-    fail("Filesystem is mandatory for #{resource.type} #{resource.name}") if resource[:filesystem].nil?
+    raise("Filesystem is mandatory for #{resource.type} #{resource.name}") if resource[:filesystem].nil?
 
     if @property_flush[:owner]
       # Determine path
@@ -170,10 +170,10 @@ Puppet::Type.type(:gpfs_fileset).provide(:rest_v2, :parent => Puppet::Provider::
       data[:allocInodes] = @property_flush[:alloc_inodes] if @property_flush[:alloc_inodes]
 
       uri_path = "v2/filesystems/#{resource[:filesystem]}/filesets/#{resource[:fileset]}"
-  
+
       begin
         put_request(uri_path, data)
-      rescue Exception => e
+      rescue Exception => e # rubocop:disable Lint/RescueException
         raise Puppet::Error, "PUT to #{uri_path} failed\nError message: #{e.message}"
       end
     end
@@ -181,5 +181,4 @@ Puppet::Type.type(:gpfs_fileset).provide(:rest_v2, :parent => Puppet::Provider::
     # resource` will show the correct values after changes have been made).
     @property_hash = resource.to_hash
   end
-
 end

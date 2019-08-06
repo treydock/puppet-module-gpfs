@@ -6,7 +6,7 @@
 # In this case I'm trying the relative path first, then falling back to normal
 # mechanisms. This should be fixed in future versions of puppet but it looks
 # like we'll need to maintain this for some time perhaps.
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__),"..","..",".."))
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', '..', '..'))
 require 'puppet/util/scalemgmt_validator'
 
 # This file contains a provider for the resource type `scalemgmt_conn_validator`,
@@ -36,7 +36,7 @@ Puppet::Type.type(:scalemgmt_conn_validator).provide(:net_http) do
       # especially on the first install.  Therefore, our first connection attempt
       # may fail.  Here we have somewhat arbitrarily chosen to retry every 2
       # seconds until the configurable timeout has expired.
-      Puppet.notice("Failed to connect to scalemgmt; sleeping 2 seconds before retry")
+      Puppet.notice('Failed to connect to scalemgmt; sleeping 2 seconds before retry')
       sleep 2
       success = validator.attempt_connection
     end
@@ -65,6 +65,4 @@ Puppet::Type.type(:scalemgmt_conn_validator).provide(:net_http) do
   def validator
     @validator ||= Puppet::Util::ScalemgmtValidator.new(resource[:scalemgmt_server], resource[:scalemgmt_port], resource[:api_user], resource[:api_password], resource[:test_url])
   end
-
 end
-

@@ -1,5 +1,5 @@
 Puppet::Type.newtype(:gpfs_fileset) do
-  @doc = %q{Manage a GPFS fileset"
+  @doc = %q(Manage a GPFS fileset"
 
     Example:
 
@@ -13,16 +13,16 @@ Puppet::Type.newtype(:gpfs_fileset) do
         alloc_inodes    => 1000000,
       }
 
-  }
+  )
 
   ensurable
 
   newparam(:name) do
-    desc "The default namevar."
+    desc 'The default namevar.'
   end
 
   newparam(:fileset) do
-    desc "The GPFS fileset name."
+    desc 'The GPFS fileset name.'
 
     defaultto do
       @resource[:name]
@@ -30,31 +30,31 @@ Puppet::Type.newtype(:gpfs_fileset) do
   end
 
   newparam(:filesystem) do
-    desc "The GPFS filesystem name."
+    desc 'The GPFS filesystem name.'
   end
 
   newproperty(:path) do
-    desc "The GPFS fileset path."
+    desc 'The GPFS fileset path.'
 
     validate do |value|
       unless Puppet::Util.absolute_path?(value)
-        raise ArgumentError, "Fileset path must be fully qualified, not %s" % value
+        raise ArgumentError, 'Fileset path must be fully qualified, not %s' % value
       end
     end
   end
 
   newproperty(:owner) do
-    desc "Owner of GPFS fileset: user:group"
+    desc 'Owner of GPFS fileset: user:group'
 
     validate do |value|
-      unless value =~ /^\w+:\w+$/
-        raise ArgumentError, "Owner must be user:group, not %s" % value
+      unless value =~ %r{^\w+:\w+$}
+        raise ArgumentError, 'Owner must be user:group, not %s' % value
       end
     end
   end
 
   newparam(:permissions) do
-    desc "Permissions of fileset."
+    desc 'Permissions of fileset.'
 
     munge do |value|
       value.to_i
@@ -62,30 +62,30 @@ Puppet::Type.newtype(:gpfs_fileset) do
   end
 
   newparam(:inode_space) do
-    desc "inodeSpace of fileset."
+    desc 'inodeSpace of fileset.'
     defaultto('new')
   end
 
   newproperty(:max_num_inodes) do
-    desc "Max number of inodes for fileset."
+    desc 'Max number of inodes for fileset.'
 
     validate do |value|
-      unless value.to_s =~ /^\d+/
-        raise ArgumentError, "max_num_inodes %s is not a valid integer" % value
+      unless value.to_s =~ %r{^\d+}
+        raise ArgumentError, 'max_num_inodes %s is not a valid integer' % value
       end
     end
 
     def insync?(is)
-      if is.is_a?(Array)
-        current = is[0].to_i
-      else
-        current = is.to_i
-      end
-      if @should.is_a?(Array)
-        should = @should[0].to_i
-      else
-        should = @should.to_i
-      end
+      current = if is.is_a?(Array)
+                  is[0].to_i
+                else
+                  is.to_i
+                end
+      should = if @should.is_a?(Array)
+                 @should[0].to_i
+               else
+                 @should.to_i
+               end
       # If the difference is less than or equal to 32, consider in sync.
       diff = current - should
       if diff.abs <= 32
@@ -97,25 +97,25 @@ Puppet::Type.newtype(:gpfs_fileset) do
   end
 
   newproperty(:alloc_inodes) do
-    desc "Allocated inodes for fileset."
+    desc 'Allocated inodes for fileset.'
 
     validate do |value|
-      unless value.to_s =~ /^\d+$/
-        raise ArgumentError, "alloc_inodes %s is not a valid integer" % value
+      unless value.to_s =~ %r{^\d+$}
+        raise ArgumentError, 'alloc_inodes %s is not a valid integer' % value
       end
     end
 
     def insync?(is)
-      if is.is_a?(Array)
-        current = is[0].to_i
-      else
-        current = is.to_i
-      end
-      if @should.is_a?(Array)
-        should = @should[0].to_i
-      else
-        should = @should.to_i
-      end
+      current = if is.is_a?(Array)
+                  is[0].to_i
+                else
+                  is.to_i
+                end
+      should = if @should.is_a?(Array)
+                 @should[0].to_i
+               else
+                 @should.to_i
+               end
       # If more inodes are allocated than specified in Puppet, consider no change needed
       # as impossible to reduce allocated inodes
       if current > should
@@ -136,11 +136,10 @@ Puppet::Type.newtype(:gpfs_fileset) do
   end
 
   autorequire(:service) do
-    [ 'gpfsgui' ]
+    ['gpfsgui']
   end
 
   autorequire(:scalemgmt_conn_validator) do
-    [ 'gpfs' ]
+    ['gpfs']
   end
-
 end

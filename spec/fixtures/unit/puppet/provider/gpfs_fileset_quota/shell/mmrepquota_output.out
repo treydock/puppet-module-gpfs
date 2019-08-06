@@ -1,0 +1,10 @@
+mmrepquota::HEADER:version:reserved:reserved:filesystemName:quotaType:id:name:blockUsage:blockQuota:blockLimit:blockInDoubt:blockGrace:filesUsage:filesQuota:filesLimit:filesInDoubt:filesGrace:remarks:quota:defQuota:fid:filesetname:
+mmrepquota::0:1:::test:USR:0:root:256:0:0:0:none:1:0:0:0:none:i:on:off:0:root:
+mmrepquota::0:1:::test:USR:0:root:0:0:0:10240:none:1:0:0:39:none:i:on:off:2:qtest1:
+mmrepquota::0:1:::test:USR:20821:tdockendorf:0:0:0:0:none:1:0:0:0:none:i:on:off:1:test3:
+mmrepquota::0:1:::test:GRP:0:root:256:0:0:0:none:1:0:0:0:none:i:on:off:0:root:
+mmrepquota::0:1:::test:GRP:0:root:0:0:0:10240:none:1:0:0:39:none:i:on:off:2:qtest1:
+mmrepquota::0:1:::test:GRP:103:sysp:0:0:0:0:none:1:0:0:0:none:i:on:off:1:test3:
+mmrepquota::0:1:::test:FILESET:0:root:256:0:0:0:none:1:0:0:0:none:i:on:off:::
+mmrepquota::0:1:::test:FILESET:1:test3:0:0:0:0:none:1:0:0:0:none:N/A:on:off:::
+mmrepquota::0:1:::test:FILESET:2:qtest1:0:1073741824:1073741824:0:none:1:400000:400000:0:none:e:on:off:::

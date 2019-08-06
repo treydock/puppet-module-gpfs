@@ -4,8 +4,8 @@ require 'net/http'
 require 'openssl'
 require 'uri'
 
+# Shared provider class
 class Puppet::Provider::Gpfs < Puppet::Provider
-
   class << self
     attr_accessor :base_url
     attr_accessor :api_user
@@ -20,18 +20,18 @@ class Puppet::Provider::Gpfs < Puppet::Provider
 
   def self.parse_response_body(response)
     data = JSON.parse(response.body)
-  rescue JSON::ParseError => e
-    Puppet.debug("Unable to parse response body")
+  rescue JSON::ParseError
+    Puppet.debug('Unable to parse response body')
     data = nil
   ensure
-    return data
+    data
   end
 
   def self.response_message(response)
-    data = self.parse_response_body(response)
+    data = parse_response_body(response)
     return nil if data.nil?
     message = nil
-    if data.has_key?('status')
+    if data.key?('status')
       message = data['status']['message']
     end
     message
@@ -41,7 +41,7 @@ class Puppet::Provider::Gpfs < Puppet::Provider
     jobid = data['jobs'][0]['jobId']
     wait = true
     while wait
-      data = self.request("v2/jobs/#{jobid}", 'GET')
+      data = request("v2/jobs/#{jobid}", 'GET')
       status = data['jobs'][0]['status']
       if status == 'RUNNING'
         Puppet.debug("Job #{jobid} still running, sleeping 1 second...")
@@ -58,7 +58,7 @@ class Puppet::Provider::Gpfs < Puppet::Provider
   end
 
   def self.request(uri_path, type, params = nil, wait = false)
-    uri = URI.join(self.base_url, uri_path)
+    uri = URI.join(base_url, uri_path)
     header = {
       'Content-Type' => 'application/json',
       'Accept' => 'application/json',
@@ -67,7 +67,7 @@ class Puppet::Provider::Gpfs < Puppet::Provider
 
     case type
     when 'GET'
-      if params && ! params.empty?
+      if params && !params.empty?
         uri.query = URI.encode_www_form(params)
       end
       request = Net::HTTP::Get.new(uri.request_uri, header)
@@ -83,51 +83,47 @@ class Puppet::Provider::Gpfs < Puppet::Provider
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    request.basic_auth(self.api_user, self.api_password)
-    Puppet.debug("Send #{type} to #{uri.to_s}")
+    request.basic_auth(api_user, api_password)
+    Puppet.debug("Send #{type} to #{uri}")
     if body
       request.body = body
       Puppet.debug("DATA: #{body}")
     end
     response = http.request(request)
-    unless response.kind_of?(Net::HTTPSuccess)
-      raise Puppet::Error, "#{type} to #{uri.to_s} failed with code #{response.code}, message=#{self.response_message(response)}"
+    unless response.is_a?(Net::HTTPSuccess)
+      raise Puppet::Error, "#{type} to #{uri} failed with code #{response.code}, message=#{response_message(response)}"
     end
-    data = self.parse_response_body(response)
+    data = parse_response_body(response)
     Puppet.debug("Response data:\n#{JSON.pretty_generate(data)}")
     return data unless wait
-    job_success, job_output = self.wait_for_job(data)
-    if not job_success
-      raise Puppet::Error, "#{type} to #{uri.to_s} job failed: #{job_output}"
-    end
+    job_success, job_output = wait_for_job(data)
+    raise Puppet::Error, "#{type} to #{uri} job failed: #{job_output}" unless job_success
   end
 
   def self.get_request(uri_path, params = nil, wait = false)
-=begin
-    uri = URI.join(self.base_url, uri_path)
-    header = {
-      'Content-Type' => 'application/json',
-      'Accept' => 'application/json',
-    }
-
-    if params && ! params.empty?
-      uri.query = URI.encode_www_form(params)
-    end
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    request = Net::HTTP::Get.new(uri.request_uri, header)
-    request.basic_auth(self.api_user, self.api_password)
-    Puppet.debug("Send GET to #{uri.to_s}")
-    response = http.request(request)
-    unless response.kind_of?(Net::HTTPSuccess)
-      raise Puppet::Error, "GET to #{uri.to_s} failed with code #{response.code}, message=#{self.response_message(response)}"
-    end
-    data = self.parse_response_body(response)
-    Puppet.debug("Response data: #{data}")
-    return data
-=end
-    self.request(uri_path, 'GET', params, wait)
+    #     uri = URI.join(self.base_url, uri_path)
+    #     header = {
+    #       'Content-Type' => 'application/json',
+    #       'Accept' => 'application/json',
+    #     }
+    #
+    #     if params && ! params.empty?
+    #       uri.query = URI.encode_www_form(params)
+    #     end
+    #     http = Net::HTTP.new(uri.host, uri.port)
+    #     http.use_ssl = true
+    #     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    #     request = Net::HTTP::Get.new(uri.request_uri, header)
+    #     request.basic_auth(self.api_user, self.api_password)
+    #     Puppet.debug("Send GET to #{uri.to_s}")
+    #     response = http.request(request)
+    #     unless response.kind_of?(Net::HTTPSuccess)
+    #       raise Puppet::Error, "GET to #{uri.to_s} failed with code #{response.code}, message=#{self.response_message(response)}"
+    #     end
+    #     data = self.parse_response_body(response)
+    #     Puppet.debug("Response data: #{data}")
+    #     return data
+    request(uri_path, 'GET', params, wait)
   end
 
   def get_request(*args)
@@ -135,28 +131,26 @@ class Puppet::Provider::Gpfs < Puppet::Provider
   end
 
   def self.post_request(uri_path, data, wait = true)
-=begin
-    uri = URI.join(self.base_url, uri_path)
-    header = {
-      'Content-Type' => 'application/json',
-      'Accept' => 'application/json',
-    }
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    request = Net::HTTP::Post.new(uri.request_uri, header)
-    request.basic_auth(self.api_user, self.api_password)
-    request.body = data.to_json
-    Puppet.debug("Send POST to #{uri.to_s} with data #{data}")
-    response = http.request(request)
-    unless response.kind_of?(Net::HTTPSuccess)
-      raise Puppet::Error, "POST to #{uri.to_s} failed with code #{response.code}, message=#{self.response_message(response)}"
-    end
-    data = self.parse_response_body(response)
-    Puppet.debug("Response data: #{data}")
-    return data
-=end
-    self.request(uri_path, 'POST', data, wait)
+    #     uri = URI.join(self.base_url, uri_path)
+    #     header = {
+    #       'Content-Type' => 'application/json',
+    #       'Accept' => 'application/json',
+    #     }
+    #     http = Net::HTTP.new(uri.host, uri.port)
+    #     http.use_ssl = true
+    #     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    #     request = Net::HTTP::Post.new(uri.request_uri, header)
+    #     request.basic_auth(self.api_user, self.api_password)
+    #     request.body = data.to_json
+    #     Puppet.debug("Send POST to #{uri.to_s} with data #{data}")
+    #     response = http.request(request)
+    #     unless response.kind_of?(Net::HTTPSuccess)
+    #       raise Puppet::Error, "POST to #{uri.to_s} failed with code #{response.code}, message=#{self.response_message(response)}"
+    #     end
+    #     data = self.parse_response_body(response)
+    #     Puppet.debug("Response data: #{data}")
+    #     return data
+    request(uri_path, 'POST', data, wait)
   end
 
   def post_request(*args)
@@ -164,28 +158,26 @@ class Puppet::Provider::Gpfs < Puppet::Provider
   end
 
   def self.put_request(uri_path, data, wait = true)
-=begin
-    uri = URI.join(self.base_url, uri_path)
-    header = {
-      'Content-Type' => 'application/json',
-      'Accept' => 'application/json',
-    }
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    request = Net::HTTP::Put.new(uri.request_uri, header)
-    request.basic_auth(self.api_user, self.api_password)
-    request.body = data.to_json
-    Puppet.debug("Send PUT to #{uri.to_s} with data #{data}")
-    response = http.request(request)
-    unless response.kind_of?(Net::HTTPSuccess)
-      raise Puppet::Error, "PUT to #{uri.to_s} failed with code #{response.code}, message=#{self.response_message(response)}"
-    end
-    data = self.parse_response_body(response)
-    Puppet.debug("Response data: #{data}")
-    return data
-=end
-    self.request(uri_path, 'PUT', data, wait)
+    #     uri = URI.join(self.base_url, uri_path)
+    #     header = {
+    #       'Content-Type' => 'application/json',
+    #       'Accept' => 'application/json',
+    #     }
+    #     http = Net::HTTP.new(uri.host, uri.port)
+    #     http.use_ssl = true
+    #     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    #     request = Net::HTTP::Put.new(uri.request_uri, header)
+    #     request.basic_auth(self.api_user, self.api_password)
+    #     request.body = data.to_json
+    #     Puppet.debug("Send PUT to #{uri.to_s} with data #{data}")
+    #     response = http.request(request)
+    #     unless response.kind_of?(Net::HTTPSuccess)
+    #       raise Puppet::Error, "PUT to #{uri.to_s} failed with code #{response.code}, message=#{self.response_message(response)}"
+    #     end
+    #     data = self.parse_response_body(response)
+    #     Puppet.debug("Response data: #{data}")
+    #     return data
+    request(uri_path, 'PUT', data, wait)
   end
 
   def put_request(*args)
@@ -193,28 +185,26 @@ class Puppet::Provider::Gpfs < Puppet::Provider
   end
 
   def self.delete_request(uri_path, wait = true)
-=begin
-    uri = URI.join(self.base_url, uri_path)
-    header = {
-      'Content-Type' => 'application/json',
-      'Accept' => 'application/json',
-    }
-
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    request = Net::HTTP::Delete.new(uri.request_uri, header)
-    request.basic_auth(self.api_user, self.api_password)
-    Puppet.debug("Send DELETE to #{uri.to_s}")
-    response = http.request(request)
-    unless response.kind_of?(Net::HTTPSuccess)
-      raise Puppet::Error, "DELETE to #{uri.to_s} failed with code #{response.code}, message=#{self.response_message(response)}"
-    end
-    data = self.parse_response_body(response)
-    Puppet.debug("Response data: #{data}")
-    return data
-=end
-    self.request(uri_path, 'DELETE', wait)
+    #     uri = URI.join(self.base_url, uri_path)
+    #     header = {
+    #       'Content-Type' => 'application/json',
+    #       'Accept' => 'application/json',
+    #     }
+    #
+    #     http = Net::HTTP.new(uri.host, uri.port)
+    #     http.use_ssl = true
+    #     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    #     request = Net::HTTP::Delete.new(uri.request_uri, header)
+    #     request.basic_auth(self.api_user, self.api_password)
+    #     Puppet.debug("Send DELETE to #{uri.to_s}")
+    #     response = http.request(request)
+    #     unless response.kind_of?(Net::HTTPSuccess)
+    #       raise Puppet::Error, "DELETE to #{uri.to_s} failed with code #{response.code}, message=#{self.response_message(response)}"
+    #     end
+    #     data = self.parse_response_body(response)
+    #     Puppet.debug("Response data: #{data}")
+    #     return data
+    request(uri_path, 'DELETE', wait)
   end
 
   def delete_request(*args)
@@ -222,22 +212,18 @@ class Puppet::Provider::Gpfs < Puppet::Provider
   end
 
   def self.human_readable_kilobytes(value)
-    return '0' if value.to_i == 0
+    return '0' if value.to_i.zero?
     {
       'K' => 1024,
       'M' => 1024**2,
       'G' => 1024**3,
       'T' => 1024**4,
     }.each_pair do |suffix, factor|
-      if value < factor
-        factored_value = (value.to_f / (factor/1024))
-        # Check if integer value is same as float rounded to one decimal place
-        if Integer(factored_value) == factored_value.round(1)
-          return "#{Integer(factored_value)}#{suffix}"
-        else
-          return "#{factored_value.round(1)}#{suffix}"
-        end
-      end
+      next unless value < factor
+      factored_value = (value.to_f / (factor / 1024))
+      # Check if integer value is same as float rounded to one decimal place
+      return "#{Integer(factored_value)}#{suffix}" if Integer(factored_value) == factored_value.round(1)
+      return "#{factored_value.round(1)}#{suffix}"
     end
     value
   end
@@ -248,14 +234,13 @@ class Puppet::Provider::Gpfs < Puppet::Provider
       'G' => 1024**2,
       'T' => 1024**3,
     }
-    if value =~ /^([0-9\.]+)(T|G|M)$/
-      v = $1.to_f
-      f = $2
+    if value =~ %r{^([0-9\.]+)(T|G|M)$} # rubocop:disable Style/GuardClause
+      v = Regexp.last_match(1).to_f
+      f = Regexp.last_match(2)
       factor = factors[f]
       return "#{Integer(v * factor)}K"
     else
       return value
     end
   end
-
 end

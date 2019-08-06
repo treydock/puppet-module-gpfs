@@ -1,19 +1,15 @@
 require 'spec_helper'
 
 describe 'gpfs::gui' do
-  on_supported_os({
-    :supported_os => [
-      {
-        "operatingsystem" => "RedHat",
-        "operatingsystemrelease" => ["7"],
-      }
-    ]
-  }).each do |os, facts|
+  on_supported_os(supported_os: [
+                    {
+                      'operatingsystem' => 'RedHat',
+                      'operatingsystemrelease' => ['7'],
+                    },
+                  ]).each do |os, facts|
     context "on #{os}" do
       let(:facts) do
-        facts.merge({
-          :concat_basedir => '/dne',
-        })
+        facts.merge(concat_basedir: '/dne')
       end
 
       it { is_expected.to compile.with_all_deps }
@@ -25,7 +21,6 @@ describe 'gpfs::gui' do
       it { is_expected.to contain_class('gpfs::gui::install').that_comes_before('Class[gpfs::gui::config]') }
       it { is_expected.to contain_class('gpfs::gui::config').that_comes_before('Class[gpfs::gui::service]') }
       it { is_expected.to contain_class('gpfs::gui::service') }
-
     end # end context
   end # end on_supported_os loop
 end # end describe

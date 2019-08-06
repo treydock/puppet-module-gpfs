@@ -2,8 +2,8 @@ require 'spec_helper_acceptance'
 
 describe 'gpfs_fileset type:' do
   context 'create fileset' do
-    it 'should run successfully' do
-      pp =<<-EOS
+    it 'runs successfully' do
+      pp = <<-EOS
       class { 'gpfs':
         packages => [
           'gpfs.adv',
@@ -28,21 +28,21 @@ describe 'gpfs_fileset type:' do
       }
       EOS
 
-      apply_manifest(pp, :catch_failures => true)
-      apply_manifest(pp, :catch_changes => true)
+      apply_manifest(pp, catch_failures: true)
+      apply_manifest(pp, catch_changes: true)
     end
 
     describe file('/fs/test/test1') do
-      it { should be_directory }
-      it { should be_mode 1770 }
-      it { should be_owned_by 'root' }
-      it { should be_grouped_into 'root' }
+      it { is_expected.to be_directory }
+      it { is_expected.to be_mode 1770 }
+      it { is_expected.to be_owned_by 'root' }
+      it { is_expected.to be_grouped_into 'root' }
     end
   end
 
   context 'modify fileset max_num_inodes' do
-    it 'should run successfully' do
-      pp =<<-EOS
+    it 'runs successfully' do
+      pp = <<-EOS
       class { 'gpfs':
         packages => [
           'gpfs.adv',
@@ -67,14 +67,14 @@ describe 'gpfs_fileset type:' do
       }
       EOS
 
-      apply_manifest(pp, :catch_failures => true)
-      apply_manifest(pp, :catch_changes => true)
+      apply_manifest(pp, catch_failures: true)
+      apply_manifest(pp, catch_changes: true)
     end
   end
 
   context 'modify fileset owner' do
-    it 'should run successfully' do
-      pp =<<-EOS
+    it 'runs successfully' do
+      pp = <<-EOS
       class { 'gpfs':
         packages => [
           'gpfs.adv',
@@ -99,21 +99,21 @@ describe 'gpfs_fileset type:' do
       }
       EOS
 
-      apply_manifest(pp, :catch_failures => true)
-      apply_manifest(pp, :catch_changes => true)
+      apply_manifest(pp, catch_failures: true)
+      apply_manifest(pp, catch_changes: true)
     end
 
     describe file('/fs/test/test1') do
-      it { should be_directory }
-      it { should be_mode 1770 }
-      it { should be_owned_by 'adm' }
-      it { should be_grouped_into 'adm' }
+      it { is_expected.to be_directory }
+      it { is_expected.to be_mode 1770 }
+      it { is_expected.to be_owned_by 'adm' }
+      it { is_expected.to be_grouped_into 'adm' }
     end
   end
 
   context 'decreasing alloc_inodes' do
-    it 'should run successfully' do
-      pp =<<-EOS
+    it 'runs successfully' do
+      pp = <<-EOS
       class { 'gpfs':
         packages => [
           'gpfs.adv',
@@ -138,13 +138,13 @@ describe 'gpfs_fileset type:' do
       }
       EOS
 
-      apply_manifest(pp, :catch_failures => true)
+      apply_manifest(pp, catch_failures: true)
     end
   end
 
   context 'create fileset with statefile' do
-    it 'should run successfully' do
-      pp =<<-EOS
+    it 'runs successfully' do
+      pp = <<-EOS
       class { 'gpfs':
         packages => [
           'gpfs.adv',
@@ -170,21 +170,21 @@ describe 'gpfs_fileset type:' do
       }
       EOS
 
-      apply_manifest(pp, :catch_failures => true)
-      apply_manifest(pp, :catch_changes => true)
+      apply_manifest(pp, catch_failures: true)
+      apply_manifest(pp, catch_changes: true)
     end
 
     describe file('/fs/test/test2/.new_fileset') do
-      it { should be_file }
-      it { should be_mode 400 }
-      it { should be_owned_by 'root' }
-      it { should be_grouped_into 'root' }
+      it { is_expected.to be_file }
+      it { is_expected.to be_mode 400 }
+      it { is_expected.to be_owned_by 'root' }
+      it { is_expected.to be_grouped_into 'root' }
     end
   end
 
   context 'delete fileset' do
-    it 'should run successfully' do
-      pp =<<-EOS
+    it 'runs successfully' do
+      pp = <<-EOS
       class { 'gpfs':
         packages => [
           'gpfs.adv',
@@ -214,9 +214,8 @@ describe 'gpfs_fileset type:' do
       }
       EOS
 
-      apply_manifest(pp, :catch_failures => true)
-      apply_manifest(pp, :catch_changes => true)
+      apply_manifest(pp, catch_failures: true)
+      apply_manifest(pp, catch_changes: true)
     end
   end
-
 end

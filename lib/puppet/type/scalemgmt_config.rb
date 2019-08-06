@@ -3,7 +3,7 @@ Dir[File.dirname(__FILE__) + '/gpfs*.rb'].each do |file|
 end
 
 Puppet::Type.newtype(:scalemgmt_config) do
-  newparam(:name, :namevar => true) do
+  newparam(:name, namevar: true) do
     desc 'scalemgmt config'
   end
 
@@ -32,5 +32,4 @@ Puppet::Type.newtype(:scalemgmt_config) do
 
     []
   end
-
 end
