@@ -1,12 +1,12 @@
 {
   "name": "treydock-gpfs",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "author": "treydock",
   "summary": "GPFS Puppet module",
   "license": "Apache-2.0",
-  "source": "https://github.com/treydock/puppet-gpfs",
-  "project_page": "https://github.com/treydock/puppet-gpfs",
-  "issues_url": "https://github.com/treydock/puppet-gpfs/issues",
+  "source": "https://github.com/treydock/puppet-module-gpfs",
+  "project_page": "https://github.com/treydock/puppet-module-gpfs",
+  "issues_url": "https://github.com/treydock/puppet-module-pfs/issues",
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
