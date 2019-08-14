@@ -34,11 +34,12 @@ class gpfs::client::config {
   }
 
   concat { '/var/mmfs/etc/RKM.conf':
-    ensure  => 'present',
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0600',
-    require => File['/var/mmfs/etc'],
+    ensure    => 'present',
+    owner     => 'root',
+    group     => 'root',
+    mode      => '0600',
+    show_diff => false,
+    require   => File['/var/mmfs/etc'],
   }
 
   concat::fragment { 'RKM.conf.header':
