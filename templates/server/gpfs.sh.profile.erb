@@ -1,3 +1,2 @@
 ######## Managed by Puppet #########
-# <%= scope['settings::server'] %>:<%= @__file__.gsub(/\/environments\/([a-zA-Z0-9_\-]+)\//, "/environments/$::environment/") %>
 export PATH=$PATH:<%= scope['gpfs::server::bin_paths'].join(':') -%>
