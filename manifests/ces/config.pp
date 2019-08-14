@@ -1,4 +1,5 @@
-# Private class.
+# @summary Manage GPFS CES config
+# @api private
 class gpfs::ces::config {
 
   logrotate::rule { 'ganesha':

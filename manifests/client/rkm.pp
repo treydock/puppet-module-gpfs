@@ -1,4 +1,4 @@
-# @summary Manage GPFS RKM
+# @summary Manage GPFS client ISKLM configuration
 #
 # @param rkm_id
 # @param type

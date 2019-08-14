@@ -1,4 +1,5 @@
-# Private class.
+# @summary Manage GPFS NSD config
+# @api private
 class gpfs::server::config {
 
   file { '/etc/profile.d/gpfs.sh':

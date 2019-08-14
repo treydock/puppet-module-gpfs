@@ -1,19 +1,19 @@
 Puppet::Type.newtype(:gpfs_fileset) do
-  @doc = %q(Manage a GPFS fileset"
+  desc <<-DESC
+@summary Manage a GPFS fileset
 
-    Example:
+@example Create `test` GPFS fileset
+  gpfs_fileset { 'test':
+    filesystem      => 'project',
+    path            => '/gpfs/project/test',
+    owner           => 'nobody:wheel',
+    permissions     => '1770',
+    inode_space     => 'new',
+    max_num_inodes  => 1000000,
+    alloc_inodes    => 1000000,
+  }
 
-      gpfs_fileset { 'test':
-        filesystem      => 'project',
-        path            => '/fs/project/test',
-        owner           => 'nobody:wheel',
-        permissions     => '1770',
-        inode_space     => 'new',
-        max_num_inodes  => 1000000,
-        alloc_inodes    => 1000000,
-      }
-
-  )
+  DESC
 
   ensurable
 

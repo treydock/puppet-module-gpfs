@@ -1,16 +1,19 @@
 Puppet::Type.newtype(:gpfs_fileset_quota) do
-  @doc = "Set a GPFS fileset quota'
+  desc <<-DESC
+@summary Set a GPFS fileset quota
 
-    Example:
+@example Add fileset quota to `test` fileset.
+  gpfs_fileset_quota { 'test':
+    filesystem => 'project',
+    block_soft_limit  => '5T',
+    block_hard_limit  => '5T',
+    files_soft_limit  => 1000000,
+    files_hard_limit  => 1000000,
+  }
 
-      gpfs_fileset_quota { 'test':
-        filesystem => 'project',
-        block_soft_limit  => '5T',
-        block_hard_limit  => '5T',
-        files_soft_limit  => 1000000,
-        files_hard_limit  => 1000000,
-      }
-  "
+**Autorequires**:
+  * `gpfs_fileset` - Puppet will autorequire the `gpfs_fileset` resource defined in `fileset` property.
+  DESC
 
   ensurable
 

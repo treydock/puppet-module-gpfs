@@ -1,4 +1,5 @@
-# Private class.
+# @summary Manage GPFS CES install
+# @api private
 class gpfs::ces::install {
   if $caller_module_name != $module_name {
     fail("Use of private class ${name} by ${caller_module_name}")

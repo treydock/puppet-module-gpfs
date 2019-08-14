@@ -8,14 +8,17 @@ Puppet::Type.newtype(:scalemgmt_config) do
   end
 
   newparam(:base_url) do
+    desc 'Base URL of GPFS API'
     defaultto('https://localhost:443/scalemgmt/')
   end
 
   newparam(:api_user) do
+    desc 'API user'
     defaultto('admin')
   end
 
   newparam(:api_password) do
+    desc 'API password'
     defaultto('admin001')
   end
 

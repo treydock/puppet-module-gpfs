@@ -1,4 +1,5 @@
-# Private class.
+# @summary Manage GPFS GUI services
+# @api private
 class gpfs::gui::service {
   assert_private()
 

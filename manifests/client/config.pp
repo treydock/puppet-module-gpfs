@@ -1,4 +1,5 @@
-# Private class.
+# @summary Manage GPFS client config
+# @api private
 class gpfs::client::config {
 
   $_ssh_authorized_key_defaults = {

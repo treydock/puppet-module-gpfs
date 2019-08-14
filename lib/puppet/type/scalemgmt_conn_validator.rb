@@ -6,6 +6,7 @@ Puppet::Type.newtype(:scalemgmt_conn_validator) do
           purposes such as monitoring."
 
   ensurable do
+    desc 'Ensure'
     defaultvalues
     defaultto :present
   end
