@@ -12,3 +12,11 @@ add_custom_fact :service_provider, ->(_os, facts) {
     'systemd'
   end
 }
+add_custom_fact :kernelrelease, ->(_os, facts) {
+  case facts[:operatingsystemmajrelease]
+  when '6'
+    '2.6.32-754.18.2.el6.x86_64'
+  else
+    '3.10.0-957.12.2.el7.x86_64'
+  end
+}

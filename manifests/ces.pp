@@ -12,8 +12,14 @@
 class gpfs::ces (
   Boolean $manage_packages  = true,
   String $package_ensure    = 'present',
-  Array $packages           = $gpfs::params::ces_packages,
-) inherits gpfs::params {
+  Array $packages           = [
+    'gpfs.java',
+    'gpfs.smb',
+    'nfs-ganesha',
+    'nfs-ganesha-gpfs',
+    'nfs-ganesha-utils',
+  ],
+) {
 
   contain gpfs
   contain gpfs::ces::install

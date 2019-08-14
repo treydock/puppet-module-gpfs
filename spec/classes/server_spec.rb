@@ -15,7 +15,6 @@ describe 'gpfs::server' do
       it { is_expected.to compile.with_all_deps }
 
       it { is_expected.to create_class('gpfs::server') }
-      it { is_expected.to contain_class('gpfs::params') }
 
       it { is_expected.to contain_class('gpfs').that_comes_before('Class[gpfs::server::install]') }
       it { is_expected.to contain_class('gpfs::server::install').that_comes_before('Class[gpfs::server::config]') }

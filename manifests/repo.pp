@@ -1,11 +1,9 @@
 # @summary Manage GPFS repo
 # @api private
 class gpfs::repo {
-  if $caller_module_name != $module_name {
-    fail("Use of private class ${name} by ${caller_module_name}")
-  }
+  assert_private()
 
-  if $gpfs::repo_baseurl and $gpfs::manage_repo {
+  if $facts['os']['family'] == 'RedHat' and $gpfs::repo_baseurl {
     yumrepo { 'gpfs':
       descr           => 'RPMS for GPFS',
       baseurl         => $gpfs::repo_baseurl,

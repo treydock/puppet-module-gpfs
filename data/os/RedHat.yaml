@@ -1,0 +1,20 @@
+gpfs::client::packages: []
+gpfs::server::packages: []
+gpfs::packages:
+  - gpfs.adv
+  - gpfs.base
+  - gpfs.crypto
+  - gpfs.docs
+  - gpfs.ext
+  - gpfs.gpl
+  - "gpfs.gplbin-%{facts.kernelrelease}"
+  - gpfs.gskit
+  - gpfs.msg.en_US
+gpfs::gui::packages:
+  - gpfs.gui
+gpfs::ces::packages:
+  - gpfs.java
+  - gpfs.smb
+  - nfs-ganesha
+  - nfs-ganesha-gpfs
+  - nfs-ganesha-utils

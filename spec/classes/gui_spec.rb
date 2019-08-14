@@ -15,7 +15,6 @@ describe 'gpfs::gui' do
       it { is_expected.to compile.with_all_deps }
 
       it { is_expected.to create_class('gpfs::gui') }
-      it { is_expected.to contain_class('gpfs::params') }
 
       it { is_expected.to contain_class('gpfs').that_comes_before('Class[gpfs::gui::install]') }
       it { is_expected.to contain_class('gpfs::gui::install').that_comes_before('Class[gpfs::gui::config]') }

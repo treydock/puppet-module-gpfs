@@ -12,14 +12,24 @@ describe 'gpfs::client' do
         facts.merge(concat_basedir: '/dne')
       end
 
+      let(:kernel) do
+        case facts[:operatingsystemmajrelease].to_i
+        when 7
+          '3.10.0-957.12.2.el7.x86_64'
+        when 6
+          '2.6.32-754.18.2.el6.x86_64'
+        end
+      end
+
       it { is_expected.to compile.with_all_deps }
 
       it { is_expected.to create_class('gpfs::client') }
-      it { is_expected.to contain_class('gpfs::params') }
 
       it { is_expected.to contain_class('gpfs').that_comes_before('Class[gpfs::client::install]') }
       it { is_expected.to contain_class('gpfs::client::install').that_comes_before('Class[gpfs::client::config]') }
       it { is_expected.to contain_class('gpfs::client::config') }
+
+      it { is_expected.to contain_package("gpfs.gplbin-#{kernel}").with_ensure('present') }
 
       # Test validate_bool parameters
       [

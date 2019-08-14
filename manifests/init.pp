@@ -18,13 +18,28 @@ class gpfs (
   Optional[String] $repo_baseurl = undef,
   Boolean $manage_packages  = true,
   String $package_ensure    = 'present',
-  Array $packages           = $gpfs::params::packages,
-) inherits gpfs::params {
+  Array $packages           = [
+    'gpfs.adv',
+    'gpfs.base',
+    'gpfs.crypto',
+    'gpfs.docs',
+    'gpfs.ext',
+    'gpfs.gpl',
+    'gpfs.gskit',
+    'gpfs.msg.en_US',
+  ],
+) {
 
-  contain gpfs::repo
+  $osfamily = dig($facts, 'os', 'family')
+  if !  $osfamily in ['RedHat'] {
+    fail("Unsupported OS: ${osfamily}, module ${module_name} only supports RedHat")
+  }
+
   contain gpfs::install
 
-  Class['gpfs::repo']
-  -> Class['gpfs::install']
+  if $manage_repo {
+    contain gpfs::repo
+    Class['gpfs::repo'] -> Class['gpfs::install']
+  }
 
 }
