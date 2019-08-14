@@ -25,6 +25,7 @@ class gpfs (
     'gpfs.docs',
     'gpfs.ext',
     'gpfs.gpl',
+    "gpfs.gplbin-${facts['kernelrelease']}",
     'gpfs.gskit',
     'gpfs.msg.en_US',
   ],
