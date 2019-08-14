@@ -1,16 +1,14 @@
 # @summary Manage GPFS client install
 # @api private
 class gpfs::client::install {
-  if $caller_module_name != $module_name {
-    fail("Use of private class ${name} by ${caller_module_name}")
-  }
-
-  $_package_defaults = {
-    'ensure' => $gpfs::client::package_ensure
-  }
+  assert_private()
 
   if $gpfs::client::manage_packages {
-    ensure_packages($gpfs::client::packages, $_package_defaults)
+    $gpfs::client::packages.each |$package| {
+      package { $package:
+        ensure => $gpfs::client::package_ensure,
+      }
+    }
   }
 
 }
