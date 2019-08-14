@@ -1,6 +1,7 @@
 # @summary Manage GPFS NSD config
 # @api private
 class gpfs::server::config {
+  assert_private()
 
   file { '/etc/profile.d/gpfs.sh':
     ensure  => 'file',

@@ -1,6 +1,7 @@
 # @summary Manage GPFS CES config
 # @api private
 class gpfs::ces::config {
+  assert_private()
 
   logrotate::rule { 'ganesha':
     path         => '/var/log/ganesha.log',

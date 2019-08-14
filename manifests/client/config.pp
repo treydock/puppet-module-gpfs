@@ -1,6 +1,7 @@
 # @summary Manage GPFS client config
 # @api private
 class gpfs::client::config {
+  assert_private()
 
   $_ssh_authorized_key_defaults = {
     'type' => 'ssh-rsa',

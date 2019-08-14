@@ -8,9 +8,7 @@ describe 'gpfs::server' do
                     },
                   ]).each do |os, facts|
     context "on #{os}" do
-      let(:facts) do
-        facts.merge(concat_basedir: '/dne')
-      end
+      let(:facts) { facts }
 
       it { is_expected.to compile.with_all_deps }
 
