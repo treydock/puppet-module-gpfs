@@ -31,7 +31,7 @@ class gpfs (
 ) {
 
   $osfamily = dig($facts, 'os', 'family')
-  if !  $osfamily in ['RedHat'] {
+  if ! ($osfamily in ['RedHat']) {
     fail("Unsupported OS: ${osfamily}, module ${module_name} only supports RedHat")
   }
 
