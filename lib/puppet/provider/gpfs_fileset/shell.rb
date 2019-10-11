@@ -180,10 +180,10 @@ Puppet::Type.type(:gpfs_fileset).provide(:shell, parent: Puppet::Provider::Gpfs)
       end
     end
 
-    # Sanity check max_num_inodes is not lower than previous value
+    # Sanity check max_num_inodes is not lower than allocated inodes
     if @property_flush[:max_num_inodes]
-      if @property_hash[:max_num_inodes].to_i > @property_flush[:max_num_inodes].to_i
-        Puppet.warning("Fileset #{resource[:name]}: decreasing max inodes from #{@property_hash[:max_num_inodes]} to #{@property_flush[:max_num_inodes]} is not permitted")
+      if @property_hash[:alloc_inodes].to_i > @property_flush[:max_num_inodes].to_i
+        Puppet.warning("Fileset #{resource[:name]}: Decreasing max inodes (#{@property_flush[:max_num_inodes]}) to be less than allocated inodes (#{@property_hash[:alloc_inodes]}) is not permitted")
         @property_flush.delete(:max_num_inodes)
       end
     end
