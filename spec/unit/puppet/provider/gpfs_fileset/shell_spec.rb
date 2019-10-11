@@ -122,5 +122,24 @@ mmlsfs::0:1:::test:defaultMountPoint:%2Ffs%2Ftest::"
       resource.provider.max_num_inodes = 5000
       resource.provider.flush
     end
+
+    it 'decreases max inodes' do
+      hash = resource.to_hash
+      hash[:max_num_inodes] = 10_000
+      resource.provider.instance_variable_set(:@property_hash, hash)
+      expect(resource.provider).to receive(:mmchfileset).with(['test', 'test1', '--inode-limit', 5000])
+      resource.provider.max_num_inodes = 5000
+      resource.provider.flush
+    end
+
+    it 'cannot decreas alloc inodes' do
+      hash = resource.to_hash
+      hash[:alloc_inodes] = 10_000
+      resource.provider.instance_variable_set(:@property_hash, hash)
+      expect(resource.provider).not_to receive(:mmchfileset)
+      expect(Puppet).to receive(:warning).with(%r{not permitted})
+      resource.provider.alloc_inodes = 5000
+      resource.provider.flush
+    end
   end
 end
