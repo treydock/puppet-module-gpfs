@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [v0.1.4](https://github.com/treydock/puppet-module-gpfs/tree/v0.1.4) (2019-10-11)
+
+[Full Changelog](https://github.com/treydock/puppet-module-gpfs/compare/v0.1.3...v0.1.4)
+
+### Fixed
+
+- Support decreasing max inodes for a fileset [\#4](https://github.com/treydock/puppet-module-gpfs/pull/4) ([treydock](https://github.com/treydock))
+
 ## [v0.1.3](https://github.com/treydock/puppet-module-gpfs/tree/v0.1.3) (2019-08-20)
 
 [Full Changelog](https://github.com/treydock/puppet-module-gpfs/compare/v0.1.2...v0.1.3)
