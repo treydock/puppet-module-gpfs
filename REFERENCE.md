@@ -33,6 +33,7 @@ _Private Classes_
 
 **Resource types**
 
+* [`gpfs_config`](#gpfs_config): GPFS config
 * [`gpfs_fileset`](#gpfs_fileset): Manage a GPFS fileset
 * [`gpfs_fileset_quota`](#gpfs_fileset_quota): Set a GPFS fileset quota
 * [`scalemgmt_config`](#scalemgmt_config): scalemgmt config
@@ -329,6 +330,14 @@ Paths to add to PATH
 
 Default value: ['/usr/lpp/mmfs/bin']
 
+##### `config_filesystems`
+
+Data type: `Optional[Array]`
+
+Filesystems where filesets are managed by Puppet
+
+Default value: `undef`
+
 ## Defined types
 
 ### gpfs::client::rkm
@@ -436,6 +445,24 @@ Data type: `Any`
 Default value: '10'
 
 ## Resource types
+
+### gpfs_config
+
+GPFS config
+
+#### Parameters
+
+The following parameters are available in the `gpfs_config` type.
+
+##### `name`
+
+namevar
+
+GPFS config
+
+##### `filesystems`
+
+Filesystems to manage
 
 ### gpfs_fileset
 
