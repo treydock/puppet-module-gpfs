@@ -6,10 +6,32 @@ require 'uri'
 
 # Shared provider class
 class Puppet::Provider::Gpfs < Puppet::Provider
+  initvars
+
+  @filesystems = nil
+
   class << self
     attr_accessor :base_url
     attr_accessor :api_user
     attr_accessor :api_password
+    attr_accessor :filesystems
+  end
+
+  commands mmlsfs: '/usr/lpp/mmfs/bin/mmlsfs'
+
+  def self.mmlsfs_filesystems
+    filesystems = []
+    mmlsfs_output = mmlsfs('all', '-T', '-Y')
+    mmlsfs_output.each_line do |line|
+      l = line.strip.split(':')
+      next if l[2] == 'HEADER'
+      fs = l[6]
+      if @filesystems && !@filesystems.include?(fs)
+        next
+      end
+      filesystems << fs unless filesystems.include?(fs)
+    end
+    filesystems
   end
 
   def self.set_scalemgmt_defaults

@@ -11,7 +11,6 @@ Puppet::Type.type(:gpfs_fileset).provide(:shell, parent: Puppet::Provider::Gpfs)
 
   commands chown: 'chown'
   commands chmod: 'chmod'
-  commands mmlsfs: '/usr/lpp/mmfs/bin/mmlsfs'
   commands mmlsfileset: '/usr/lpp/mmfs/bin/mmlsfileset'
   # commands :mmclidecode => '/usr/lpp/mmfs/bin/mmclidecode'
   commands mmcrfileset: '/usr/lpp/mmfs/bin/mmcrfileset'
@@ -22,15 +21,7 @@ Puppet::Type.type(:gpfs_fileset).provide(:shell, parent: Puppet::Provider::Gpfs)
 
   def self.instances
     filesets = []
-    filesystems = []
-    mmlsfs_output = mmlsfs('all', '-T', '-Y')
-    mmlsfs_output.each_line do |line|
-      l = line.strip.split(':')
-      next if l[2] == 'HEADER'
-      fs = l[6]
-      filesystems << fs unless filesystems.include?(fs)
-    end
-    filesystems.each do |filesystem|
+    mmlsfs_filesystems.each do |filesystem|
       mmlsfileset_output = mmlsfileset(filesystem, '-Y')
       mmlsfileset_output.each_line do |line|
         fileset = {}

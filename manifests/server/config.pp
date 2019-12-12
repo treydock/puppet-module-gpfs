@@ -11,4 +11,8 @@ class gpfs::server::config {
     content => template('gpfs/server/gpfs.sh.profile.erb')
   }
 
+  gpfs_config { 'puppet':
+    filesystems => $gpfs::server::config_filesystems,
+  }
+
 }

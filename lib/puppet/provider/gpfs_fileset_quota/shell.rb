@@ -13,16 +13,7 @@ Puppet::Type.type(:gpfs_fileset_quota).provide(:shell, parent: Puppet::Provider:
 
   def self.instances
     quotas = []
-    filesystems = []
-    mmlsfs_output = mmlsfs('all', '-T', '-Y')
-    mmlsfs_output.each_line do |line|
-      l = line.strip.split(':')
-      next if l[2] == 'HEADER'
-      fs = l[6]
-      filesystems << fs unless filesystems.include?(fs)
-    end
-
-    filesystems.each do |filesystem|
+    mmlsfs_filesystems.each do |filesystem|
       mmrepquota_output = mmrepquota('-Y', filesystem)
       mmrepquota_output.each_line do |line|
         quota = {}
