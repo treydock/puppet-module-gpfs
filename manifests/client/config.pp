@@ -52,12 +52,27 @@ class gpfs::client::config {
 
   # Hack to properly install systemd service
   if $::service_provider == 'systemd' {
-    file { '/etc/systemd/system/gpfs.service':
+    file { '/usr/lib/systemd/system/gpfs.service':
       ensure => 'file',
       owner  => 'root',
       group  => 'root',
       mode   => '0444',
       source => 'file:///usr/lpp/mmfs/lib/systemd/gpfs.service',
+    }
+    file { '/etc/systemd/system/gpfs.service':
+      ensure => 'absent',
+      notify => Exec['gpfs-systemctl-daemon-reload'],
+    }
+    exec { 'gpfs-systemctl-daemon-reload':
+      path        => '/usr/bin:/bin:/usr/sbin:/sbin',
+      command     => 'systemctl daemon-reload',
+      refreshonly => true,
+      notify      => Exec['gpfs-fix-systemd-enable'],
+    }
+    exec { 'gpfs-fix-systemd-enable':
+      path        => '/usr/bin:/bin:/usr/sbin:/sbin',
+      command     => 'systemctl is-enabled gpfs && systemctl disable gpfs ; systemctl enable gpfs',
+      refreshonly => true,
     }
   }
 
