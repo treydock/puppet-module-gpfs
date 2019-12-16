@@ -71,7 +71,8 @@ class gpfs::client::config {
     }
     exec { 'gpfs-fix-systemd-enable':
       path        => '/usr/bin:/bin:/usr/sbin:/sbin',
-      command     => 'systemctl is-enabled gpfs && systemctl disable gpfs ; systemctl enable gpfs',
+      command     => 'systemctl disable gpfs ; systemctl enable gpfs',
+      onlyif      => 'systemctl is-enabled gpfs',
       refreshonly => true,
     }
   }
