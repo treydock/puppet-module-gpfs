@@ -224,6 +224,14 @@ Hash to define gpfs::client::rkm resources
 
 Default value: {}
 
+##### `bin_paths`
+
+Data type: `Array[Stdlib::Absolutepath]`
+
+Paths to add to PATH
+
+Default value: []
+
 ### gpfs::gui
 
 GPFS GUI class
@@ -324,7 +332,7 @@ Default value: []
 
 ##### `bin_paths`
 
-Data type: `Array`
+Data type: `Array[Stdlib::Absolutepath]`
 
 Paths to add to PATH
 
