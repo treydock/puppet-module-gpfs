@@ -18,7 +18,7 @@ class gpfs::server (
   Boolean $manage_packages  = true,
   String $package_ensure    = 'present',
   Array $packages           = [],
-  Array $bin_paths          = ['/usr/lpp/mmfs/bin'],
+  Array[Stdlib::Absolutepath] $bin_paths = ['/usr/lpp/mmfs/bin'],
   Optional[Array] $config_filesystems = undef,
 ) {
 

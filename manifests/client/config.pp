@@ -12,6 +12,20 @@ class gpfs::client::config {
     create_resources('ssh_authorized_key', $gpfs::client::ssh_authorized_keys, $_ssh_authorized_key_defaults)
   }
 
+  $bin_paths = $gpfs::client::bin_paths
+  if ! empty($bin_paths) {
+    $gpfs_sh_ensure = 'file'
+  } else {
+    $gpfs_sh_ensure = 'absent'
+  }
+  file { '/etc/profile.d/gpfs.sh':
+    ensure  => $gpfs_sh_ensure,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => template('gpfs/gpfs.sh.profile.erb')
+  }
+
   file { '/var/mmfs/ccr':
     ensure => 'directory',
     owner  => 'root',

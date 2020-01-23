@@ -17,6 +17,8 @@
 #   SSH authorized keys for NSDs
 # @param rkms
 #   Hash to define gpfs::client::rkm resources
+# @param bin_paths
+#   Paths to add to PATH
 class gpfs::client (
   Boolean $manage_packages = true,
   $package_ensure       = 'present',
@@ -25,6 +27,7 @@ class gpfs::client (
   $ssh_user             = 'root',
   $ssh_authorized_keys  = {},
   $rkms                 = {},
+  Array[Stdlib::Absolutepath] $bin_paths  = [],
 ) {
 
   contain gpfs
