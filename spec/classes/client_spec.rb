@@ -29,6 +29,12 @@ describe 'gpfs::client' do
 
       it { is_expected.to contain_package("gpfs.gplbin-#{kernel}").with_ensure('present') }
 
+      context 'when server included' do
+        let(:pre_condition) { 'include gpfs::server' }
+
+        it { is_expected.to compile.with_all_deps }
+      end
+
       # Test validate_bool parameters
       [
       ].each do |param|

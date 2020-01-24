@@ -18,7 +18,7 @@ class gpfs::client::config {
   } else {
     $gpfs_sh_ensure = 'absent'
   }
-  file { '/etc/profile.d/gpfs.sh':
+  file { '/etc/profile.d/gpfs-client.sh':
     ensure  => $gpfs_sh_ensure,
     owner   => 'root',
     group   => 'root',
