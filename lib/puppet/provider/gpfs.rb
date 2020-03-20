@@ -9,12 +9,14 @@ class Puppet::Provider::Gpfs < Puppet::Provider
   initvars
 
   @filesystems = nil
+  @inode_tolerance = 32
 
   class << self
     attr_accessor :base_url
     attr_accessor :api_user
     attr_accessor :api_password
     attr_accessor :filesystems
+    attr_accessor :inode_tolerance
   end
 
   commands mmlsfs: '/usr/lpp/mmfs/bin/mmlsfs'
