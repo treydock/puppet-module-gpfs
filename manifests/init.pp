@@ -13,6 +13,9 @@
 #   GPFS package ensure property
 # @param packages
 #   GPFS base packages
+# @param config_filesystems
+#   Filesystems where filesets are managed by Puppet
+#
 class gpfs (
   Boolean $manage_repo = true,
   Optional[String] $repo_baseurl = undef,
@@ -28,6 +31,7 @@ class gpfs (
     'gpfs.gskit',
     'gpfs.msg.en_US',
   ],
+  Optional[Array] $config_filesystems = undef,
 ) {
 
   $osfamily = dig($facts, 'os', 'family')
@@ -42,4 +46,7 @@ class gpfs (
     Class['gpfs::repo'] -> Class['gpfs::install']
   }
 
+  gpfs_config { 'puppet':
+    filesystems => $config_filesystems,
+  }
 }
