@@ -200,6 +200,33 @@
 </li>
 
     
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#filesystems-class_method" title="filesystems (class method)">.<strong>filesystems</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute filesystems.</p>
+</div></span>
+  
+</li>
+
+    
   </ul>
 
 
@@ -261,6 +288,28 @@
   <span class="summary_signature">
     
       <a href="#human_readable_kilobytes-class_method" title="human_readable_kilobytes (class method)">.<strong>human_readable_kilobytes</strong>(value)  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#mmlsfs_filesystems-class_method" title="mmlsfs_filesystems (class method)">.<strong>mmlsfs_filesystems</strong>  &#x21d2; Object </a>
     
 
     
@@ -588,12 +637,12 @@
       <pre class="lines">
 
 
-12
-13
-14</pre>
+16
+17
+18</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 12</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 16</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_api_password'>api_password</span>
   <span class='ivar'>@api_password</span>
@@ -631,12 +680,12 @@
       <pre class="lines">
 
 
-11
-12
-13</pre>
+15
+16
+17</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 11</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 15</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_api_user'>api_user</span>
   <span class='ivar'>@api_user</span>
@@ -674,15 +723,58 @@
       <pre class="lines">
 
 
-10
-11
-12</pre>
+14
+15
+16</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 10</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 14</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_base_url'>base_url</span>
   <span class='ivar'>@base_url</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      
+      <span id="filesystems=-class_method"></span>
+      <div class="method_details ">
+  <h3 class="signature " id="filesystems-class_method">
+  
+    .<strong>filesystems</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute filesystems</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+17
+18
+19</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 17</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_filesystems'>filesystems</span>
+  <span class='ivar'>@filesystems</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -711,31 +803,31 @@
       <pre class="lines">
 
 
-187
-188
-189
-190
-191
-192
-193
-194
-195
-196
-197
-198
-199
-200
-201
-202
-203
-204
-205
-206
-207
-208</pre>
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 187</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 209</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_delete_request'>delete_request</span><span class='lparen'>(</span><span class='id identifier rubyid_uri_path'>uri_path</span><span class='comma'>,</span> <span class='id identifier rubyid_wait'>wait</span> <span class='op'>=</span> <span class='kw'>true</span><span class='rparen'>)</span>
   <span class='comment'>#     uri = URI.join(self.base_url, uri_path)
@@ -779,34 +871,34 @@
       <pre class="lines">
 
 
-103
-104
-105
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123
-124
 125
 126
-127</pre>
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 103</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 125</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_request'>get_request</span><span class='lparen'>(</span><span class='id identifier rubyid_uri_path'>uri_path</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_wait'>wait</span> <span class='op'>=</span> <span class='kw'>false</span><span class='rparen'>)</span>
   <span class='comment'>#     uri = URI.join(self.base_url, uri_path)
@@ -853,25 +945,25 @@
       <pre class="lines">
 
 
-214
-215
-216
-217
-218
-219
-220
-221
-222
-223
-224
-225
-226
-227
-228
-229</pre>
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 214</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 236</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_human_readable_kilobytes'>human_readable_kilobytes</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>0</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='period'>.</span><span class='id identifier rubyid_zero?'>zero?</span>
@@ -895,6 +987,58 @@
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="mmlsfs_filesystems-class_method">
+  
+    .<strong>mmlsfs_filesystems</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 22</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_mmlsfs_filesystems'>mmlsfs_filesystems</span>
+  <span class='id identifier rubyid_filesystems'>filesystems</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_mmlsfs_output'>mmlsfs_output</span> <span class='op'>=</span> <span class='id identifier rubyid_mmlsfs'>mmlsfs</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>all</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>-T</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>-Y</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_mmlsfs_output'>mmlsfs_output</span><span class='period'>.</span><span class='id identifier rubyid_each_line'>each_line</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_line'>line</span><span class='op'>|</span>
+    <span class='id identifier rubyid_l'>l</span> <span class='op'>=</span> <span class='id identifier rubyid_line'>line</span><span class='period'>.</span><span class='id identifier rubyid_strip'>strip</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>:</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
+    <span class='kw'>next</span> <span class='kw'>if</span> <span class='id identifier rubyid_l'>l</span><span class='lbracket'>[</span><span class='int'>2</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>HEADER</span><span class='tstring_end'>&#39;</span></span>
+    <span class='id identifier rubyid_fs'>fs</span> <span class='op'>=</span> <span class='id identifier rubyid_l'>l</span><span class='lbracket'>[</span><span class='int'>6</span><span class='rbracket'>]</span>
+    <span class='kw'>if</span> <span class='ivar'>@filesystems</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='ivar'>@filesystems</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_fs'>fs</span><span class='rparen'>)</span>
+      <span class='kw'>next</span>
+    <span class='kw'>end</span>
+    <span class='id identifier rubyid_filesystems'>filesystems</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_fs'>fs</span> <span class='kw'>unless</span> <span class='id identifier rubyid_filesystems'>filesystems</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_fs'>fs</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_filesystems'>filesystems</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="parse_response_body-class_method">
   
     .<strong>parse_response_body</strong>(response)  &#x21d2; <tt>Object</tt> 
@@ -909,17 +1053,17 @@
       <pre class="lines">
 
 
-21
-22
-23
-24
-25
-26
-27
-28</pre>
+43
+44
+45
+46
+47
+48
+49
+50</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 21</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 43</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_parse_response_body'>parse_response_body</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
@@ -949,31 +1093,31 @@
       <pre class="lines">
 
 
-133
-134
-135
-136
-137
-138
-139
-140
-141
-142
-143
-144
-145
-146
-147
-148
-149
-150
-151
-152
-153
-154</pre>
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 133</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 155</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_post_request'>post_request</span><span class='lparen'>(</span><span class='id identifier rubyid_uri_path'>uri_path</span><span class='comma'>,</span> <span class='id identifier rubyid_data'>data</span><span class='comma'>,</span> <span class='id identifier rubyid_wait'>wait</span> <span class='op'>=</span> <span class='kw'>true</span><span class='rparen'>)</span>
   <span class='comment'>#     uri = URI.join(self.base_url, uri_path)
@@ -1017,31 +1161,31 @@
       <pre class="lines">
 
 
-160
-161
-162
-163
-164
-165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179
-180
-181</pre>
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 160</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 182</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_put_request'>put_request</span><span class='lparen'>(</span><span class='id identifier rubyid_uri_path'>uri_path</span><span class='comma'>,</span> <span class='id identifier rubyid_data'>data</span><span class='comma'>,</span> <span class='id identifier rubyid_wait'>wait</span> <span class='op'>=</span> <span class='kw'>true</span><span class='rparen'>)</span>
   <span class='comment'>#     uri = URI.join(self.base_url, uri_path)
@@ -1107,28 +1251,6 @@
       <pre class="lines">
 
 
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
 82
 83
 84
@@ -1148,10 +1270,32 @@
 98
 99
 100
-101</pre>
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 60</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 82</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span><span class='id identifier rubyid_uri_path'>uri_path</span><span class='comma'>,</span> <span class='id identifier rubyid_type'>type</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_wait'>wait</span> <span class='op'>=</span> <span class='kw'>false</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_uri'>uri</span> <span class='op'>=</span> <span class='const'>URI</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='id identifier rubyid_base_url'>base_url</span><span class='comma'>,</span> <span class='id identifier rubyid_uri_path'>uri_path</span><span class='rparen'>)</span>
@@ -1215,18 +1359,18 @@
       <pre class="lines">
 
 
-30
-31
-32
-33
-34
-35
-36
-37
-38</pre>
+52
+53
+54
+55
+56
+57
+58
+59
+60</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 30</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 52</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_response_message'>response_message</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='id identifier rubyid_parse_response_body'>parse_response_body</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='rparen'>)</span>
@@ -1257,14 +1401,14 @@
       <pre class="lines">
 
 
-15
-16
-17
-18
-19</pre>
+37
+38
+39
+40
+41</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 15</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 37</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_set_scalemgmt_defaults'>set_scalemgmt_defaults</span>
   <span class='ivar'>@base_url</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>https://localhost:443/scalemgmt/</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>if</span> <span class='ivar'>@base_url</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -1291,24 +1435,24 @@
       <pre class="lines">
 
 
-231
-232
-233
-234
-235
-236
-237
-238
-239
-240
-241
-242
-243
-244
-245</pre>
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 231</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 253</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_to_kb'>to_kb</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_factors'>factors</span> <span class='op'>=</span> <span class='lbrace'>{</span>
@@ -1345,28 +1489,28 @@
       <pre class="lines">
 
 
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58</pre>
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 40</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 62</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_wait_for_job'>wait_for_job</span><span class='lparen'>(</span><span class='id identifier rubyid_data'>data</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_jobid'>jobid</span> <span class='op'>=</span> <span class='id identifier rubyid_data'>data</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>jobs</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>jobId</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
@@ -1413,12 +1557,12 @@
       <pre class="lines">
 
 
-210
-211
-212</pre>
+232
+233
+234</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 210</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 232</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_request'>delete_request</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_delete_request'>delete_request</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
@@ -1443,12 +1587,12 @@
       <pre class="lines">
 
 
-129
-130
-131</pre>
+151
+152
+153</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 129</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 151</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_request'>get_request</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_get_request'>get_request</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
@@ -1473,12 +1617,12 @@
       <pre class="lines">
 
 
-156
-157
-158</pre>
+178
+179
+180</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 156</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 178</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_post_request'>post_request</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_post_request'>post_request</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
@@ -1503,12 +1647,12 @@
       <pre class="lines">
 
 
-183
-184
-185</pre>
+205
+206
+207</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 183</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 205</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_put_request'>put_request</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_put_request'>put_request</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>

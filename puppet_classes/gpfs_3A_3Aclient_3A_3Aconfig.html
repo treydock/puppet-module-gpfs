@@ -153,7 +153,37 @@
 61
 62
 63
-64</pre>
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94</pre>
       </td>
       <td>
         <pre class="code"><span class="info file"># File 'manifests/client/config.pp', line 3</span>
@@ -168,6 +198,20 @@ class gpfs::client::config {
 
   if $gpfs::client::manage_ssh_authorized_keys {
     create_resources(&#39;ssh_authorized_key&#39;, $gpfs::client::ssh_authorized_keys, $_ssh_authorized_key_defaults)
+  }
+
+  $bin_paths = $gpfs::client::bin_paths
+  if ! empty($bin_paths) {
+    $gpfs_sh_ensure = &#39;file&#39;
+  } else {
+    $gpfs_sh_ensure = &#39;absent&#39;
+  }
+  file { &#39;/etc/profile.d/gpfs-client.sh&#39;:
+    ensure  =&gt; $gpfs_sh_ensure,
+    owner   =&gt; &#39;root&#39;,
+    group   =&gt; &#39;root&#39;,
+    mode    =&gt; &#39;0644&#39;,
+    content =&gt; template(&#39;gpfs/gpfs.sh.profile.erb&#39;)
   }
 
   file { &#39;/var/mmfs/ccr&#39;:
@@ -210,12 +254,28 @@ class gpfs::client::config {
 
   # Hack to properly install systemd service
   if $::service_provider == &#39;systemd&#39; {
-    file { &#39;/etc/systemd/system/gpfs.service&#39;:
+    file { &#39;/usr/lib/systemd/system/gpfs.service&#39;:
       ensure =&gt; &#39;file&#39;,
       owner  =&gt; &#39;root&#39;,
       group  =&gt; &#39;root&#39;,
       mode   =&gt; &#39;0444&#39;,
       source =&gt; &#39;file:///usr/lpp/mmfs/lib/systemd/gpfs.service&#39;,
+    }
+    file { &#39;/etc/systemd/system/gpfs.service&#39;:
+      ensure =&gt; &#39;absent&#39;,
+      notify =&gt; Exec[&#39;gpfs-systemctl-daemon-reload&#39;],
+    }
+    exec { &#39;gpfs-systemctl-daemon-reload&#39;:
+      path        =&gt; &#39;/usr/bin:/bin:/usr/sbin:/sbin&#39;,
+      command     =&gt; &#39;systemctl daemon-reload&#39;,
+      refreshonly =&gt; true,
+      notify      =&gt; Exec[&#39;gpfs-fix-systemd-enable&#39;],
+    }
+    exec { &#39;gpfs-fix-systemd-enable&#39;:
+      path        =&gt; &#39;/usr/bin:/bin:/usr/sbin:/sbin&#39;,
+      command     =&gt; &#39;systemctl disable gpfs ; systemctl enable gpfs&#39;,
+      onlyif      =&gt; &#39;systemctl is-enabled gpfs&#39;,
+      refreshonly =&gt; true,
     }
   }
 

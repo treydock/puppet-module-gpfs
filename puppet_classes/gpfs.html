@@ -193,6 +193,24 @@
       
     </li>
   
+    <li>
+      
+        <span class='name'>config_filesystems</span>
+      
+      
+        <span class='type'>(<tt>Optional[Array]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Filesystems where filesets are managed by Puppet</p>
+</div>
+      
+    </li>
+  
 </ul>
 
 
@@ -203,9 +221,6 @@
         <pre class="lines">
 
 
-16
-17
-18
 19
 20
 21
@@ -232,10 +247,17 @@
 42
 43
 44
-45</pre>
+45
+46
+47
+48
+49
+50
+51
+52</pre>
       </td>
       <td>
-        <pre class="code"><span class="info file"># File 'manifests/init.pp', line 16</span>
+        <pre class="code"><span class="info file"># File 'manifests/init.pp', line 19</span>
 
 class gpfs (
   Boolean $manage_repo = true,
@@ -252,6 +274,7 @@ class gpfs (
     &#39;gpfs.gskit&#39;,
     &#39;gpfs.msg.en_US&#39;,
   ],
+  Optional[Array] $config_filesystems = undef,
 ) {
 
   $osfamily = dig($facts, &#39;os&#39;, &#39;family&#39;)
@@ -266,6 +289,9 @@ class gpfs (
     Class[&#39;gpfs::repo&#39;] -&gt; Class[&#39;gpfs::install&#39;]
   }
 
+  gpfs_config { &#39;puppet&#39;:
+    filesystems =&gt; $config_filesystems,
+  }
 }</pre>
       </td>
     </tr>

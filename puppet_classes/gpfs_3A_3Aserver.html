@@ -153,7 +153,7 @@
         <span class='name'>bin_paths</span>
       
       
-        <span class='type'>(<tt>Array</tt>)</span>
+        <span class='type'>(<tt>Array[Stdlib::Absolutepath]</tt>)</span>
       
       
         <em class="default">(defaults to: <tt>[&#39;/usr/lpp/mmfs/bin&#39;]</tt>)</em>
@@ -176,7 +176,6 @@
         <pre class="lines">
 
 
-14
 15
 16
 17
@@ -191,16 +190,17 @@
 26
 27
 28
-29</pre>
+29
+30</pre>
       </td>
       <td>
-        <pre class="code"><span class="info file"># File 'manifests/server.pp', line 14</span>
+        <pre class="code"><span class="info file"># File 'manifests/server.pp', line 15</span>
 
 class gpfs::server (
   Boolean $manage_packages  = true,
   String $package_ensure    = &#39;present&#39;,
   Array $packages           = [],
-  Array $bin_paths          = [&#39;/usr/lpp/mmfs/bin&#39;],
+  Array[Stdlib::Absolutepath] $bin_paths = [&#39;/usr/lpp/mmfs/bin&#39;],
 ) {
 
   contain gpfs
