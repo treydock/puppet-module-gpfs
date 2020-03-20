@@ -9,7 +9,7 @@ class Puppet::Provider::Gpfs < Puppet::Provider
   initvars
 
   @filesystems = nil
-  @inode_tolerance = 32
+  @inode_tolerance = 2048
 
   class << self
     attr_accessor :base_url

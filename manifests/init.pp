@@ -15,8 +15,6 @@
 #   GPFS base packages
 # @param config_filesystems
 #   Filesystems where filesets are managed by Puppet
-# @param inode_tolerance
-#   Number of inodes to allow GPFS to adjust max or allocated inodes without triggering a Puppet change
 #
 class gpfs (
   Boolean $manage_repo = true,
@@ -34,7 +32,6 @@ class gpfs (
     'gpfs.msg.en_US',
   ],
   Optional[Array] $config_filesystems = undef,
-  Integer $inode_tolerance = 32,
 ) {
 
   $osfamily = dig($facts, 'os', 'family')
@@ -50,7 +47,6 @@ class gpfs (
   }
 
   gpfs_config { 'puppet':
-    filesystems     => $config_filesystems,
-    inode_tolerance => $inode_tolerance,
+    filesystems => $config_filesystems,
   }
 }
