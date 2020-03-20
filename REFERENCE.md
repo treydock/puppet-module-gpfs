@@ -106,6 +106,14 @@ Default value: [ "gpfs.gplbin-${facts['kernelrelease']}",
     'gpfs.msg.en_US',
   ]
 
+##### `config_filesystems`
+
+Data type: `Optional[Array]`
+
+Filesystems where filesets are managed by Puppet
+
+Default value: `undef`
+
 ### gpfs::ces
 
 GPFS CES class
@@ -337,14 +345,6 @@ Data type: `Array[Stdlib::Absolutepath]`
 Paths to add to PATH
 
 Default value: ['/usr/lpp/mmfs/bin']
-
-##### `config_filesystems`
-
-Data type: `Optional[Array]`
-
-Filesystems where filesets are managed by Puppet
-
-Default value: `undef`
 
 ## Defined types
 
