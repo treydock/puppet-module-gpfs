@@ -11,15 +11,12 @@
 #   GPFS server packages
 # @param bin_paths
 #   Paths to add to PATH
-# @param config_filesystems
-#   Filesystems where filesets are managed by Puppet
 #
 class gpfs::server (
   Boolean $manage_packages  = true,
   String $package_ensure    = 'present',
   Array $packages           = [],
   Array[Stdlib::Absolutepath] $bin_paths = ['/usr/lpp/mmfs/bin'],
-  Optional[Array] $config_filesystems = undef,
 ) {
 
   contain gpfs
