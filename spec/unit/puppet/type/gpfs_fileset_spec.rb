@@ -105,6 +105,18 @@ describe Puppet::Type.type(:gpfs_fileset) do
     expect(fileset[:max_num_inodes]).to eq(1_000_000)
   end
 
+  context 'max_num_inodes insync?' do
+    it 'is insync with tolerance' do
+      fileset[:max_num_inodes] = 1_000_000
+      expect(fileset.property(:max_num_inodes).insync?(1_002_048)).to eq(true)
+    end
+
+    it 'is not insync with tolerance' do
+      fileset[:max_num_inodes] = 1_000_000
+      expect(fileset.property(:max_num_inodes).insync?(1_003_000)).to eq(false)
+    end
+  end
+
   it 'does not accept non-numeric max_num_inodes' do
     expect {
       fileset[:max_num_inodes] = 'foo'

@@ -86,9 +86,9 @@ Puppet::Type.newtype(:gpfs_fileset) do
                else
                  @should.to_i
                end
-      # If the difference is less than or equal to 32, consider in sync.
+      # If the difference is less than or equal to inode_tolerance, consider in sync.
       diff = current - should
-      if diff.abs <= 32
+      if diff.abs <= Puppet::Provider::Gpfs.inode_tolerance
         true
       else
         false
@@ -121,9 +121,9 @@ Puppet::Type.newtype(:gpfs_fileset) do
       if current > should
         return true
       end
-      # If the difference is less than or equal to 32, consider in sync.
+      # If the difference is less than or equal to inode_tolerance, consider in sync.
       diff = current - should
-      if diff.abs <= 32
+      if diff.abs <= Puppet::Provider::Gpfs.inode_tolerance
         true
       else
         false
