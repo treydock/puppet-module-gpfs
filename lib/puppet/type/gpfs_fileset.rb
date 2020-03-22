@@ -88,7 +88,7 @@ Puppet::Type.newtype(:gpfs_fileset) do
                end
       # If the difference is less than or equal to inode_tolerance, consider in sync.
       diff = current - should
-      if diff.abs <= Puppet::Provider::Gpfs.inode_tolerance
+      if diff.abs <= @resource[:inode_tolerance]
         true
       else
         false
@@ -123,7 +123,7 @@ Puppet::Type.newtype(:gpfs_fileset) do
       end
       # If the difference is less than or equal to inode_tolerance, consider in sync.
       diff = current - should
-      if diff.abs <= Puppet::Provider::Gpfs.inode_tolerance
+      if diff.abs <= @resource[:inode_tolerance]
         true
       else
         false
@@ -133,6 +133,19 @@ Puppet::Type.newtype(:gpfs_fileset) do
 
   newparam(:new_statefile) do
     desc 'Statefile that is created at root of a new fileset'
+  end
+
+  newparam(:inode_tolerance) do
+    desc 'Number of inodes to allow GPFS to adjust max or allocated inodes without triggering a Puppet change'
+    defaultto(32)
+    validate do |value|
+      if value && value.to_s != value.to_i.to_s
+        raise ArgumentError, 'Expected an integer for inode_tolerance'
+      end
+    end
+    munge do |value|
+      value.to_i
+    end
   end
 
   autorequire(:service) do
