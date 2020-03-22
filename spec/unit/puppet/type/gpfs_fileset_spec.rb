@@ -106,14 +106,20 @@ describe Puppet::Type.type(:gpfs_fileset) do
   end
 
   context 'max_num_inodes insync?' do
-    it 'is insync with tolerance' do
+    it 'is insync with default tolerance' do
       fileset[:max_num_inodes] = 1_000_000
-      expect(fileset.property(:max_num_inodes).insync?(1_002_048)).to eq(true)
+      expect(fileset.property(:max_num_inodes).insync?(1_000_032)).to eq(true)
     end
 
-    it 'is not insync with tolerance' do
+    it 'is not insync with no tolerance' do
       fileset[:max_num_inodes] = 1_000_000
-      expect(fileset.property(:max_num_inodes).insync?(1_003_000)).to eq(false)
+      expect(fileset.property(:max_num_inodes).insync?(1_002_048)).to eq(false)
+    end
+
+    it 'is insync with tolerance' do
+      fileset[:max_num_inodes] = 1_000_000
+      fileset[:inode_tolerance] = 2048
+      expect(fileset.property(:max_num_inodes).insync?(1_002_048)).to eq(true)
     end
   end
 
@@ -142,6 +148,24 @@ describe Puppet::Type.type(:gpfs_fileset) do
   it 'accepts new_statefile' do
     fileset[:new_statefile] = '.new_fileset'
     expect(fileset[:new_statefile]).to eq('.new_fileset')
+  end
+
+  it 'accepts inode_tolerance as String' do
+    fileset[:inode_tolerance] = '1024'
+    expect(fileset[:inode_tolerance]).to eq(1024)
+  end
+
+  it 'accepts inode_tolerance as Integer' do
+    fileset[:inode_tolerance] = 2048
+    expect(fileset[:inode_tolerance]).to eq(2048)
+  end
+
+  it 'does not accept inode_tolerance not number' do
+    expect { fileset[:inode_tolerance] = 'foo' }.to raise_error(Puppet::ResourceError, %r{Expected an integer for inode_tolerance})
+  end
+
+  it 'does not accept inode_tolerance as Float' do
+    expect { fileset[:inode_tolerance] = 1.5 }.to raise_error(Puppet::ResourceError, %r{Expected an integer for inode_tolerance})
   end
 
   it 'autorequires Service[gpfsgui]' do
