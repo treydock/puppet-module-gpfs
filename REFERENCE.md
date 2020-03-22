@@ -552,6 +552,12 @@ Default value: new
 
 Statefile that is created at root of a new fileset
 
+##### `inode_tolerance`
+
+Number of inodes to allow GPFS to adjust max or allocated inodes without triggering a Puppet change
+
+Default value: 32
+
 ### gpfs_fileset_quota
 
 **Autorequires**:
