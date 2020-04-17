@@ -216,7 +216,14 @@
 124
 125
 126
-127</pre>
+127
+128
+129
+130
+131
+132
+133
+134</pre>
       </td>
       <td>
         <pre class="code"><span class="info file"># File 'manifests/gui/config.pp', line 3</span>
@@ -232,6 +239,13 @@ class gpfs::gui::config {
   }
 
   if $gpfs::gui::manage_firewall {
+    shellvar { &#39;gpfsgui-UPDATE_IPTABLES&#39;:
+      ensure   =&gt; &#39;present&#39;,
+      target   =&gt; &#39;/etc/sysconfig/gpfsgui&#39;,
+      variable =&gt; &#39;UPDATE_IPTABLES&#39;,
+      value    =&gt; &#39;false&#39;,
+    }
+
     case $gpfs::gui::firewall_source {
       String: {
         firewall { &quot;47443 ${gpfs::gui::firewall_source}:47443&quot;:
