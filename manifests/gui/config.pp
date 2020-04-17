@@ -58,6 +58,9 @@ class gpfs::gui::config {
           }
         }
       }
+      false: {
+      # Do nothing
+      }
       default: {
         firewall { '47443 *:47443':
           ensure  => 'present',
