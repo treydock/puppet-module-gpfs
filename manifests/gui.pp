@@ -13,6 +13,8 @@
 #   Determines if firewall should be managed
 # @param firewall_source
 #   Firewall source value
+# @param firewall_https_only
+#   Only manage firewall rules for HTTPS
 # @param manage_services
 #   Determines if services are managed
 # @param manage_initgui
@@ -25,6 +27,7 @@ class gpfs::gui (
   ],
   Boolean $manage_firewall  = true,
   Optional[Variant[String, Array]] $firewall_source = undef,
+  Boolean $firewall_https_only = false,
   Boolean $manage_services = true,
   Boolean $manage_initgui = true,
 ) {
