@@ -292,11 +292,19 @@ Default value: `true`
 
 ##### `firewall_source`
 
-Data type: `Optional[Variant[String, Array]]`
+Data type: `Optional[Variant[String, Array, Boolean]]`
 
 Firewall source value
 
 Default value: `undef`
+
+##### `firewall_https_only`
+
+Data type: `Boolean`
+
+Only manage firewall rules for HTTPS
+
+Default value: `false`
 
 ##### `manage_services`
 

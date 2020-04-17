@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file. The format 
 
 ### Added
 
+- Add firewall\_https\_only to gpfs::gui class and allow firewall\_source to be false [\#15](https://github.com/treydock/puppet-module-gpfs/pull/15) ([treydock](https://github.com/treydock))
 - Add gpfs::gui::manage\_services and gpfs::gui::manage\_initgui [\#14](https://github.com/treydock/puppet-module-gpfs/pull/14) ([treydock](https://github.com/treydock))
 
 ## [v0.5.0](https://github.com/treydock/puppet-module-gpfs/tree/v0.5.0) (2020-03-22)
