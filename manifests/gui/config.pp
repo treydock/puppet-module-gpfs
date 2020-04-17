@@ -11,6 +11,13 @@ class gpfs::gui::config {
   }
 
   if $gpfs::gui::manage_firewall {
+    shellvar { 'gpfsgui-UPDATE_IPTABLES':
+      ensure   => 'present',
+      target   => '/etc/sysconfig/gpfsgui',
+      variable => 'UPDATE_IPTABLES',
+      value    => 'false',
+    }
+
     case $gpfs::gui::firewall_source {
       String: {
         firewall { "47443 ${gpfs::gui::firewall_source}:47443":

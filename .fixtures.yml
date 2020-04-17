@@ -13,5 +13,9 @@ fixtures:
       repo: https://github.com/saz/puppet-sudo.git
     logrotate:
       repo: https://github.com/voxpupuli/puppet-logrotate.git
+    augeasproviders_core:
+      repo: https://github.com/hercules-team/augeasproviders_core
+    augeasproviders_shellvar:
+      repo: https://github.com/hercules-team/augeasproviders_shellvar
   symlinks:
     gpfs: "#{source_dir}"
