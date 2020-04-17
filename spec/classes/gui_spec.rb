@@ -18,6 +18,12 @@ describe 'gpfs::gui' do
       it { is_expected.to contain_class('gpfs::gui::install').that_comes_before('Class[gpfs::gui::config]') }
       it { is_expected.to contain_class('gpfs::gui::config').that_comes_before('Class[gpfs::gui::service]') }
       it { is_expected.to contain_class('gpfs::gui::service') }
+
+      context 'when firewall_source is false' do
+        let(:params) { { firewall_source: false } }
+
+        it { is_expected.not_to contain_firewall('47443 *:47443') }
+      end
     end # end context
   end # end on_supported_os loop
 end # end describe
