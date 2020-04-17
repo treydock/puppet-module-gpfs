@@ -298,6 +298,22 @@ Firewall source value
 
 Default value: `undef`
 
+##### `manage_services`
+
+Data type: `Boolean`
+
+Determines if services are managed
+
+Default value: `true`
+
+##### `manage_initgui`
+
+Data type: `Boolean`
+
+Determines if manage Exec to initialize GUI
+
+Default value: `true`
+
 ### gpfs::server
 
 GPFS server class
