@@ -121,7 +121,11 @@
 29
 30
 31
-32</pre>
+32
+33
+34
+35
+36</pre>
       </td>
       <td>
         <pre class="code"><span class="info file"># File 'manifests/gui/service.pp', line 3</span>
@@ -129,30 +133,34 @@
 class gpfs::gui::service {
   assert_private()
 
-  service { &#39;pmcollector&#39;:
-    ensure     =&gt; &#39;running&#39;,
-    enable     =&gt; true,
-    hasstatus  =&gt; true,
-    hasrestart =&gt; true,
-    before     =&gt; Service[&#39;gpfsgui&#39;],
-  }
+  if $gpfs::gui::manage_services {
+    service { &#39;pmcollector&#39;:
+      ensure     =&gt; &#39;running&#39;,
+      enable     =&gt; true,
+      hasstatus  =&gt; true,
+      hasrestart =&gt; true,
+      before     =&gt; Service[&#39;gpfsgui&#39;],
+    }
 
-  service { &#39;gpfsgui&#39;:
-    ensure     =&gt; &#39;running&#39;,
-    enable     =&gt; true,
-    hasstatus  =&gt; true,
-    hasrestart =&gt; true,
-  }
+    service { &#39;gpfsgui&#39;:
+      ensure     =&gt; &#39;running&#39;,
+      enable     =&gt; true,
+      hasstatus  =&gt; true,
+      hasrestart =&gt; true,
+    }
 
-  exec { &#39;/usr/lpp/mmfs/gui/cli/initgui&#39;:
-    path        =&gt; &#39;/usr/bin:/bin:/usr/sbin:/sbin&#39;,
-    command     =&gt; &#39;/usr/lpp/mmfs/gui/cli/initgui &amp;&amp; touch /var/lib/mmfs/initgui.done&#39;,
-    refreshonly =&gt; true,
-    creates     =&gt; &#39;/var/lib/mmfs/initgui.done&#39;,
-    onlyif      =&gt; [
-      &#39;test -f /var/mmfs/gen/mmsdrfs&#39;,
-    ],
-    require     =&gt; Service[&#39;gpfsgui&#39;],
+    if $gpfs::gui::manage_initgui {
+      exec { &#39;/usr/lpp/mmfs/gui/cli/initgui&#39;:
+        path        =&gt; &#39;/usr/bin:/bin:/usr/sbin:/sbin&#39;,
+        command     =&gt; &#39;/usr/lpp/mmfs/gui/cli/initgui &amp;&amp; touch /var/lib/mmfs/initgui.done&#39;,
+        refreshonly =&gt; true,
+        creates     =&gt; &#39;/var/lib/mmfs/initgui.done&#39;,
+        onlyif      =&gt; [
+          &#39;test -f /var/mmfs/gen/mmsdrfs&#39;,
+        ],
+        require     =&gt; Service[&#39;gpfsgui&#39;],
+      }
+    }
   }
 
 }</pre>

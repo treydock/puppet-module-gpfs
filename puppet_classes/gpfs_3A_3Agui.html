@@ -186,6 +186,42 @@
       
     </li>
   
+    <li>
+      
+        <span class='name'>manage_services</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>true</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Determines if services are managed</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>manage_initgui</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>true</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Determines if manage Exec to initialize GUI</p>
+</div>
+      
+    </li>
+  
 </ul>
 
 
@@ -196,10 +232,6 @@
         <pre class="lines">
 
 
-16
-17
-18
-19
 20
 21
 22
@@ -216,10 +248,16 @@
 33
 34
 35
-36</pre>
+36
+37
+38
+39
+40
+41
+42</pre>
       </td>
       <td>
-        <pre class="code"><span class="info file"># File 'manifests/gui.pp', line 16</span>
+        <pre class="code"><span class="info file"># File 'manifests/gui.pp', line 20</span>
 
 class gpfs::gui (
   Boolean $manage_packages  = true,
@@ -229,6 +267,8 @@ class gpfs::gui (
   ],
   Boolean $manage_firewall  = true,
   Optional[Variant[String, Array]] $firewall_source = undef,
+  Boolean $manage_services = true,
+  Boolean $manage_initgui = true,
 ) {
 
   contain gpfs
