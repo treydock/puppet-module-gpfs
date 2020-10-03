@@ -123,7 +123,7 @@ usage=dataAndMetadata
         end
         shell 'mmcrfs test -F /tmp/test.lst -T /fs/test -A yes -n 1 -Q yes --perfileset-quota'
         # shell 'mmchfs test --perfileset-quota'
-        shell 'mmcheckquota test'
+        # shell 'mmcheckquota test'
       end
       shell 'mmmount all'
     end

@@ -3,7 +3,7 @@ require 'puppet/type/gpfs_fileset'
 
 describe Puppet::Type.type(:gpfs_fileset) do
   let(:fileset) do
-    described_class.new(name: 'test')
+    described_class.new(name: 'test', filesystem: 'foo')
   end
   let(:provider_class) do
     described_class.provide(:rest_v2) do

@@ -1,6 +1,9 @@
 require 'spec_helper_acceptance'
 
 describe 'gpfs::gui class:' do
+  before(:each) do
+    skip('Skip GUI tests')
+  end
   context 'default parameters' do
     it 'runs successfully' do
       pp = <<-EOS
