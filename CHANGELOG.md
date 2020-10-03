@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [v0.8.0](https://github.com/treydock/puppet-module-gpfs/tree/v0.8.0) (2020-10-03)
+
+[Full Changelog](https://github.com/treydock/puppet-module-gpfs/compare/v0.7.0...v0.8.0)
+
+### Added
+
+- Better handling of unlinked filesets or changing junction path [\#17](https://github.com/treydock/puppet-module-gpfs/pull/17) ([treydock](https://github.com/treydock))
+
+### Fixed
+
+- Ensure missing user or group does not break prefetch [\#18](https://github.com/treydock/puppet-module-gpfs/pull/18) ([treydock](https://github.com/treydock))
+
 ## [v0.7.0](https://github.com/treydock/puppet-module-gpfs/tree/v0.7.0) (2020-04-17)
 
 [Full Changelog](https://github.com/treydock/puppet-module-gpfs/compare/v0.6.0...v0.7.0)

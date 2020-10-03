@@ -522,9 +522,9 @@ The following properties are available in the `gpfs_fileset` type.
 
 ##### `ensure`
 
-Valid values: present, absent
+Valid values: present, absent, unlinked
 
-The basic property that the resource should be in.
+The state of the fileset
 
 Default value: present
 
