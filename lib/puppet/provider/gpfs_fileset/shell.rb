@@ -27,7 +27,12 @@ Puppet::Type.type(:gpfs_fileset).provide(:shell, parent: Puppet::Provider::Gpfs)
         fileset = {}
         l = line.strip.split(':')
         next if l[2] == 'HEADER'
-        fileset[:ensure] = :present
+        status = l[10]
+        fileset[:ensure] = if status == 'Unlinked'
+                             :unlinked
+                           else
+                             :present
+                           end
         fileset[:filesystem] = l[6]
         fileset[:fileset] = l[7]
         fileset[:name] = "#{fileset[:filesystem]}/#{fileset[:fileset]}"
@@ -83,8 +88,6 @@ Puppet::Type.type(:gpfs_fileset).provide(:shell, parent: Puppet::Provider::Gpfs)
   end
 
   def create
-    raise("Filesystem is mandatory for #{resource.type} #{resource.name}") if resource[:filesystem].nil?
-
     mmcrfileset_args = [resource[:filesystem], resource[:fileset]]
     if resource[:inode_space]
       mmcrfileset_args << '--inode-space'
@@ -125,16 +128,22 @@ Puppet::Type.type(:gpfs_fileset).provide(:shell, parent: Puppet::Provider::Gpfs)
   end
 
   def destroy
-    raise("Filesystem is mandatory for #{resource.type} #{resource.name}") if resource[:filesystem].nil?
-
     mmunlinkfileset([resource[:filesystem], resource[:fileset]])
     mmdelfileset([resource[:filesystem], resource[:fileset]])
 
     @property_hash.clear
   end
 
+  def unlink
+    mmunlinkfileset([resource[:filesystem], resource[:fileset]])
+  end
+
   def exists?
     @property_hash[:ensure] == :present
+  end
+
+  def unlinked?
+    @property_hash[:ensure] == :unlinked
   end
 
   def initialize(value = {})
@@ -159,7 +168,20 @@ Puppet::Type.type(:gpfs_fileset).provide(:shell, parent: Puppet::Provider::Gpfs)
   end
 
   def flush
-    raise("Filesystem is mandatory for #{resource.type} #{resource.name}") if resource[:filesystem].nil?
+    if @property_flush[:path]
+      # Relink fileset
+      # rubocop:disable Style/IdenticalConditionalBranches
+      if @property_hash[:path] == '--'
+        Puppet.notice("Gpfs_fileset[#{resource[:name]}]: Relinking fileset.")
+        mmlinkfileset([resource[:filesystem], resource[:fileset], '-J', @property_flush[:path]])
+      # Path changed so unlink and relink
+      else
+        Puppet.notice("Gpfs_fileset[#{resource[:name]}]: Changing junction path by unlink and link fileset.")
+        mmunlinkfileset([resource[:filesystem], resource[:fileset]])
+        mmlinkfileset([resource[:filesystem], resource[:fileset], '-J', @property_flush[:path]])
+      end
+      # rubocop:enable Style/IdenticalConditionalBranches
+    end
 
     if @property_flush[:permissions] || @property_flush[:owner]
       # Determine path

@@ -15,7 +15,31 @@ Puppet::Type.newtype(:gpfs_fileset) do
 
   DESC
 
-  ensurable
+  ensurable do
+    desc 'The state of the fileset'
+
+    defaultto(:present)
+    newvalue(:present) do
+      @resource.provider.create
+    end
+    newvalue(:absent) do
+      @resource.provider.destroy
+    end
+    newvalue(:unlinked) do
+      @resource.provider.unlink
+      nil
+    end
+
+    def retreive
+      if @resource.provider.exists? && @resource.provider.unlinked?
+        :unlinked
+      elsif @resource.provider.exists?
+        :present
+      else
+        :absent
+      end
+    end
+  end
 
   newparam(:name) do
     desc 'The default namevar.'
@@ -154,5 +178,11 @@ Puppet::Type.newtype(:gpfs_fileset) do
 
   autorequire(:scalemgmt_conn_validator) do
     ['gpfs']
+  end
+
+  validate do
+    if self[:filesystem].nil?
+      raise('Filesystem is required.')
+    end
   end
 end

@@ -16,9 +16,6 @@ describe 'gpfs_fileset_quota type:' do
           'gpfs.msg.en_US',
         ]
       }
-      class { 'gpfs::gui':
-        manage_firewall => false,
-      }
       gpfs_fileset { 'qtest1':
         filesystem      => 'test',
         owner           => 'root:root',
@@ -54,9 +51,6 @@ describe 'gpfs_fileset_quota type:' do
           'gpfs.gskit',
           'gpfs.msg.en_US',
         ]
-      }
-      class { 'gpfs::gui':
-        manage_firewall => false,
       }
       gpfs_fileset { 'qtest1':
         filesystem      => 'test',
@@ -94,9 +88,6 @@ describe 'gpfs_fileset_quota type:' do
           'gpfs.msg.en_US',
         ]
       }
-      class { 'gpfs::gui':
-        manage_firewall => false,
-      }
       gpfs_fileset { 'qtest1':
         filesystem      => 'test',
         owner           => 'root:root',
@@ -132,9 +123,6 @@ describe 'gpfs_fileset_quota type:' do
           'gpfs.gskit',
           'gpfs.msg.en_US',
         ]
-      }
-      class { 'gpfs::gui':
-        manage_firewall => false,
       }
       gpfs_fileset_quota { 'qtest1':
         ensure      => 'absent',
