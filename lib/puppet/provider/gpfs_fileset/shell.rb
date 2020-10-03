@@ -38,8 +38,18 @@ Puppet::Type.type(:gpfs_fileset).provide(:shell, parent: Puppet::Provider::Gpfs)
         if !fileset[:path].nil? && File.directory?(fileset[:path])
           # Get owner
           s = File.stat(fileset[:path])
-          user = Etc.getpwuid(s.uid).name
-          group = Etc.getgrgid(s.gid).name
+          begin
+            user = Etc.getpwuid(s.uid).name
+          rescue ArgumentError
+            Puppet.warning("Unable to lookup UID #{s.uid} for GPFS fileset #{fileset[:fileset]} on #{fileset[:filesystem]}")
+            user = s.uid
+          end
+          begin
+            group = Etc.getgrgid(s.gid).name
+          rescue ArgumentError
+            Puppet.warning("Unable to lookup GID #{s.gid} for GPFS fileset #{fileset[:fileset]} on #{fileset[:filesystem]}")
+            group = s.gid
+          end
           fileset[:owner] = "#{user}:#{group}"
         end
         filesets << new(fileset)
