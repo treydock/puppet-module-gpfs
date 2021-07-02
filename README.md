@@ -1,7 +1,7 @@
 # puppet-module-gpfs
 
 [![Puppet Forge](http://img.shields.io/puppetforge/v/treydock/gpfs.svg)](https://forge.puppetlabs.com/treydock/gpfs)
-[![Build Status](https://travis-ci.org/treydock/puppet-module-gpfs.png)](https://travis-ci.org/treydock/puppet-module-gpfs)
+[![CI Status](https://github.com/treydock/puppet-module-gpfs/workflows/CI/badge.svg?branch=master)](https://github.com/treydock/puppet-module-gpfs/actions?query=workflow%3ACI)
 
 #### Table of Contents
 
@@ -24,10 +24,6 @@ This module will manage GPFS.
 ### What gpfs affects
 
 At this time the module is capable of installing GPFS packages and managing ISKLM configurations as well as SSH key authorization for client root logins.
-
-### Setup Requirements
-
-For systems with `yum` package manager using Puppet >= 6.0 there is a dependency on [puppetlabs/yumrepo_core](https://forge.puppet.com/puppetlabs/yumrepo_core).
 
 ## Usage
 
