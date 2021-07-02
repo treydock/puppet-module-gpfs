@@ -6,15 +6,15 @@
 <title>
   File: README
   
-    &mdash; Documentation by YARD 0.9.20
+    &mdash; Documentation by YARD 0.9.26
   
 </title>
 
-  <link rel="stylesheet" href="css/style.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
 
-  <link rel="stylesheet" href="css/common.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
 
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript">
   pathId = "";
   relpath = '';
 </script>
@@ -62,31 +62,31 @@
 
 <p><a href="https://forge.puppetlabs.com/treydock/gpfs"><img
 src="http://img.shields.io/puppetforge/v/treydock/gpfs.svg"></a> <a
-href="https://travis-ci.org/treydock/puppet-module-gpfs"><img
-src="https://travis-ci.org/treydock/puppet-module-gpfs.png"></a></p>
+href="https://github.com/treydock/puppet-module-gpfs/actions?query=workflow%3ACI"><img
+src="https://github.com/treydock/puppet-module-gpfs/workflows/CI/badge.svg?branch=master"></a></p>
 
 <h4 id="label-Table+of+Contents">Table of Contents</h4>
 <ol><li>
-<p><a href="#label-Description">Description</a></p>
+<p><a href="#description">Description</a></p>
 </li><li>
-<p><a href="#label-Setup">Setup - The basics of getting started with gpfs</a></p>
+<p><a href="#setup">Setup - The basics of getting started with gpfs</a></p>
 <ul><li>
-<p><a href="#label-What+gpfs+affects">What gpfs affects</a></p>
+<p><a href="#what-gpfs-affects">What gpfs affects</a></p>
 </li><li>
-<p><a href="#label-Setup+requirements">Setup requirements</a></p>
+<p><a href="#setup-requirements">Setup requirements</a></p>
 </li></ul>
 </li><li>
-<p><a href="#label-Usage">Usage - Configuration options and additional
+<p><a href="#usage">Usage - Configuration options and additional
 functionality</a></p>
 <ul><li>
-<p><a href="#label-Repo+configuration">Repo configuration</a></p>
+<p><a href="#repo-configuration">Repo configuration</a></p>
 </li><li>
-<p><a href="#label-Clients">Clients</a></p>
+<p><a href="#clients">Clients</a></p>
 </li><li>
-<p><a href="#label-Filesets+and+fileset+quotas">Filesets and Fileset Quotas</a></p>
+<p><a href="#filesets-and-fileset-quotas">Filesets and Fileset Quotas</a></p>
 </li></ul>
 </li><li>
-<p><a href="#label-Reference">Reference - Module reference</a></p>
+<p><a href="#reference">Reference - Module reference</a></p>
 </li></ol>
 
 <h2 id="label-Description">Description</h2>
@@ -100,12 +100,6 @@ functionality</a></p>
 <p>At this time the module is capable of installing GPFS packages and managing
 ISKLM configurations as well as SSH key authorization for client root
 logins.</p>
-
-<h3 id="label-Setup+Requirements">Setup Requirements</h3>
-
-<p>For systems with <code>yum</code> package manager using Puppet &gt;= 6.0
-there is a dependency on <a
-href="https://forge.puppet.com/puppetlabs/yumrepo_core">puppetlabs/yumrepo_core</a>.</p>
 
 <h2 id="label-Usage">Usage</h2>
 

@@ -6,15 +6,15 @@
 <title>
   Resource Type: gpfs_fileset_quota
   
-    &mdash; Documentation by YARD 0.9.20
+    &mdash; Documentation by YARD 0.9.26
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
 
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript">
   pathId = "puppet_types::gpfs_fileset_quota";
   relpath = '../';
 </script>
@@ -115,6 +115,7 @@ autorequire the <code>gpfs_fileset</code> resource defined in
 }</code></pre>
     
   </div>
+
 
 
 </div>
@@ -277,6 +278,23 @@ autorequire the <code>gpfs_fileset</code> resource defined in
         <div class="discussion">
           
 <p>The GPFS quota object name</p>
+
+        </div>
+      </div>
+      
+      
+    </li>
+    
+    <li>
+      <span class="name">provider</span>
+      
+      
+      <div class="docstring">
+        <div class="discussion">
+          
+<p>The specific backend to use for this <code>gpfs_fileset_quota</code>
+resource. You will seldom need to specify this — Puppet will usually
+discover the appropriate provider for your platform.</p>
 
         </div>
       </div>

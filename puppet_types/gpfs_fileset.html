@@ -6,15 +6,15 @@
 <title>
   Resource Type: gpfs_fileset
   
-    &mdash; Documentation by YARD 0.9.20
+    &mdash; Documentation by YARD 0.9.26
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
 
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript">
   pathId = "puppet_types::gpfs_fileset";
   relpath = '../';
 </script>
@@ -113,6 +113,7 @@
 }</code></pre>
     
   </div>
+
 
 
 </div>
@@ -330,6 +331,23 @@ triggering a Puppet change</p>
         <div class="discussion">
           
 <p>Permissions of fileset.</p>
+
+        </div>
+      </div>
+      
+      
+    </li>
+    
+    <li>
+      <span class="name">provider</span>
+      
+      
+      <div class="docstring">
+        <div class="discussion">
+          
+<p>The specific backend to use for this <code>gpfs_fileset</code> resource.
+You will seldom need to specify this — Puppet will usually discover the
+appropriate provider for your platform.</p>
 
         </div>
       </div>
