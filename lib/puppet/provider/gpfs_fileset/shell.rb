@@ -56,6 +56,7 @@ Puppet::Type.type(:gpfs_fileset).provide(:shell, parent: Puppet::Provider::Gpfs)
             group = s.gid
           end
           fileset[:owner] = "#{user}:#{group}"
+          fileset[:permissions] = s.mode.to_s(8).split('')[-4..-1].join
         end
         filesets << new(fileset)
       end
@@ -199,6 +200,13 @@ Puppet::Type.type(:gpfs_fileset).provide(:shell, parent: Puppet::Provider::Gpfs)
           chown(@property_flush[:owner], path)
         else
           Puppet.warning("Unable to set owner for #{resource.type} #{resource.name}, path #{path} does not exist")
+        end
+      end
+      if @property_flush[:permissions] && resource[:enforce_permissions].to_s == 'true'
+        if File.directory?(path)
+          chmod(@property_flush[:permissions], path)
+        else
+          Puppet.warning("Unable to set permissions for #{resource.type} #{resource.name}, path #{path} does not exist")
         end
       end
     end

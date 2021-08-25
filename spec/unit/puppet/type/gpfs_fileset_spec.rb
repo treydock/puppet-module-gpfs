@@ -81,9 +81,21 @@ describe Puppet::Type.type(:gpfs_fileset) do
 
   it 'accepts permissions' do
     fileset[:permissions] = '1770'
-    expect(fileset[:permissions]).to eq(1770)
+    expect(fileset[:permissions]).to eq('1770')
     fileset[:permissions] = '0770'
-    expect(fileset[:permissions]).to eq(770)
+    expect(fileset[:permissions]).to eq('0770')
+  end
+
+  it 'does not accept invalid permissions of 3 digits' do
+    expect {
+      fileset[:permissions] = '700'
+    }.to raise_error(Puppet::ResourceError)
+  end
+
+  it 'does not accept invalid permissions' do
+    expect {
+      fileset[:permissions] = 'foo'
+    }.to raise_error(Puppet::ResourceError)
   end
 
   it 'has inode_space default to new' do
