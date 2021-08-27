@@ -172,10 +172,6 @@ Puppet::Type.newtype(:gpfs_fileset) do
     end
   end
 
-  newparam(:new_statefile) do
-    desc 'Statefile that is created at root of a new fileset'
-  end
-
   newparam(:inode_tolerance) do
     desc 'Number of inodes to allow GPFS to adjust max or allocated inodes without triggering a Puppet change'
     defaultto(32)

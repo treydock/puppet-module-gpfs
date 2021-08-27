@@ -115,13 +115,6 @@ Puppet::Type.type(:gpfs_fileset).provide(:shell, parent: Puppet::Provider::Gpfs)
     mmcrfileset(mmcrfileset_args)
     mmlinkfileset(mmlinkfileset_args)
 
-    if resource[:new_statefile]
-      new_statefile_path = File.join(path, resource[:new_statefile])
-      require 'fileutils'
-      FileUtils.touch(new_statefile_path)
-      chmod('0400', new_statefile_path)
-    end
-
     chmod(resource[:permissions], path) if resource[:permissions]
     chown(resource[:owner], path) if resource[:owner]
 
