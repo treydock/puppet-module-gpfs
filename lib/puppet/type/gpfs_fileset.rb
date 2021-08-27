@@ -77,12 +77,29 @@ Puppet::Type.newtype(:gpfs_fileset) do
     end
   end
 
-  newparam(:permissions) do
+  newproperty(:permissions) do
     desc 'Permissions of fileset.'
 
     munge do |value|
-      value.to_i
+      value.to_s
     end
+
+    validate do |value|
+      if value.to_s !~ %r{([0-7]{4,4})}
+        raise ArgumentError, 'Permissions must be valid POSIX permissions string, not %s' % value
+      end
+    end
+
+    def insync?(is)
+      return true if @resource[:enforce_permissions].to_s == 'false'
+      super(is)
+    end
+  end
+
+  newparam(:enforce_permissions) do
+    desc 'Enforce POSIX permissions after creation'
+    newvalues(:true, :false)
+    defaultto(:false)
   end
 
   newparam(:inode_space) do
