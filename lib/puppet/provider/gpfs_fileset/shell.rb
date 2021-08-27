@@ -153,6 +153,10 @@ Puppet::Type.type(:gpfs_fileset).provide(:shell, parent: Puppet::Provider::Gpfs)
     @property_flush[:owner] = value
   end
 
+  def permissions=(value)
+    @property_flush[:permissions] = value
+  end
+
   def max_num_inodes=(value)
     @property_flush[:max_num_inodes] = value
   end

@@ -117,6 +117,10 @@ Puppet::Type.type(:gpfs_fileset).provide(:rest_v2, parent: Puppet::Provider::Gpf
     @property_flush[:owner] = value
   end
 
+  def permissions=(value)
+    @property_flush[:permissions] = value
+  end
+
   def max_num_inodes=(value)
     @property_flush[:max_num_inodes] = value
   end
@@ -128,7 +132,7 @@ Puppet::Type.type(:gpfs_fileset).provide(:rest_v2, parent: Puppet::Provider::Gpf
   def flush
     raise("Filesystem is mandatory for #{resource.type} #{resource.name}") if resource[:filesystem].nil?
 
-    if @property_flush[:owner]
+    if @property_flush[:permissions] || @property_flush[:owner]
       # Determine path
       if resource[:path]
         path = resource[:path]
@@ -142,6 +146,14 @@ Puppet::Type.type(:gpfs_fileset).provide(:rest_v2, parent: Puppet::Provider::Gpf
       if @property_flush[:owner]
         if File.directory?(path)
           chown(@property_flush[:owner], path)
+        else
+          Puppet.warning("Unable to set permissions for #{resource.type} #{resource.name}, path #{path} does not exist")
+        end
+      end
+
+      if @property_flush[:permissions] && resource[:enforce_permissions].to_s == 'true'
+        if File.directory?(path)
+          chmod(@property_flush[:permissions], path)
         else
           Puppet.warning("Unable to set permissions for #{resource.type} #{resource.name}, path #{path} does not exist")
         end
