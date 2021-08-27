@@ -203,43 +203,6 @@ describe 'gpfs_fileset type:' do
     end
   end
 
-  context 'create fileset with statefile' do
-    it 'runs successfully' do
-      pp = <<-EOS
-      class { 'gpfs':
-        packages => [
-          'gpfs.adv',
-          'gpfs.base',
-          'gpfs.crypto',
-          'gpfs.docs',
-          'gpfs.ext',
-          'gpfs.gpl',
-          'gpfs.gskit',
-          'gpfs.msg.en_US',
-        ]
-      }
-      gpfs_fileset { 'test2':
-        filesystem      => 'test',
-        owner           => 'root:root',
-        permissions     => '1770',
-        max_num_inodes  => 400000,
-        alloc_inodes    => 400000,
-        new_statefile   => '.new_fileset',
-      }
-      EOS
-
-      apply_manifest(pp, catch_failures: true)
-      apply_manifest(pp, catch_changes: true)
-    end
-
-    describe file('/fs/test/test2/.new_fileset') do
-      it { is_expected.to be_file }
-      it { is_expected.to be_mode 400 }
-      it { is_expected.to be_owned_by 'root' }
-      it { is_expected.to be_grouped_into 'root' }
-    end
-  end
-
   context 'delete fileset' do
     it 'runs successfully' do
       pp = <<-EOS

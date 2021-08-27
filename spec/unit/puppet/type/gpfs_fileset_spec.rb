@@ -157,11 +157,6 @@ describe Puppet::Type.type(:gpfs_fileset) do
     }.to raise_error(Puppet::ResourceError, %r{alloc_inodes foo is not a valid integer})
   end
 
-  it 'accepts new_statefile' do
-    fileset[:new_statefile] = '.new_fileset'
-    expect(fileset[:new_statefile]).to eq('.new_fileset')
-  end
-
   it 'accepts inode_tolerance as String' do
     fileset[:inode_tolerance] = '1024'
     expect(fileset[:inode_tolerance]).to eq(1024)
