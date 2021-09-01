@@ -595,18 +595,29 @@ Owner of GPFS fileset: user:group
 
 The GPFS fileset path.
 
+##### `permissions`
+
+Permissions of fileset.
+
 #### Parameters
 
 The following parameters are available in the `gpfs_fileset` type.
 
+* [`enforce_permissions`](#enforce_permissions)
 * [`fileset`](#fileset)
 * [`filesystem`](#filesystem)
 * [`inode_space`](#inode_space)
 * [`inode_tolerance`](#inode_tolerance)
 * [`name`](#name)
-* [`new_statefile`](#new_statefile)
-* [`permissions`](#permissions)
 * [`provider`](#provider)
+
+##### <a name="enforce_permissions"></a>`enforce_permissions`
+
+Valid values: ``true``, ``false``
+
+Enforce POSIX permissions after creation
+
+Default value: ``false``
 
 ##### <a name="fileset"></a>`fileset`
 
@@ -633,14 +644,6 @@ Default value: `32`
 namevar
 
 The default namevar.
-
-##### <a name="new_statefile"></a>`new_statefile`
-
-Statefile that is created at root of a new fileset
-
-##### <a name="permissions"></a>`permissions`
-
-Permissions of fileset.
 
 ##### <a name="provider"></a>`provider`
 
