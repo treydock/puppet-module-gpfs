@@ -220,6 +220,21 @@
       
     </li>
     
+    <li>
+      <span class="name">permissions</span>
+      
+      
+      <div class="docstring">
+        <div class="discussion">
+          
+<p>Permissions of fileset.</p>
+
+        </div>
+      </div>
+      
+      
+    </li>
+    
   </ul>
 </div>
 
@@ -227,6 +242,40 @@
 <div class="tags">
   <p class="tag_title">Parameters</p>
   <ul>
+    
+    <li>
+      <span class="name">enforce_permissions</span>
+      
+      <span class="default"> (defaults to: <em>false</em>)</span>
+      
+      
+      <div class="docstring">
+        <div class="discussion">
+          
+<p>Enforce POSIX permissions after creation</p>
+
+        </div>
+      </div>
+      
+      
+      <div>
+        Supported values:
+        <ul>
+          
+          <li>
+            
+            true
+          </li>
+          
+          <li>
+            
+            false
+          </li>
+          
+        </ul>
+      </div>
+      
+    </li>
     
     <li>
       <span class="name">fileset</span>
@@ -301,36 +350,6 @@ triggering a Puppet change</p>
         <div class="discussion">
           
 <p>The default namevar.</p>
-
-        </div>
-      </div>
-      
-      
-    </li>
-    
-    <li>
-      <span class="name">new_statefile</span>
-      
-      
-      <div class="docstring">
-        <div class="discussion">
-          
-<p>Statefile that is created at root of a new fileset</p>
-
-        </div>
-      </div>
-      
-      
-    </li>
-    
-    <li>
-      <span class="name">permissions</span>
-      
-      
-      <div class="docstring">
-        <div class="discussion">
-          
-<p>Permissions of fileset.</p>
 
         </div>
       </div>
