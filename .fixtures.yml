@@ -1,20 +1,20 @@
 fixtures:
-  repositories:
+  forge_modules:
     stdlib:
-      repo: https://github.com/puppetlabs/puppetlabs-stdlib.git
+      repo: puppetlabs/stdlib
     concat:
-      repo: https://github.com/puppetlabs/puppetlabs-concat.git
+      repo: puppetlabs/concat
     firewall:
-      repo: https://github.com/puppetlabs/puppetlabs-firewall.git
+      repo: puppetlabs/firewall
     yumrepo_core:
-      repo: https://github.com/puppetlabs/puppetlabs-yumrepo_core.git
+      repo: puppetlabs/yumrepo_core
     sudo:
-      repo: https://github.com/saz/puppet-sudo.git
+      repo: saz/sudo
     logrotate:
-      repo: https://github.com/voxpupuli/puppet-logrotate.git
+      repo: puppet/logrotate
     augeasproviders_core:
-      repo: https://github.com/hercules-team/augeasproviders_core
+      repo: herculesteam/augeasproviders_core
     augeasproviders_shellvar:
-      repo: https://github.com/hercules-team/augeasproviders_shellvar
+      repo: herculesteam/augeasproviders_shellvar
   symlinks:
     gpfs: "#{source_dir}"
