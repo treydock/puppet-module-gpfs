@@ -197,9 +197,7 @@ Puppet::Type.newtype(:gpfs_fileset) do
     ['gpfs']
   end
 
-  validate do
-    if self[:filesystem].nil?
-      raise('Filesystem is required.')
-    end
+  def pre_run_check
+    raise('Filesystem is required.') if self[:filesystem].nil?
   end
 end
