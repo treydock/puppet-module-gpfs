@@ -128,12 +128,16 @@ Puppet::Type.type(:gpfs_fileset).provide(:shell, parent: Puppet::Provider::Gpfs)
     @property_hash.clear
   end
 
+  def link
+    mmlinkfileset([resource[:filesystem], resource[:fileset], '-J', resource[:path]])
+  end
+
   def unlink
     mmunlinkfileset([resource[:filesystem], resource[:fileset]])
   end
 
   def exists?
-    @property_hash[:ensure] == :present
+    @property_hash[:ensure] == :present || unlinked?
   end
 
   def unlinked?
