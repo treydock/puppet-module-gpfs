@@ -20,7 +20,11 @@ Puppet::Type.newtype(:gpfs_fileset) do
 
     defaultto(:present)
     newvalue(:present) do
-      @resource.provider.create
+      if @resource.provider.exists? && @resource.provider.unlinked?
+        @resource.provider.link
+      else
+        @resource.provider.create
+      end
     end
     newvalue(:absent) do
       @resource.provider.destroy
@@ -30,7 +34,7 @@ Puppet::Type.newtype(:gpfs_fileset) do
       nil
     end
 
-    def retreive
+    def retrieve
       if @resource.provider.exists? && @resource.provider.unlinked?
         :unlinked
       elsif @resource.provider.exists?
@@ -193,9 +197,7 @@ Puppet::Type.newtype(:gpfs_fileset) do
     ['gpfs']
   end
 
-  validate do
-    if self[:filesystem].nil?
-      raise('Filesystem is required.')
-    end
+  def pre_run_check
+    raise('Filesystem is required.') if self[:filesystem].nil?
   end
 end
