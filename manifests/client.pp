@@ -9,6 +9,8 @@
 #   GPFS client package ensure property
 # @param packages
 #   GPFS client packages
+# @param manage_service_files
+#  Determines if GPFS service files are managed
 # @param manage_ssh_authorized_keys
 #   Determines if SSH authorized_keys should be managed
 # @param ssh_user
@@ -23,6 +25,7 @@ class gpfs::client (
   Boolean $manage_packages = true,
   $package_ensure       = 'present',
   $packages             = [],
+  Boolean $manage_service_files = true,
   Boolean $manage_ssh_authorized_keys = true,
   $ssh_user             = 'root',
   $ssh_authorized_keys  = {},
