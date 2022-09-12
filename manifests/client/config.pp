@@ -65,7 +65,7 @@ class gpfs::client::config {
   create_resources('gpfs::client::rkm', $gpfs::client::rkms)
 
   # Hack to properly install systemd service
-  if $::service_provider == 'systemd' {
+  if $::service_provider == 'systemd' and $gpfs::client::manage_service_files {
     file { '/usr/lib/systemd/system/gpfs.service':
       ensure => 'file',
       owner  => 'root',
