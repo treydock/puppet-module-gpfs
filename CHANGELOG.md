@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [v2.2.0](https://github.com/treydock/puppet-module-gpfs/tree/v2.2.0) (2022-09-12)
+
+[Full Changelog](https://github.com/treydock/puppet-module-gpfs/compare/v2.1.1...v2.2.0)
+
+### Added
+
+- Add gpfs::client::manage\_service\_files parameter [\#25](https://github.com/treydock/puppet-module-gpfs/pull/25) ([treydock](https://github.com/treydock))
+
 ## [v2.1.1](https://github.com/treydock/puppet-module-gpfs/tree/v2.1.1) (2022-07-06)
 
 [Full Changelog](https://github.com/treydock/puppet-module-gpfs/compare/v2.1.0...v2.1.1)

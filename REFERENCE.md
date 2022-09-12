@@ -191,6 +191,7 @@ The following parameters are available in the `gpfs::client` class:
 * [`manage_packages`](#manage_packages)
 * [`package_ensure`](#package_ensure)
 * [`packages`](#packages)
+* [`manage_service_files`](#manage_service_files)
 * [`manage_ssh_authorized_keys`](#manage_ssh_authorized_keys)
 * [`ssh_user`](#ssh_user)
 * [`ssh_authorized_keys`](#ssh_authorized_keys)
@@ -220,6 +221,14 @@ Data type: `Any`
 GPFS client packages
 
 Default value: `[]`
+
+##### <a name="manage_service_files"></a>`manage_service_files`
+
+Data type: `Boolean`
+
+Determines if GPFS service files are managed
+
+Default value: ``true``
 
 ##### <a name="manage_ssh_authorized_keys"></a>`manage_ssh_authorized_keys`
 
