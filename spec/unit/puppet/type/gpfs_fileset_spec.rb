@@ -175,6 +175,17 @@ describe Puppet::Type.type(:gpfs_fileset) do
     expect { fileset[:inode_tolerance] = 1.5 }.to raise_error(Puppet::ResourceError, %r{Expected an integer for inode_tolerance})
   end
 
+  it 'does not accept non-Hash afm_attributes' do
+    expect {
+      fileset[:afm_attributes] = 'foo'
+    }.to raise_error(Puppet::ResourceError, %r{got String})
+  end
+
+  it 'accepts Hash for afm_attributes' do
+    fileset[:afm_attributes] = { 'afmTarget' => 'foo', 'afmMode' => 'read-only' }
+    expect(fileset[:afm_attributes]).to eq('afmTarget' => 'foo', 'afmMode' => 'read-only')
+  end
+
   it 'autorequires Service[gpfsgui]' do
     service = Puppet::Type.type(:service).new(name: 'gpfsgui')
     catalog = Puppet::Resource::Catalog.new
