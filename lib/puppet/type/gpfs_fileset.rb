@@ -33,7 +33,7 @@ Puppet::Type.newtype(:gpfs_fileset) do
       @resource.provider.destroy
     end
     newvalue(:unlinked) do
-      if @resource.provider.exists? && ! @resource.provider.unlinked?
+      if @resource.provider.exists? && !@resource.provider.unlinked?
         @resource.provider.unlink
       elsif !@resource.provider.exists?
         @resource.provider.create
