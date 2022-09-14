@@ -72,6 +72,11 @@ Puppet::Type.newtype(:gpfs_fileset) do
         raise ArgumentError, 'Fileset path must be fully qualified, not %s' % value
       end
     end
+
+    def insync?(is)
+      return true if @resource[:ensure].to_s == 'unlinked'
+      super(is)
+    end
   end
 
   newproperty(:owner) do
@@ -81,6 +86,11 @@ Puppet::Type.newtype(:gpfs_fileset) do
       unless value =~ %r{^\w+:\w+$}
         raise ArgumentError, 'Owner must be user:group, not %s' % value
       end
+    end
+
+    def insync?(is)
+      return true if @resource[:ensure].to_s == 'unlinked'
+      super(is)
     end
   end
 
@@ -99,6 +109,7 @@ Puppet::Type.newtype(:gpfs_fileset) do
 
     def insync?(is)
       return true if @resource[:enforce_permissions].to_s == 'false'
+      return true if @resource[:ensure].to_s == 'unlinked'
       super(is)
     end
   end
