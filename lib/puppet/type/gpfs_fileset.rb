@@ -26,6 +26,9 @@ Puppet::Type.newtype(:gpfs_fileset) do
         @resource.provider.create
       end
     end
+    newvalue(:created) do
+      @resource.provider.create unless @resource.provider.exists?
+    end
     newvalue(:absent) do
       @resource.provider.destroy
     end
