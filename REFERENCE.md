@@ -612,6 +612,7 @@ Permissions of fileset.
 
 The following parameters are available in the `gpfs_fileset` type.
 
+* [`afm_attributes`](#afm_attributes)
 * [`enforce_permissions`](#enforce_permissions)
 * [`fileset`](#fileset)
 * [`filesystem`](#filesystem)
@@ -619,6 +620,10 @@ The following parameters are available in the `gpfs_fileset` type.
 * [`inode_tolerance`](#inode_tolerance)
 * [`name`](#name)
 * [`provider`](#provider)
+
+##### <a name="afm_attributes"></a>`afm_attributes`
+
+AFM attributes
 
 ##### <a name="enforce_permissions"></a>`enforce_permissions`
 
