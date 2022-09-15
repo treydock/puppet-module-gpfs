@@ -90,6 +90,12 @@ Puppet::Type.type(:gpfs_fileset).provide(:shell, parent: Puppet::Provider::Gpfs)
 
   def create
     mmcrfileset_args = [resource[:filesystem], resource[:fileset]]
+    if resource[:afm_attributes]
+      resource[:afm_attributes].each_pair do |k, v|
+        mmcrfileset_args << '-p'
+        mmcrfileset_args << "#{k}=#{v}"
+      end
+    end
     if resource[:inode_space]
       mmcrfileset_args << '--inode-space'
       mmcrfileset_args << resource[:inode_space]
@@ -113,12 +119,16 @@ Puppet::Type.type(:gpfs_fileset).provide(:shell, parent: Puppet::Provider::Gpfs)
     mmlinkfileset_args << path
 
     mmcrfileset(mmcrfileset_args)
-    mmlinkfileset(mmlinkfileset_args)
 
-    chmod(resource[:permissions], path) if resource[:permissions]
-    chown(resource[:owner], path) if resource[:owner]
+    if resource[:ensure].to_s == 'present'
+      mmlinkfileset(mmlinkfileset_args)
 
-    @property_hash[:ensure] = :present
+      chmod(resource[:permissions], path) if resource[:permissions]
+      chown(resource[:owner], path) if resource[:owner]
+      @property_hash[:ensure] = :present
+    else
+      @property_hash[:ensure] = :unlinked
+    end
   end
 
   def destroy

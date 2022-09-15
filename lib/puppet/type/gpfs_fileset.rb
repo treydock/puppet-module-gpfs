@@ -30,8 +30,11 @@ Puppet::Type.newtype(:gpfs_fileset) do
       @resource.provider.destroy
     end
     newvalue(:unlinked) do
-      @resource.provider.unlink
-      nil
+      if @resource.provider.exists? && !@resource.provider.unlinked?
+        @resource.provider.unlink
+      elsif !@resource.provider.exists?
+        @resource.provider.create
+      end
     end
 
     def retrieve
@@ -69,6 +72,11 @@ Puppet::Type.newtype(:gpfs_fileset) do
         raise ArgumentError, 'Fileset path must be fully qualified, not %s' % value
       end
     end
+
+    def insync?(is)
+      return true if @resource[:ensure].to_s == 'unlinked'
+      super(is)
+    end
   end
 
   newproperty(:owner) do
@@ -78,6 +86,11 @@ Puppet::Type.newtype(:gpfs_fileset) do
       unless value =~ %r{^\w+:\w+$}
         raise ArgumentError, 'Owner must be user:group, not %s' % value
       end
+    end
+
+    def insync?(is)
+      return true if @resource[:ensure].to_s == 'unlinked'
+      super(is)
     end
   end
 
@@ -96,6 +109,7 @@ Puppet::Type.newtype(:gpfs_fileset) do
 
     def insync?(is)
       return true if @resource[:enforce_permissions].to_s == 'false'
+      return true if @resource[:ensure].to_s == 'unlinked'
       super(is)
     end
   end
@@ -186,6 +200,16 @@ Puppet::Type.newtype(:gpfs_fileset) do
     end
     munge do |value|
       value.to_i
+    end
+  end
+
+  newparam(:afm_attributes) do
+    desc 'AFM attributes'
+
+    validate do |value|
+      unless value.is_a? Hash
+        raise ArgumentError, 'Expect afm_attributes to be hash, got %s' % value.class
+      end
     end
   end
 
