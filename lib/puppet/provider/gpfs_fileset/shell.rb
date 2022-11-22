@@ -36,7 +36,7 @@ Puppet::Type.type(:gpfs_fileset).provide(:shell, parent: Puppet::Provider::Gpfs)
         fileset[:filesystem] = l[6]
         fileset[:fileset] = l[7]
         fileset[:name] = "#{fileset[:filesystem]}/#{fileset[:fileset]}"
-        fileset[:path] = URI.unescape(l[11]) unless l[11].nil?
+        fileset[:path] = URI.decode_www_form_component(l[11]) unless l[11].nil?
         fileset[:max_num_inodes] = l[32].to_i
         fileset[:alloc_inodes] = l[33].to_i
         fileset[:owner] = nil
@@ -81,7 +81,7 @@ Puppet::Type.type(:gpfs_fileset).provide(:shell, parent: Puppet::Provider::Gpfs)
     mmlsfs_out.each_line do |line|
       l = line.strip.split(':')
       next if l[2] == 'HEADER'
-      mountpoint = URI.unescape(l[8])
+      mountpoint = URI.decode_www_form_component(l[8])
     end
     raise("Unable to determine filesystem mount point for filesystem #{filesystem}") if mountpoint.nil?
     path = File.join(mountpoint, fileset)
