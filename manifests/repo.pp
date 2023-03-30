@@ -13,5 +13,4 @@ class gpfs::repo {
       priority        => '1',
     }
   }
-
 }

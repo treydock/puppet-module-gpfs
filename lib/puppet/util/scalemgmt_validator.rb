@@ -1,14 +1,11 @@
+# frozen_string_literal: true
+
 require 'net/http'
 require 'openssl'
 
 # Validator class, for testing that scalemgmt is alive
 class Puppet::Util::ScalemgmtValidator
-  attr_reader :scalemgmt_server
-  attr_reader :scalemgmt_port
-  attr_reader :api_user
-  attr_reader :api_password
-  attr_reader :test_path
-  attr_reader :test_headers
+  attr_reader :scalemgmt_server, :scalemgmt_port, :api_user, :api_password, :test_path, :test_headers
 
   def initialize(scalemgmt_server, scalemgmt_port, api_user = 'admin', api_password = 'admin001', test_path = '/scalemgmt/v2/info')
     @scalemgmt_server = scalemgmt_server
@@ -39,9 +36,9 @@ class Puppet::Util::ScalemgmtValidator
       Puppet.notice "Unable to connect to scalemgmt server (https://#{scalemgmt_server}:#{scalemgmt_port}): [#{response.code}] #{response.msg}"
       return false
     end
-    return true
+    true
   rescue Exception => e # rubocop:disable Lint/RescueException
     Puppet.notice "Unable to connect to scalemgmt server (https://#{scalemgmt_server}:#{scalemgmt_port}): #{e.message}"
-    return false
+    false
   end
 end

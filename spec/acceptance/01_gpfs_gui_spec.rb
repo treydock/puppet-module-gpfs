@@ -1,12 +1,15 @@
+# frozen_string_literal: true
+
 require 'spec_helper_acceptance'
 
 describe 'gpfs::gui class:' do
   before(:each) do
     skip('Skip GUI tests')
   end
-  context 'default parameters' do
+
+  context 'with default parameters' do
     it 'runs successfully' do
-      pp = <<-EOS
+      pp = <<-PP
       class { 'gpfs':
         packages => [
           'gpfs.adv',
@@ -22,7 +25,7 @@ describe 'gpfs::gui class:' do
       class { 'gpfs::gui':
         manage_firewall => false,
       }
-      EOS
+      PP
 
       apply_manifest(pp, catch_failures: true)
       apply_manifest(pp, catch_changes: true)

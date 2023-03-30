@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Puppet::Type.newtype(:gpfs_fileset) do
   desc <<-DESC
 @summary Manage a GPFS fileset
@@ -75,6 +77,7 @@ Puppet::Type.newtype(:gpfs_fileset) do
 
     def insync?(is)
       return true if @resource[:ensure].to_s == 'unlinked'
+
       super(is)
     end
   end
@@ -90,6 +93,7 @@ Puppet::Type.newtype(:gpfs_fileset) do
 
     def insync?(is)
       return true if @resource[:ensure].to_s == 'unlinked'
+
       super(is)
     end
   end
@@ -110,6 +114,7 @@ Puppet::Type.newtype(:gpfs_fileset) do
     def insync?(is)
       return true if @resource[:enforce_permissions].to_s == 'false'
       return true if @resource[:ensure].to_s == 'unlinked'
+
       super(is)
     end
   end
@@ -147,11 +152,7 @@ Puppet::Type.newtype(:gpfs_fileset) do
                end
       # If the difference is less than or equal to inode_tolerance, consider in sync.
       diff = current - should
-      if diff.abs <= @resource[:inode_tolerance]
-        true
-      else
-        false
-      end
+      diff.abs <= @resource[:inode_tolerance]
     end
   end
 
@@ -180,13 +181,10 @@ Puppet::Type.newtype(:gpfs_fileset) do
       if current > should
         return true
       end
+
       # If the difference is less than or equal to inode_tolerance, consider in sync.
       diff = current - should
-      if diff.abs <= @resource[:inode_tolerance]
-        true
-      else
-        false
-      end
+      diff.abs <= @resource[:inode_tolerance]
     end
   end
 

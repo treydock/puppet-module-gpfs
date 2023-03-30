@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'puppet'
 require 'json'
 require 'net/http'
@@ -11,10 +13,7 @@ class Puppet::Provider::Gpfs < Puppet::Provider
   @filesystems = nil
 
   class << self
-    attr_accessor :base_url
-    attr_accessor :api_user
-    attr_accessor :api_password
-    attr_accessor :filesystems
+    attr_accessor :base_url, :api_user, :api_password, :filesystems
   end
 
   commands mmlsfs: '/usr/lpp/mmfs/bin/mmlsfs'
@@ -25,10 +24,12 @@ class Puppet::Provider::Gpfs < Puppet::Provider
     mmlsfs_output.each_line do |line|
       l = line.strip.split(':')
       next if l[2] == 'HEADER'
+
       fs = l[6]
       if @filesystems && !@filesystems.include?(fs)
         next
       end
+
       filesystems << fs unless filesystems.include?(fs)
     end
     filesystems
@@ -52,6 +53,7 @@ class Puppet::Provider::Gpfs < Puppet::Provider
   def self.response_message(response)
     data = parse_response_body(response)
     return nil if data.nil?
+
     message = nil
     if data.key?('status')
       message = data['status']['message']
@@ -65,10 +67,11 @@ class Puppet::Provider::Gpfs < Puppet::Provider
     while wait
       data = request("v2/jobs/#{jobid}", 'GET')
       status = data['jobs'][0]['status']
-      if status == 'RUNNING'
+      case status
+      when 'RUNNING'
         Puppet.debug("Job #{jobid} still running, sleeping 1 second...")
         sleep(1)
-      elsif status == 'COMPLETED'
+      when 'COMPLETED'
         stdout = data['jobs'][0]['result']['stdout']
         Puppet.debug("Job completed successfully: #{stdout.join(', ')}")
         return true, stdout.join(', ')
@@ -83,7 +86,7 @@ class Puppet::Provider::Gpfs < Puppet::Provider
     uri = URI.join(base_url, uri_path)
     header = {
       'Content-Type' => 'application/json',
-      'Accept' => 'application/json',
+      'Accept' => 'application/json'
     }
     body = nil
 
@@ -115,9 +118,11 @@ class Puppet::Provider::Gpfs < Puppet::Provider
     unless response.is_a?(Net::HTTPSuccess)
       raise Puppet::Error, "#{type} to #{uri} failed with code #{response.code}, message=#{response_message(response)}"
     end
+
     data = parse_response_body(response)
     Puppet.debug("Response data:\n#{JSON.pretty_generate(data)}")
     return data unless wait
+
     job_success, job_output = wait_for_job(data)
     raise Puppet::Error, "#{type} to #{uri} job failed: #{job_output}" unless job_success
   end
@@ -235,16 +240,19 @@ class Puppet::Provider::Gpfs < Puppet::Provider
 
   def self.human_readable_kilobytes(value)
     return '0' if value.to_i.zero?
+
     {
       'K' => 1024,
       'M' => 1024**2,
       'G' => 1024**3,
-      'T' => 1024**4,
+      'T' => 1024**4
     }.each_pair do |suffix, factor|
       next unless value < factor
+
       factored_value = (value.to_f / (factor / 1024))
       # Check if integer value is same as float rounded to one decimal place
       return "#{Integer(factored_value)}#{suffix}" if Integer(factored_value) == factored_value.round(1)
+
       return "#{factored_value.round(1)}#{suffix}"
     end
     value
@@ -254,15 +262,15 @@ class Puppet::Provider::Gpfs < Puppet::Provider
     factors = {
       'M' => 1024,
       'G' => 1024**2,
-      'T' => 1024**3,
+      'T' => 1024**3
     }
-    if value =~ %r{^([0-9\.]+)(T|G|M)$} # rubocop:disable Style/GuardClause
+    if value =~ %r{^([0-9.]+)(T|G|M)$}
       v = Regexp.last_match(1).to_f
       f = Regexp.last_match(2)
       factor = factors[f]
-      return "#{Integer(v * factor)}K"
+      "#{Integer(v * factor)}K"
     else
-      return value
+      value
     end
   end
 end

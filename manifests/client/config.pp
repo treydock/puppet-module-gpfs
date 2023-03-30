@@ -23,7 +23,7 @@ class gpfs::client::config {
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template('gpfs/gpfs.sh.profile.erb')
+    content => template('gpfs/gpfs.sh.profile.erb'),
   }
 
   file { '/var/mmfs/ccr':
@@ -65,7 +65,7 @@ class gpfs::client::config {
   create_resources('gpfs::client::rkm', $gpfs::client::rkms)
 
   # Hack to properly install systemd service
-  if $::service_provider == 'systemd' and $gpfs::client::manage_service_files {
+  if $facts['service_provider'] == 'systemd' and $gpfs::client::manage_service_files {
     file { '/usr/lib/systemd/system/gpfs.service':
       ensure => 'file',
       owner  => 'root',
@@ -90,5 +90,4 @@ class gpfs::client::config {
       refreshonly => true,
     }
   }
-
 }

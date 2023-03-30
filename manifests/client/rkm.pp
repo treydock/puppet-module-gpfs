@@ -13,20 +13,19 @@
 # @param retry_sleep
 # @param order
 define gpfs::client::rkm (
-  $rkm_id               = $name,
-  $type                 = 'ISKLM',
+  String[1] $rkm_id = $name,
+  String[1] $type = 'ISKLM',
   Array $kmip_server_uris     = [],
-  $key_store            = '/var/mmfs/etc/RKMcerts/ISKLM.proj2',
-  $key_store_source     = undef,
-  $passphrase           = undef,
-  $client_cert_label    = undef,
-  $tenant_name          = undef,
-  $connection_timeout   = '5',
-  $connection_attempts  = '3',
-  $retry_sleep          = '50000',
-  $order                = '10',
+  Stdlib::Absolutepath $key_store = '/var/mmfs/etc/RKMcerts/ISKLM.proj2',
+  Optional[String[1]] $key_store_source = undef,
+  Optional[String[1]] $passphrase = undef,
+  Optional[String[1]] $client_cert_label = undef,
+  Optional[String[1]] $tenant_name = undef,
+  String[1] $connection_timeout = '5',
+  String[1] $connection_attempts = '3',
+  String[1] $retry_sleep = '50000',
+  String[1] $order = '10',
 ) {
-
   # Template uses:
   # - $rkm_id
   # - $kmip_server_uris
@@ -62,5 +61,4 @@ define gpfs::client::rkm (
       source => $key_store_source,
     }
   }
-
 }

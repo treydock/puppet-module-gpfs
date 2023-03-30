@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'puppet/type/gpfs_fileset'
 
@@ -73,6 +75,7 @@ describe Puppet::Type.type(:gpfs_fileset) do
     fileset[:owner] = 'root:root'
     expect(fileset[:owner]).to eq('root:root')
   end
+
   it 'does not accept an owner with only user' do
     expect {
       fileset[:owner] = 'root'
@@ -117,7 +120,7 @@ describe Puppet::Type.type(:gpfs_fileset) do
     expect(fileset[:max_num_inodes]).to eq(1_000_000)
   end
 
-  context 'max_num_inodes insync?' do
+  describe 'max_num_inodes insync?' do
     it 'is insync with default tolerance' do
       fileset[:max_num_inodes] = 1_000_000
       expect(fileset.property(:max_num_inodes).insync?(1_000_032)).to eq(true)

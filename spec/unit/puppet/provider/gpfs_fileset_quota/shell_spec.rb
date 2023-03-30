@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Puppet::Type.type(:gpfs_fileset_quota).provider(:shell) do
@@ -42,7 +44,7 @@ mmlsfs::0:1:::test:defaultMountPoint:%2Ffs%2Ftest::"
       { ensure: :present, name: 'test/test3/fileset/test3', fileset: 'test3', filesystem: 'test', object_name: 'test3', type: :fileset,
         block_soft_limit: '0', block_hard_limit: '0', files_soft_limit: 0, files_hard_limit: 0 },
       { ensure: :present, name: 'test/qtest1/fileset/qtest1', fileset: 'qtest1', filesystem: 'test', object_name: 'qtest1', type: :fileset,
-        block_soft_limit: '1T', block_hard_limit: '1T', files_soft_limit: 400_000, files_hard_limit: 400_000 },
+        block_soft_limit: '1T', block_hard_limit: '1T', files_soft_limit: 400_000, files_hard_limit: 400_000 }
     ]
   end
 
@@ -82,7 +84,7 @@ mmlsfs::0:1:::test:defaultMountPoint:%2Ffs%2Ftest::"
     end
 
     it 'prefetches' do
-      resources.keys.each do |r|
+      resources.each_key do |r|
         expect(resources[r]).to receive(:provider=).with(described_class)
       end
       described_class.prefetch(resources)
@@ -127,9 +129,11 @@ mmlsfs::0:1:::test:defaultMountPoint:%2Ffs%2Ftest::"
     it 'handles 500G' do
       expect(resource.provider.class.human_readable_kilobytes(524_288_000)).to eq('500G')
     end
+
     it 'handles 5T' do
       expect(resource.provider.class.human_readable_kilobytes(5_368_709_120)).to eq('5T')
     end
+
     it 'handles 1.8T' do
       expect(resource.provider.class.human_readable_kilobytes(1_932_735_283)).to eq('1.8T')
     end

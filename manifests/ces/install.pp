@@ -10,6 +10,4 @@ class gpfs::ces::install {
       }
     }
   }
-
-
 }

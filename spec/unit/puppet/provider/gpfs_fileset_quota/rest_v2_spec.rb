@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Puppet::Type.type(:gpfs_fileset_quota).provider(:rest_v2) do
@@ -14,15 +16,15 @@ describe Puppet::Type.type(:gpfs_fileset_quota).provider(:rest_v2) do
     {
       'quotas' => [
         { 'filesetName' => 'test1', 'filesystemName' => 'project', 'quotaType' => 'USR', 'objectName' => 'test1',
-          'blockLimit'  => 1_048_576, 'blockQuota' => 1_048_576, 'filesLimit' => 1_000_000, 'filesQuota' => 1_000_000 },
+          'blockLimit' => 1_048_576, 'blockQuota' => 1_048_576, 'filesLimit' => 1_000_000, 'filesQuota' => 1_000_000 },
         { 'filesetName' => 'test2', 'filesystemName' => 'project', 'quotaType' => 'FILESET', 'objectName' => 'test2',
-          'blockLimit'  => 2_147_483_648, 'blockQuota' => 2_147_483_648, 'filesLimit' => 1_000_000, 'filesQuota' => 1_000_000 },
-        { 'filesetName' => 'test1', 'filesystemName' => 'scratch', 'quotaType' => 'FILESET', 'objectName' => 'test1' },
+          'blockLimit' => 2_147_483_648, 'blockQuota' => 2_147_483_648, 'filesLimit' => 1_000_000, 'filesQuota' => 1_000_000 },
+        { 'filesetName' => 'test1', 'filesystemName' => 'scratch', 'quotaType' => 'FILESET', 'objectName' => 'test1' }
       ],
       'status' => {
         'code' => 200,
-        'message' => 'The request finished successfully',
-      },
+        'message' => 'The request finished successfully'
+      }
     }
   end
 
@@ -32,7 +34,7 @@ describe Puppet::Type.type(:gpfs_fileset_quota).provider(:rest_v2) do
         block_soft_limit: '1G', block_hard_limit: '1G', files_soft_limit: 1_000_000, files_hard_limit: 1_000_000 },
       { ensure: :present, name: 'project/test2/test1', fileset: 'test2', filesystem: 'project', object_name: 'test2', type: 'fileset',
         block_soft_limit: '2T', block_hard_limit: '2T', files_soft_limit: 1_000_000, files_hard_limit: 1_000_000 },
-      { ensure: :present, name: 'scratch/test1/test1', fileset: 'test1', filesystem: 'scratch', object_name: 'test1', type: 'fileset' },
+      { ensure: :present, name: 'scratch/test1/test1', fileset: 'test1', filesystem: 'scratch', object_name: 'test1', type: 'fileset' }
     ]
   end
 
@@ -68,7 +70,7 @@ describe Puppet::Type.type(:gpfs_fileset_quota).provider(:rest_v2) do
     end
 
     it 'prefetches' do
-      resources.keys.each do |r|
+      resources.each_key do |r|
         expect(resources[r]).to receive(:provider=).with(described_class)
       end
       described_class.prefetch(resources)
@@ -80,7 +82,7 @@ describe Puppet::Type.type(:gpfs_fileset_quota).provider(:rest_v2) do
       expected_data = {
         operationType: 'setQuota',
         quotaType: resource[:type],
-        objectName: resource[:object_name],
+        objectName: resource[:object_name]
       }
       expect(resource.provider).to receive(:post_request).with("v2/filesystems/#{resource[:filesystem]}/filesets/#{resource[:fileset]}/quotas", expected_data)
       resource.provider.create
@@ -104,7 +106,7 @@ describe Puppet::Type.type(:gpfs_fileset_quota).provider(:rest_v2) do
         blockSoftLimit: '0',
         blockHardLimit: '0',
         filesSoftLimit: 0,
-        filesHardLimit: 0,
+        filesHardLimit: 0
       }
       expect(resource.provider).to receive(:post_request).with("v2/filesystems/#{resource[:filesystem]}/filesets/#{resource[:fileset]}/quotas", expected_data)
       resource.provider.destroy
@@ -121,7 +123,7 @@ describe Puppet::Type.type(:gpfs_fileset_quota).provider(:rest_v2) do
         quotaType: resource[:type],
         objectName: resource[:object_name],
         blockSoftLimit: 5000,
-        blockHardLimit: 5000,
+        blockHardLimit: 5000
       }
       expect(resource.provider).to receive(:post_request).with(expected_uri_path, expected_data)
       resource.provider.block_soft_limit = 5000

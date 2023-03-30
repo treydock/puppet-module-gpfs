@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require File.expand_path(File.join(File.dirname(__FILE__), '..', 'gpfs'))
 require 'fileutils'
 require 'etc'
@@ -15,7 +17,7 @@ Puppet::Type.type(:gpfs_fileset).provide(:rest_v2, parent: Puppet::Provider::Gpf
   def self.instances
     filesets = []
     params = {
-      'fields' => ':all:',
+      'fields' => ':all:'
     }
     data = get_request('v2/filesystems/:all:/filesets', params)
     unless data.key?('filesets')
@@ -56,11 +58,12 @@ Puppet::Type.type(:gpfs_fileset).provide(:rest_v2, parent: Puppet::Provider::Gpf
 
   def self.prefetch(resources)
     filesets = instances
-    resources.keys.each do |name|
+    resources.each_key do |name|
       provider = filesets.find do |fileset|
         fileset.fileset == resources[name][:fileset] && fileset.filesystem == resources[name][:filesystem]
       end
       next unless provider
+
       resources[name].provider = provider
     end
   end
@@ -162,19 +165,15 @@ Puppet::Type.type(:gpfs_fileset).provide(:rest_v2, parent: Puppet::Provider::Gpf
 
     if @property_flush[:max_num_inodes] || @property_flush[:alloc_inodes]
       # Sanity check max_num_inodes is not lower than allocated inodes
-      if @property_flush[:max_num_inodes]
-        if @property_hash[:alloc_inodes].to_i > @property_flush[:max_num_inodes].to_i
-          Puppet.warning("Fileset #{resource[:name]}: Decreasing max inodes (#{@property_flush[:max_num_inodes]}) to be less than allocated inodes (#{@property_hash[:alloc_inodes]}) is not permitted")
-          @property_flush.delete(:max_num_inodes)
-        end
+      if @property_flush[:max_num_inodes] && (@property_hash[:alloc_inodes].to_i > @property_flush[:max_num_inodes].to_i)
+        Puppet.warning("Fileset #{resource[:name]}: Decreasing max inodes (#{@property_flush[:max_num_inodes]}) to be less than allocated inodes (#{@property_hash[:alloc_inodes]}) is not permitted")
+        @property_flush.delete(:max_num_inodes)
       end
       # Sanity check alloc_inodes is not lower than previous value
       # WARNING: API does not currently support querying allocated inodes
-      if @property_flush[:alloc_inodes]
-        if @property_hash[:alloc_inodes].to_i > @property_flush[:alloc_inodes].to_i
-          Puppet.warning("Fileset #{resource[:name]}: decreasing allocated inodes from #{@property_hash[:alloc_inodes]} to #{@property_flush[:alloc_inodes]} is not permitted")
-          @property_flush.delete(:alloc_inodes)
-        end
+      if @property_flush[:alloc_inodes] && (@property_hash[:alloc_inodes].to_i > @property_flush[:alloc_inodes].to_i)
+        Puppet.warning("Fileset #{resource[:name]}: decreasing allocated inodes from #{@property_hash[:alloc_inodes]} to #{@property_flush[:alloc_inodes]} is not permitted")
+        @property_flush.delete(:alloc_inodes)
       end
 
       data = {}

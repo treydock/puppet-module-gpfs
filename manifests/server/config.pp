@@ -9,6 +9,6 @@ class gpfs::server::config {
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template('gpfs/gpfs.sh.profile.erb')
+    content => template('gpfs/gpfs.sh.profile.erb'),
   }
 }

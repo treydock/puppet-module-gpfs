@@ -20,7 +20,6 @@ class gpfs::ces (
     'nfs-ganesha-utils',
   ],
 ) {
-
   contain gpfs
   contain gpfs::ces::install
   contain gpfs::ces::config
@@ -28,5 +27,4 @@ class gpfs::ces (
   Class['gpfs']
   ->Class['gpfs::ces::install']
   ->Class['gpfs::ces::config']
-
 }

@@ -23,16 +23,15 @@
 #   Paths to add to PATH
 class gpfs::client (
   Boolean $manage_packages = true,
-  $package_ensure       = 'present',
-  $packages             = [],
+  String[1] $package_ensure = 'present',
+  Array[String[1]] $packages = [],
   Boolean $manage_service_files = true,
   Boolean $manage_ssh_authorized_keys = true,
-  $ssh_user             = 'root',
-  $ssh_authorized_keys  = {},
-  $rkms                 = {},
+  String[1] $ssh_user = 'root',
+  Hash $ssh_authorized_keys  = {},
+  Hash $rkms = {},
   Array[Stdlib::Absolutepath] $bin_paths  = [],
 ) {
-
   contain gpfs
   contain gpfs::client::install
   contain gpfs::client::config
@@ -40,5 +39,4 @@ class gpfs::client (
   Class['gpfs']
   ->Class['gpfs::client::install']
   ->Class['gpfs::client::config']
-
 }

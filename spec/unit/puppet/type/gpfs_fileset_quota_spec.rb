@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'puppet/type/gpfs_fileset_quota'
 
@@ -119,6 +121,7 @@ describe Puppet::Type.type(:gpfs_fileset_quota) do
     quota[:files_soft_limit] = '1M'
     expect(quota[:files_soft_limit]).to eq(1_000_000)
   end
+
   it 'converts files_soft_limit from 1K' do
     quota[:files_soft_limit] = '1K'
     expect(quota[:files_soft_limit]).to eq(1000)
@@ -138,6 +141,7 @@ describe Puppet::Type.type(:gpfs_fileset_quota) do
     quota[:files_hard_limit] = '1M'
     expect(quota[:files_hard_limit]).to eq(1_000_000)
   end
+
   it 'converts files_hard_limit from 1K' do
     quota[:files_hard_limit] = '1K'
     expect(quota[:files_hard_limit]).to eq(1000)

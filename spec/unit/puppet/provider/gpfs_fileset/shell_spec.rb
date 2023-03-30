@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Puppet::Type.type(:gpfs_fileset).provider(:shell) do
@@ -35,7 +37,7 @@ mmlsfs::0:1:::test:defaultMountPoint:%2Ffs%2Ftest::"
       { ensure: :present, name: 'test/root', fileset: 'root', filesystem: 'test', path: '/fs/test',
         max_num_inodes: 65_792, alloc_inodes: 65_792, owner: nil },
       { ensure: :present, name: 'test/test3', fileset: 'test3', filesystem: 'test', path: '/fs/test/test3',
-        max_num_inodes: 2_000_000, alloc_inodes: 1_000_000, owner: nil },
+        max_num_inodes: 2_000_000, alloc_inodes: 1_000_000, owner: nil }
     ]
   end
 
@@ -82,7 +84,7 @@ mmlsfs::0:1:::test:defaultMountPoint:%2Ffs%2Ftest::"
     end
 
     it 'prefetches' do
-      resources.keys.each do |r|
+      resources.each_key do |r|
         expect(resources[r]).to receive(:provider=).with(described_class)
       end
       described_class.prefetch(resources)
