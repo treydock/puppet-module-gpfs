@@ -174,7 +174,8 @@
         <span class='type'>(<tt>Array</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>[ &quot;gpfs.gplbin-${facts[&#39;kernelrelease&#39;]}&quot;,
+        <em class="default">(defaults to: <tt>[
+    &quot;gpfs.gplbin-${facts[&#39;kernelrelease&#39;]}&quot;,
     &#39;gpfs.adv&#39;,
     &#39;gpfs.base&#39;,
     &#39;gpfs.crypto&#39;,
@@ -263,9 +264,10 @@
 class gpfs (
   Boolean $manage_repo = true,
   Optional[String] $repo_baseurl = undef,
-  Boolean $manage_packages  = true,
-  String $package_ensure    = &#39;present&#39;,
-  Array $packages           = [ &quot;gpfs.gplbin-${facts[&#39;kernelrelease&#39;]}&quot;,
+  Boolean $manage_packages = true,
+  String $package_ensure = &#39;present&#39;,
+  Array $packages = [
+    &quot;gpfs.gplbin-${facts[&#39;kernelrelease&#39;]}&quot;,
     &#39;gpfs.adv&#39;,
     &#39;gpfs.base&#39;,
     &#39;gpfs.crypto&#39;,
@@ -277,7 +279,6 @@ class gpfs (
   ],
   Optional[Array] $config_filesystems = undef,
 ) {
-
   $osfamily = dig($facts, &#39;os&#39;, &#39;family&#39;)
   if ! ($osfamily in [&#39;RedHat&#39;]) {
     fail(&quot;Unsupported OS: ${osfamily}, module ${module_name} only supports RedHat&quot;)

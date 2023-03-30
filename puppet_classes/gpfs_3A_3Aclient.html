@@ -117,7 +117,7 @@
         <span class='name'>package_ensure</span>
       
       
-        <span class='type'>(<tt>Any</tt>)</span>
+        <span class='type'>(<tt>String[1]</tt>)</span>
       
       
         <em class="default">(defaults to: <tt>&#39;present&#39;</tt>)</em>
@@ -135,7 +135,7 @@
         <span class='name'>packages</span>
       
       
-        <span class='type'>(<tt>Any</tt>)</span>
+        <span class='type'>(<tt>Array[String[1]]</tt>)</span>
       
       
         <em class="default">(defaults to: <tt>[]</tt>)</em>
@@ -189,7 +189,7 @@
         <span class='name'>ssh_user</span>
       
       
-        <span class='type'>(<tt>Any</tt>)</span>
+        <span class='type'>(<tt>String[1]</tt>)</span>
       
       
         <em class="default">(defaults to: <tt>&#39;root&#39;</tt>)</em>
@@ -207,7 +207,7 @@
         <span class='name'>ssh_authorized_keys</span>
       
       
-        <span class='type'>(<tt>Any</tt>)</span>
+        <span class='type'>(<tt>Hash</tt>)</span>
       
       
         <em class="default">(defaults to: <tt>{}</tt>)</em>
@@ -225,7 +225,7 @@
         <span class='name'>rkms</span>
       
       
-        <span class='type'>(<tt>Any</tt>)</span>
+        <span class='type'>(<tt>Hash</tt>)</span>
       
       
         <em class="default">(defaults to: <tt>{}</tt>)</em>
@@ -285,25 +285,22 @@
 39
 40
 41
-42
-43
-44</pre>
+42</pre>
       </td>
       <td>
         <pre class="code"><span class="info file"># File 'manifests/client.pp', line 24</span>
 
 class gpfs::client (
   Boolean $manage_packages = true,
-  $package_ensure       = &#39;present&#39;,
-  $packages             = [],
+  String[1] $package_ensure = &#39;present&#39;,
+  Array[String[1]] $packages = [],
   Boolean $manage_service_files = true,
   Boolean $manage_ssh_authorized_keys = true,
-  $ssh_user             = &#39;root&#39;,
-  $ssh_authorized_keys  = {},
-  $rkms                 = {},
+  String[1] $ssh_user = &#39;root&#39;,
+  Hash $ssh_authorized_keys  = {},
+  Hash $rkms = {},
   Array[Stdlib::Absolutepath] $bin_paths  = [],
 ) {
-
   contain gpfs
   contain gpfs::client::install
   contain gpfs::client::config
@@ -311,7 +308,6 @@ class gpfs::client (
   Class[&#39;gpfs&#39;]
   -&gt;Class[&#39;gpfs::client::install&#39;]
   -&gt;Class[&#39;gpfs::client::config&#39;]
-
 }</pre>
       </td>
     </tr>

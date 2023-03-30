@@ -183,9 +183,7 @@
 27
 28
 29
-30
-31
-32</pre>
+30</pre>
       </td>
       <td>
         <pre class="code"><span class="info file"># File 'manifests/ces.pp', line 12</span>
@@ -201,7 +199,6 @@ class gpfs::ces (
     &#39;nfs-ganesha-utils&#39;,
   ],
 ) {
-
   contain gpfs
   contain gpfs::ces::install
   contain gpfs::ces::config
@@ -209,7 +206,6 @@ class gpfs::ces (
   Class[&#39;gpfs&#39;]
   -&gt;Class[&#39;gpfs::ces::install&#39;]
   -&gt;Class[&#39;gpfs::ces::config&#39;]
-
 }</pre>
       </td>
     </tr>

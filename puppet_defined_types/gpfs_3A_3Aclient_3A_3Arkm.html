@@ -89,7 +89,7 @@
         <span class='name'>rkm_id</span>
       
       
-        <span class='type'>(<tt>Any</tt>)</span>
+        <span class='type'>(<tt>String[1]</tt>)</span>
       
       
         <em class="default">(defaults to: <tt>$name</tt>)</em>
@@ -102,7 +102,7 @@
         <span class='name'>type</span>
       
       
-        <span class='type'>(<tt>Any</tt>)</span>
+        <span class='type'>(<tt>String[1]</tt>)</span>
       
       
         <em class="default">(defaults to: <tt>&#39;ISKLM&#39;</tt>)</em>
@@ -128,7 +128,7 @@
         <span class='name'>key_store</span>
       
       
-        <span class='type'>(<tt>Any</tt>)</span>
+        <span class='type'>(<tt>Stdlib::Absolutepath</tt>)</span>
       
       
         <em class="default">(defaults to: <tt>&#39;/var/mmfs/etc/RKMcerts/ISKLM.proj2&#39;</tt>)</em>
@@ -141,7 +141,7 @@
         <span class='name'>key_store_source</span>
       
       
-        <span class='type'>(<tt>Any</tt>)</span>
+        <span class='type'>(<tt>Optional[String[1]]</tt>)</span>
       
       
         <em class="default">(defaults to: <tt>undef</tt>)</em>
@@ -154,7 +154,7 @@
         <span class='name'>passphrase</span>
       
       
-        <span class='type'>(<tt>Any</tt>)</span>
+        <span class='type'>(<tt>Optional[String[1]]</tt>)</span>
       
       
         <em class="default">(defaults to: <tt>undef</tt>)</em>
@@ -167,7 +167,7 @@
         <span class='name'>client_cert_label</span>
       
       
-        <span class='type'>(<tt>Any</tt>)</span>
+        <span class='type'>(<tt>Optional[String[1]]</tt>)</span>
       
       
         <em class="default">(defaults to: <tt>undef</tt>)</em>
@@ -180,7 +180,7 @@
         <span class='name'>tenant_name</span>
       
       
-        <span class='type'>(<tt>Any</tt>)</span>
+        <span class='type'>(<tt>Optional[String[1]]</tt>)</span>
       
       
         <em class="default">(defaults to: <tt>undef</tt>)</em>
@@ -193,7 +193,7 @@
         <span class='name'>connection_timeout</span>
       
       
-        <span class='type'>(<tt>Any</tt>)</span>
+        <span class='type'>(<tt>String[1]</tt>)</span>
       
       
         <em class="default">(defaults to: <tt>&#39;5&#39;</tt>)</em>
@@ -206,7 +206,7 @@
         <span class='name'>connection_attempts</span>
       
       
-        <span class='type'>(<tt>Any</tt>)</span>
+        <span class='type'>(<tt>String[1]</tt>)</span>
       
       
         <em class="default">(defaults to: <tt>&#39;3&#39;</tt>)</em>
@@ -219,7 +219,7 @@
         <span class='name'>retry_sleep</span>
       
       
-        <span class='type'>(<tt>Any</tt>)</span>
+        <span class='type'>(<tt>String[1]</tt>)</span>
       
       
         <em class="default">(defaults to: <tt>&#39;50000&#39;</tt>)</em>
@@ -232,7 +232,7 @@
         <span class='name'>order</span>
       
       
-        <span class='type'>(<tt>Any</tt>)</span>
+        <span class='type'>(<tt>String[1]</tt>)</span>
       
       
         <em class="default">(defaults to: <tt>&#39;10&#39;</tt>)</em>
@@ -300,28 +300,25 @@
 61
 62
 63
-64
-65
-66</pre>
+64</pre>
       </td>
       <td>
         <pre class="code"><span class="info file"># File 'manifests/client/rkm.pp', line 15</span>
 
 define gpfs::client::rkm (
-  $rkm_id               = $name,
-  $type                 = &#39;ISKLM&#39;,
+  String[1] $rkm_id = $name,
+  String[1] $type = &#39;ISKLM&#39;,
   Array $kmip_server_uris     = [],
-  $key_store            = &#39;/var/mmfs/etc/RKMcerts/ISKLM.proj2&#39;,
-  $key_store_source     = undef,
-  $passphrase           = undef,
-  $client_cert_label    = undef,
-  $tenant_name          = undef,
-  $connection_timeout   = &#39;5&#39;,
-  $connection_attempts  = &#39;3&#39;,
-  $retry_sleep          = &#39;50000&#39;,
-  $order                = &#39;10&#39;,
+  Stdlib::Absolutepath $key_store = &#39;/var/mmfs/etc/RKMcerts/ISKLM.proj2&#39;,
+  Optional[String[1]] $key_store_source = undef,
+  Optional[String[1]] $passphrase = undef,
+  Optional[String[1]] $client_cert_label = undef,
+  Optional[String[1]] $tenant_name = undef,
+  String[1] $connection_timeout = &#39;5&#39;,
+  String[1] $connection_attempts = &#39;3&#39;,
+  String[1] $retry_sleep = &#39;50000&#39;,
+  String[1] $order = &#39;10&#39;,
 ) {
-
   # Template uses:
   # - $rkm_id
   # - $kmip_server_uris
@@ -357,7 +354,6 @@ define gpfs::client::rkm (
       source =&gt; $key_store_source,
     }
   }
-
 }</pre>
       </td>
     </tr>

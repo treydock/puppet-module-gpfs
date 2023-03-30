@@ -190,9 +190,7 @@
 25
 26
 27
-28
-29
-30</pre>
+28</pre>
       </td>
       <td>
         <pre class="code"><span class="info file"># File 'manifests/server.pp', line 15</span>
@@ -203,7 +201,6 @@ class gpfs::server (
   Array $packages           = [],
   Array[Stdlib::Absolutepath] $bin_paths = [&#39;/usr/lpp/mmfs/bin&#39;],
 ) {
-
   contain gpfs
   contain gpfs::server::install
   contain gpfs::server::config
@@ -211,7 +208,6 @@ class gpfs::server (
   Class[&#39;gpfs&#39;]
   -&gt;Class[&#39;gpfs::server::install&#39;]
   -&gt;Class[&#39;gpfs::server::config&#39;]
-
 }</pre>
       </td>
     </tr>

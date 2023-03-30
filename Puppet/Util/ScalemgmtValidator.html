@@ -389,17 +389,17 @@ server.</p>
       <pre class="lines">
 
 
+10
+11
+12
 13
 14
 15
 16
-17
-18
-19
-20</pre>
+17</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/util/scalemgmt_validator.rb', line 13</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/util/scalemgmt_validator.rb', line 10</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_scalemgmt_server'>scalemgmt_server</span><span class='comma'>,</span> <span class='id identifier rubyid_scalemgmt_port'>scalemgmt_port</span><span class='comma'>,</span> <span class='id identifier rubyid_api_user'>api_user</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>admin</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_api_password'>api_password</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>admin001</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_test_path'>test_path</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/scalemgmt/v2/info</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
   <span class='ivar'>@scalemgmt_server</span> <span class='op'>=</span> <span class='id identifier rubyid_scalemgmt_server'>scalemgmt_server</span>
@@ -448,12 +448,12 @@ server.</p>
       <pre class="lines">
 
 
+8
 9
-10
-11</pre>
+10</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/util/scalemgmt_validator.rb', line 9</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/util/scalemgmt_validator.rb', line 8</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_api_password'>api_password</span>
   <span class='ivar'>@api_password</span>
@@ -536,12 +536,12 @@ server.</p>
       <pre class="lines">
 
 
-7
 8
-9</pre>
+9
+10</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/util/scalemgmt_validator.rb', line 7</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/util/scalemgmt_validator.rb', line 8</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_scalemgmt_port'>scalemgmt_port</span>
   <span class='ivar'>@scalemgmt_port</span>
@@ -580,12 +580,12 @@ server.</p>
       <pre class="lines">
 
 
-6
-7
-8</pre>
+8
+9
+10</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/util/scalemgmt_validator.rb', line 6</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/util/scalemgmt_validator.rb', line 8</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_scalemgmt_server'>scalemgmt_server</span>
   <span class='ivar'>@scalemgmt_server</span>
@@ -624,12 +624,12 @@ server.</p>
       <pre class="lines">
 
 
-11
-12
-13</pre>
+8
+9
+10</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/util/scalemgmt_validator.rb', line 11</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/util/scalemgmt_validator.rb', line 8</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_test_headers'>test_headers</span>
   <span class='ivar'>@test_headers</span>
@@ -668,12 +668,12 @@ server.</p>
       <pre class="lines">
 
 
-10
-11
-12</pre>
+8
+9
+10</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/util/scalemgmt_validator.rb', line 10</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/util/scalemgmt_validator.rb', line 8</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_test_path'>test_path</span>
   <span class='ivar'>@test_path</span>
@@ -737,6 +737,9 @@ multiple times for retry attempts.</p>
       <pre class="lines">
 
 
+24
+25
+26
 27
 28
 29
@@ -753,13 +756,10 @@ multiple times for retry attempts.</p>
 40
 41
 42
-43
-44
-45
-46</pre>
+43</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/util/scalemgmt_validator.rb', line 27</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/util/scalemgmt_validator.rb', line 24</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_attempt_connection'>attempt_connection</span>
   <span class='comment'># All that we care about is that we are able to connect successfully via
@@ -776,10 +776,10 @@ multiple times for retry attempts.</p>
     <span class='const'>Puppet</span><span class='period'>.</span><span class='id identifier rubyid_notice'>notice</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Unable to connect to scalemgmt server (https://</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_scalemgmt_server'>scalemgmt_server</span><span class='embexpr_end'>}</span><span class='tstring_content'>:</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_scalemgmt_port'>scalemgmt_port</span><span class='embexpr_end'>}</span><span class='tstring_content'>): [</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_code'>code</span><span class='embexpr_end'>}</span><span class='tstring_content'>] </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_msg'>msg</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
     <span class='kw'>return</span> <span class='kw'>false</span>
   <span class='kw'>end</span>
-  <span class='kw'>return</span> <span class='kw'>true</span>
+  <span class='kw'>true</span>
 <span class='kw'>rescue</span> <span class='const'>Exception</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_e'>e</span> <span class='comment'># rubocop:disable Lint/RescueException
 </span>  <span class='const'>Puppet</span><span class='period'>.</span><span class='id identifier rubyid_notice'>notice</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Unable to connect to scalemgmt server (https://</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_scalemgmt_server'>scalemgmt_server</span><span class='embexpr_end'>}</span><span class='tstring_content'>:</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_scalemgmt_port'>scalemgmt_port</span><span class='embexpr_end'>}</span><span class='tstring_content'>): </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_e'>e</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
-  <span class='kw'>return</span> <span class='kw'>false</span>
+  <span class='kw'>false</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>

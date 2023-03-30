@@ -272,9 +272,7 @@
 40
 41
 42
-43
-44
-45</pre>
+43</pre>
       </td>
       <td>
         <pre class="code"><span class="info file"># File 'manifests/gui.pp', line 22</span>
@@ -291,7 +289,6 @@ class gpfs::gui (
   Boolean $manage_services = true,
   Boolean $manage_initgui = true,
 ) {
-
   contain gpfs
   contain gpfs::gui::install
   contain gpfs::gui::config
@@ -301,7 +298,6 @@ class gpfs::gui (
   -&gt;Class[&#39;gpfs::gui::install&#39;]
   -&gt;Class[&#39;gpfs::gui::config&#39;]
   -&gt;Class[&#39;gpfs::gui::service&#39;]
-
 }</pre>
       </td>
     </tr>

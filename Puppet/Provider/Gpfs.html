@@ -683,12 +683,12 @@
       <pre class="lines">
 
 
-15
 16
-17</pre>
+17
+18</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 15</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 16</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_api_user'>api_user</span>
   <span class='ivar'>@api_user</span>
@@ -727,12 +727,12 @@
       <pre class="lines">
 
 
-14
-15
-16</pre>
+16
+17
+18</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 14</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 16</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_base_url'>base_url</span>
   <span class='ivar'>@base_url</span>
@@ -771,12 +771,12 @@
       <pre class="lines">
 
 
+16
 17
-18
-19</pre>
+18</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 17</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 16</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_filesystems'>filesystems</span>
   <span class='ivar'>@filesystems</span>
@@ -808,11 +808,6 @@
       <pre class="lines">
 
 
-209
-210
-211
-212
-213
 214
 215
 216
@@ -829,10 +824,15 @@
 227
 228
 229
-230</pre>
+230
+231
+232
+233
+234
+235</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 209</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 214</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_delete_request'>delete_request</span><span class='lparen'>(</span><span class='id identifier rubyid_uri_path'>uri_path</span><span class='comma'>,</span> <span class='id identifier rubyid_wait'>wait</span> <span class='op'>=</span> <span class='kw'>true</span><span class='rparen'>)</span>
   <span class='comment'>#     uri = URI.join(self.base_url, uri_path)
@@ -876,11 +876,6 @@
       <pre class="lines">
 
 
-125
-126
-127
-128
-129
 130
 131
 132
@@ -900,10 +895,15 @@
 146
 147
 148
-149</pre>
+149
+150
+151
+152
+153
+154</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 125</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 130</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_request'>get_request</span><span class='lparen'>(</span><span class='id identifier rubyid_uri_path'>uri_path</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_wait'>wait</span> <span class='op'>=</span> <span class='kw'>false</span><span class='rparen'>)</span>
   <span class='comment'>#     uri = URI.join(self.base_url, uri_path)
@@ -950,11 +950,6 @@
       <pre class="lines">
 
 
-236
-237
-238
-239
-240
 241
 242
 243
@@ -965,23 +960,36 @@
 248
 249
 250
-251</pre>
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 236</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 241</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_human_readable_kilobytes'>human_readable_kilobytes</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>0</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>if</span> <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span><span class='period'>.</span><span class='id identifier rubyid_zero?'>zero?</span>
+
   <span class='lbrace'>{</span>
     <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>K</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='int'>1024</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>M</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='int'>1024</span><span class='op'>**</span><span class='int'>2</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>G</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='int'>1024</span><span class='op'>**</span><span class='int'>3</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>T</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='int'>1024</span><span class='op'>**</span><span class='int'>4</span><span class='comma'>,</span>
+    <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>P</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='int'>1024</span><span class='op'>**</span><span class='int'>5</span>
   <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_each_pair'>each_pair</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_suffix'>suffix</span><span class='comma'>,</span> <span class='id identifier rubyid_factor'>factor</span><span class='op'>|</span>
     <span class='kw'>next</span> <span class='kw'>unless</span> <span class='id identifier rubyid_value'>value</span> <span class='op'>&lt;</span> <span class='id identifier rubyid_factor'>factor</span>
+
     <span class='id identifier rubyid_factored_value'>factored_value</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_to_f'>to_f</span> <span class='op'>/</span> <span class='lparen'>(</span><span class='id identifier rubyid_factor'>factor</span> <span class='op'>/</span> <span class='int'>1024</span><span class='rparen'>)</span><span class='rparen'>)</span>
     <span class='comment'># Check if integer value is same as float rounded to one decimal place
 </span>    <span class='kw'>return</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='const'>Integer</span><span class='lparen'>(</span><span class='id identifier rubyid_factored_value'>factored_value</span><span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_suffix'>suffix</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>if</span> <span class='const'>Integer</span><span class='lparen'>(</span><span class='id identifier rubyid_factored_value'>factored_value</span><span class='rparen'>)</span> <span class='op'>==</span> <span class='id identifier rubyid_factored_value'>factored_value</span><span class='period'>.</span><span class='id identifier rubyid_round'>round</span><span class='lparen'>(</span><span class='int'>1</span><span class='rparen'>)</span>
+
     <span class='kw'>return</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_factored_value'>factored_value</span><span class='period'>.</span><span class='id identifier rubyid_round'>round</span><span class='lparen'>(</span><span class='int'>1</span><span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_suffix'>suffix</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
   <span class='kw'>end</span>
   <span class='id identifier rubyid_value'>value</span>
@@ -1006,6 +1014,7 @@
       <pre class="lines">
 
 
+21
 22
 23
 24
@@ -1019,10 +1028,11 @@
 32
 33
 34
-35</pre>
+35
+36</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 22</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 21</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_mmlsfs_filesystems'>mmlsfs_filesystems</span>
   <span class='id identifier rubyid_filesystems'>filesystems</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
@@ -1030,10 +1040,12 @@
   <span class='id identifier rubyid_mmlsfs_output'>mmlsfs_output</span><span class='period'>.</span><span class='id identifier rubyid_each_line'>each_line</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_line'>line</span><span class='op'>|</span>
     <span class='id identifier rubyid_l'>l</span> <span class='op'>=</span> <span class='id identifier rubyid_line'>line</span><span class='period'>.</span><span class='id identifier rubyid_strip'>strip</span><span class='period'>.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>:</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
     <span class='kw'>next</span> <span class='kw'>if</span> <span class='id identifier rubyid_l'>l</span><span class='lbracket'>[</span><span class='int'>2</span><span class='rbracket'>]</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>HEADER</span><span class='tstring_end'>&#39;</span></span>
+
     <span class='id identifier rubyid_fs'>fs</span> <span class='op'>=</span> <span class='id identifier rubyid_l'>l</span><span class='lbracket'>[</span><span class='int'>6</span><span class='rbracket'>]</span>
     <span class='kw'>if</span> <span class='ivar'>@filesystems</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='ivar'>@filesystems</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_fs'>fs</span><span class='rparen'>)</span>
       <span class='kw'>next</span>
     <span class='kw'>end</span>
+
     <span class='id identifier rubyid_filesystems'>filesystems</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_fs'>fs</span> <span class='kw'>unless</span> <span class='id identifier rubyid_filesystems'>filesystems</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_fs'>fs</span><span class='rparen'>)</span>
   <span class='kw'>end</span>
   <span class='id identifier rubyid_filesystems'>filesystems</span>
@@ -1058,17 +1070,17 @@
       <pre class="lines">
 
 
-43
 44
 45
 46
 47
 48
 49
-50</pre>
+50
+51</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 43</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 44</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_parse_response_body'>parse_response_body</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_body'>body</span><span class='rparen'>)</span>
@@ -1098,11 +1110,6 @@
       <pre class="lines">
 
 
-155
-156
-157
-158
-159
 160
 161
 162
@@ -1119,10 +1126,15 @@
 173
 174
 175
-176</pre>
+176
+177
+178
+179
+180
+181</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 155</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 160</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_post_request'>post_request</span><span class='lparen'>(</span><span class='id identifier rubyid_uri_path'>uri_path</span><span class='comma'>,</span> <span class='id identifier rubyid_data'>data</span><span class='comma'>,</span> <span class='id identifier rubyid_wait'>wait</span> <span class='op'>=</span> <span class='kw'>true</span><span class='rparen'>)</span>
   <span class='comment'>#     uri = URI.join(self.base_url, uri_path)
@@ -1166,11 +1178,6 @@
       <pre class="lines">
 
 
-182
-183
-184
-185
-186
 187
 188
 189
@@ -1187,10 +1194,15 @@
 200
 201
 202
-203</pre>
+203
+204
+205
+206
+207
+208</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 182</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 187</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_put_request'>put_request</span><span class='lparen'>(</span><span class='id identifier rubyid_uri_path'>uri_path</span><span class='comma'>,</span> <span class='id identifier rubyid_data'>data</span><span class='comma'>,</span> <span class='id identifier rubyid_wait'>wait</span> <span class='op'>=</span> <span class='kw'>true</span><span class='rparen'>)</span>
   <span class='comment'>#     uri = URI.join(self.base_url, uri_path)
@@ -1257,9 +1269,6 @@
       <pre class="lines">
 
 
-82
-83
-84
 85
 86
 87
@@ -1298,16 +1307,21 @@
 120
 121
 122
-123</pre>
+123
+124
+125
+126
+127
+128</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 82</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 85</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span><span class='id identifier rubyid_uri_path'>uri_path</span><span class='comma'>,</span> <span class='id identifier rubyid_type'>type</span><span class='comma'>,</span> <span class='id identifier rubyid_params'>params</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_wait'>wait</span> <span class='op'>=</span> <span class='kw'>false</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_uri'>uri</span> <span class='op'>=</span> <span class='const'>URI</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='id identifier rubyid_base_url'>base_url</span><span class='comma'>,</span> <span class='id identifier rubyid_uri_path'>uri_path</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_header'>header</span> <span class='op'>=</span> <span class='lbrace'>{</span>
     <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Content-Type</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>application/json</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
-    <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Accept</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>application/json</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+    <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>Accept</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>application/json</span><span class='tstring_end'>&#39;</span></span>
   <span class='rbrace'>}</span>
   <span class='id identifier rubyid_body'>body</span> <span class='op'>=</span> <span class='kw'>nil</span>
 
@@ -1339,9 +1353,11 @@
   <span class='kw'>unless</span> <span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Net</span><span class='op'>::</span><span class='const'>HTTPSuccess</span><span class='rparen'>)</span>
     <span class='id identifier rubyid_raise'>raise</span> <span class='const'>Puppet</span><span class='op'>::</span><span class='const'>Error</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_type'>type</span><span class='embexpr_end'>}</span><span class='tstring_content'> to </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_uri'>uri</span><span class='embexpr_end'>}</span><span class='tstring_content'> failed with code </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_code'>code</span><span class='embexpr_end'>}</span><span class='tstring_content'>, message=</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_response_message'>response_message</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span>
   <span class='kw'>end</span>
+
   <span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='id identifier rubyid_parse_response_body'>parse_response_body</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='rparen'>)</span>
   <span class='const'>Puppet</span><span class='period'>.</span><span class='id identifier rubyid_debug'>debug</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Response data:\n</span><span class='embexpr_beg'>#{</span><span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_pretty_generate'>pretty_generate</span><span class='lparen'>(</span><span class='id identifier rubyid_data'>data</span><span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='id identifier rubyid_data'>data</span> <span class='kw'>unless</span> <span class='id identifier rubyid_wait'>wait</span>
+
   <span class='id identifier rubyid_job_success'>job_success</span><span class='comma'>,</span> <span class='id identifier rubyid_job_output'>job_output</span> <span class='op'>=</span> <span class='id identifier rubyid_wait_for_job'>wait_for_job</span><span class='lparen'>(</span><span class='id identifier rubyid_data'>data</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='const'>Puppet</span><span class='op'>::</span><span class='const'>Error</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_type'>type</span><span class='embexpr_end'>}</span><span class='tstring_content'> to </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_uri'>uri</span><span class='embexpr_end'>}</span><span class='tstring_content'> job failed: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_job_output'>job_output</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>unless</span> <span class='id identifier rubyid_job_success'>job_success</span>
 <span class='kw'>end</span></pre>
@@ -1365,7 +1381,6 @@
       <pre class="lines">
 
 
-52
 53
 54
 55
@@ -1373,14 +1388,17 @@
 57
 58
 59
-60</pre>
+60
+61
+62</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 52</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 53</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_response_message'>response_message</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='id identifier rubyid_parse_response_body'>parse_response_body</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>nil</span> <span class='kw'>if</span> <span class='id identifier rubyid_data'>data</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
+
   <span class='id identifier rubyid_message'>message</span> <span class='op'>=</span> <span class='kw'>nil</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_data'>data</span><span class='period'>.</span><span class='id identifier rubyid_key?'>key?</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>status</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
     <span class='id identifier rubyid_message'>message</span> <span class='op'>=</span> <span class='id identifier rubyid_data'>data</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>status</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>message</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
@@ -1407,14 +1425,14 @@
       <pre class="lines">
 
 
-37
 38
 39
 40
-41</pre>
+41
+42</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 37</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 38</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_set_scalemgmt_defaults'>set_scalemgmt_defaults</span>
   <span class='ivar'>@base_url</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>https://localhost:443/scalemgmt/</span><span class='tstring_end'>&#39;</span></span> <span class='kw'>if</span> <span class='ivar'>@base_url</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span>
@@ -1441,38 +1459,40 @@
       <pre class="lines">
 
 
-253
-254
-255
-256
-257
-258
-259
-260
-261
 262
 263
 264
 265
 266
-267</pre>
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 253</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 262</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_to_kb'>to_kb</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_factors'>factors</span> <span class='op'>=</span> <span class='lbrace'>{</span>
     <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>M</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='int'>1024</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>G</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='int'>1024</span><span class='op'>**</span><span class='int'>2</span><span class='comma'>,</span>
     <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>T</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='int'>1024</span><span class='op'>**</span><span class='int'>3</span><span class='comma'>,</span>
+    <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>P</span><span class='tstring_end'>&#39;</span></span> <span class='op'>=&gt;</span> <span class='int'>1024</span><span class='op'>**</span><span class='int'>4</span>
   <span class='rbrace'>}</span>
-  <span class='kw'>if</span> <span class='id identifier rubyid_value'>value</span> <span class='op'>=~</span> <span class='tstring'><span class='regexp_beg'>%r{</span><span class='tstring_content'>^([0-9\.]+)(T|G|M)$</span><span class='regexp_end'>}</span></span> <span class='comment'># rubocop:disable Style/GuardClause
-</span>    <span class='id identifier rubyid_v'>v</span> <span class='op'>=</span> <span class='const'>Regexp</span><span class='period'>.</span><span class='id identifier rubyid_last_match'>last_match</span><span class='lparen'>(</span><span class='int'>1</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_f'>to_f</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_value'>value</span> <span class='op'>=~</span> <span class='tstring'><span class='regexp_beg'>%r{</span><span class='tstring_content'>^([0-9.]+)(P|T|G|M)$</span><span class='regexp_end'>}</span></span>
+    <span class='id identifier rubyid_v'>v</span> <span class='op'>=</span> <span class='const'>Regexp</span><span class='period'>.</span><span class='id identifier rubyid_last_match'>last_match</span><span class='lparen'>(</span><span class='int'>1</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_f'>to_f</span>
     <span class='id identifier rubyid_f'>f</span> <span class='op'>=</span> <span class='const'>Regexp</span><span class='period'>.</span><span class='id identifier rubyid_last_match'>last_match</span><span class='lparen'>(</span><span class='int'>2</span><span class='rparen'>)</span>
     <span class='id identifier rubyid_factor'>factor</span> <span class='op'>=</span> <span class='id identifier rubyid_factors'>factors</span><span class='lbracket'>[</span><span class='id identifier rubyid_f'>f</span><span class='rbracket'>]</span>
-    <span class='kw'>return</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='const'>Integer</span><span class='lparen'>(</span><span class='id identifier rubyid_v'>v</span> <span class='op'>*</span> <span class='id identifier rubyid_factor'>factor</span><span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_content'>K</span><span class='tstring_end'>&quot;</span></span>
+    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='const'>Integer</span><span class='lparen'>(</span><span class='id identifier rubyid_v'>v</span> <span class='op'>*</span> <span class='id identifier rubyid_factor'>factor</span><span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_content'>K</span><span class='tstring_end'>&quot;</span></span>
   <span class='kw'>else</span>
-    <span class='kw'>return</span> <span class='id identifier rubyid_value'>value</span>
+    <span class='id identifier rubyid_value'>value</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -1495,8 +1515,6 @@
       <pre class="lines">
 
 
-62
-63
 64
 65
 66
@@ -1513,10 +1531,13 @@
 77
 78
 79
-80</pre>
+80
+81
+82
+83</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 62</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 64</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_wait_for_job'>wait_for_job</span><span class='lparen'>(</span><span class='id identifier rubyid_data'>data</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_jobid'>jobid</span> <span class='op'>=</span> <span class='id identifier rubyid_data'>data</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>jobs</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>jobId</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
@@ -1524,10 +1545,11 @@
   <span class='kw'>while</span> <span class='id identifier rubyid_wait'>wait</span>
     <span class='id identifier rubyid_data'>data</span> <span class='op'>=</span> <span class='id identifier rubyid_request'>request</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>v2/jobs/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_jobid'>jobid</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>GET</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
     <span class='id identifier rubyid_status'>status</span> <span class='op'>=</span> <span class='id identifier rubyid_data'>data</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>jobs</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>status</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
-    <span class='kw'>if</span> <span class='id identifier rubyid_status'>status</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>RUNNING</span><span class='tstring_end'>&#39;</span></span>
+    <span class='kw'>case</span> <span class='id identifier rubyid_status'>status</span>
+    <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>RUNNING</span><span class='tstring_end'>&#39;</span></span>
       <span class='const'>Puppet</span><span class='period'>.</span><span class='id identifier rubyid_debug'>debug</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Job </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_jobid'>jobid</span><span class='embexpr_end'>}</span><span class='tstring_content'> still running, sleeping 1 second...</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
       <span class='id identifier rubyid_sleep'>sleep</span><span class='lparen'>(</span><span class='int'>1</span><span class='rparen'>)</span>
-    <span class='kw'>elsif</span> <span class='id identifier rubyid_status'>status</span> <span class='op'>==</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>COMPLETED</span><span class='tstring_end'>&#39;</span></span>
+    <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>COMPLETED</span><span class='tstring_end'>&#39;</span></span>
       <span class='id identifier rubyid_stdout'>stdout</span> <span class='op'>=</span> <span class='id identifier rubyid_data'>data</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>jobs</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>result</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>stdout</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
       <span class='const'>Puppet</span><span class='period'>.</span><span class='id identifier rubyid_debug'>debug</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Job completed successfully: </span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_stdout'>stdout</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>, </span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
       <span class='kw'>return</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='id identifier rubyid_stdout'>stdout</span><span class='period'>.</span><span class='id identifier rubyid_join'>join</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>, </span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
@@ -1563,12 +1585,12 @@
       <pre class="lines">
 
 
-232
-233
-234</pre>
+237
+238
+239</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 232</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 237</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_delete_request'>delete_request</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_delete_request'>delete_request</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
@@ -1593,12 +1615,12 @@
       <pre class="lines">
 
 
-151
-152
-153</pre>
+156
+157
+158</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 151</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 156</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_request'>get_request</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_get_request'>get_request</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
@@ -1623,12 +1645,12 @@
       <pre class="lines">
 
 
-178
-179
-180</pre>
+183
+184
+185</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 178</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 183</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_post_request'>post_request</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_post_request'>post_request</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
@@ -1653,12 +1675,12 @@
       <pre class="lines">
 
 
-205
-206
-207</pre>
+210
+211
+212</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 205</span>
+      <pre class="code"><span class="info file"># File 'lib/puppet/provider/gpfs.rb', line 210</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_put_request'>put_request</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_put_request'>put_request</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
