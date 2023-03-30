@@ -137,5 +137,9 @@ mmlsfs::0:1:::test:defaultMountPoint:%2Ffs%2Ftest::"
     it 'handles 1.8T' do
       expect(resource.provider.class.human_readable_kilobytes(1_932_735_283)).to eq('1.8T')
     end
+
+    it 'handles 1.8P' do
+      expect(resource.provider.class.human_readable_kilobytes(1_932_735_283_200)).to eq('1.8P')
+    end
   end
 end

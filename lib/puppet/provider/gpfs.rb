@@ -245,7 +245,8 @@ class Puppet::Provider::Gpfs < Puppet::Provider
       'K' => 1024,
       'M' => 1024**2,
       'G' => 1024**3,
-      'T' => 1024**4
+      'T' => 1024**4,
+      'P' => 1024**5
     }.each_pair do |suffix, factor|
       next unless value < factor
 
@@ -262,9 +263,10 @@ class Puppet::Provider::Gpfs < Puppet::Provider
     factors = {
       'M' => 1024,
       'G' => 1024**2,
-      'T' => 1024**3
+      'T' => 1024**3,
+      'P' => 1024**4
     }
-    if value =~ %r{^([0-9.]+)(T|G|M)$}
+    if value =~ %r{^([0-9.]+)(P|T|G|M)$}
       v = Regexp.last_match(1).to_f
       f = Regexp.last_match(2)
       factor = factors[f]
