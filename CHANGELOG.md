@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [v2.3.3](https://github.com/treydock/puppet-module-gpfs/tree/v2.3.3) (2023-03-30)
+
+[Full Changelog](https://github.com/treydock/puppet-module-gpfs/compare/v2.3.2...v2.3.3)
+
+### Fixed
+
+- Ensure P quota is allowed with type parameters [\#31](https://github.com/treydock/puppet-module-gpfs/pull/31) ([treydock](https://github.com/treydock))
+
 ## [v2.3.2](https://github.com/treydock/puppet-module-gpfs/tree/v2.3.2) (2023-03-30)
 
 [Full Changelog](https://github.com/treydock/puppet-module-gpfs/compare/v2.3.1...v2.3.2)
