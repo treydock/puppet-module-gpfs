@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Puppet::Type.newtype(:scalemgmt_conn_validator) do
   @doc = "Verify that a connection can be successfully established between a node
           and the scalemgmt server.  Its primary use is as a precondition to

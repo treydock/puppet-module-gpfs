@@ -31,7 +31,6 @@ class gpfs::gui (
   Boolean $manage_services = true,
   Boolean $manage_initgui = true,
 ) {
-
   contain gpfs
   contain gpfs::gui::install
   contain gpfs::gui::config
@@ -41,5 +40,4 @@ class gpfs::gui (
   ->Class['gpfs::gui::install']
   ->Class['gpfs::gui::config']
   ->Class['gpfs::gui::service']
-
 }

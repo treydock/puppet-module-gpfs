@@ -1,4 +1,6 @@
-Dir[File.dirname(__FILE__) + '/gpfs*.rb'].each do |file|
+# frozen_string_literal: true
+
+Dir["#{File.dirname(__FILE__)}/gpfs*.rb"].sort.each do |file|
   require file unless file == __FILE__
 end
 
@@ -25,7 +27,7 @@ Puppet::Type.newtype(:scalemgmt_config) do
   def generate
     [
       :gpfs_fileset,
-      :gpfs_fileset_quota,
+      :gpfs_fileset_quota
     ].each do |res_type|
       provider_class = Puppet::Type.type(res_type).provider(:rest_v2)
       provider_class.base_url = self[:base_url]

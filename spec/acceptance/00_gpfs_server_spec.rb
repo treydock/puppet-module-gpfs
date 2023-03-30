@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'spec_helper_acceptance'
 
 describe 'gpfs::server class:' do
-  context 'default parameters' do
+  context 'with default parameters' do
     it 'runs successfully' do
-      pp = <<-EOS
+      pp = <<-PP
       class { 'gpfs':
         packages => [
           'gpfs.adv',
@@ -17,7 +19,7 @@ describe 'gpfs::server class:' do
         ]
       }
       class { 'gpfs::server': }
-      EOS
+      PP
 
       apply_manifest(pp, catch_failures: true)
       apply_manifest(pp, catch_changes: true)
@@ -33,11 +35,11 @@ describe 'gpfs::server class:' do
     # end
   end
 
-  context 'setup base filesystem' do
+  context 'when setup base filesystem' do
     it 'builds gplbin' do
-      pp = <<-EOS
+      pp = <<-PP
       package { ['kernel-headers', 'gcc-c++']: ensure => 'present' }
-      EOS
+      PP
       apply_manifest(pp, catch_failures: true)
       shell 'mmbuildgpl', environment: { 'LINUX_DISTRIBUTION' => 'REDHAT_AS_LINUX' }
     end
@@ -48,12 +50,13 @@ describe 'gpfs::server class:' do
       disks = lsblk.stdout.split("\n")
       disks.each do |line|
         next unless line =~ %r{^sd[ab]$}
+
         unless disks.include?("#{line}2")
           disk = line
           break
         end
       end
-      pp = <<-EOS
+      pp = <<-PP
       sshkey { "${::fqdn}_rsa":
         ensure       => present,
         host_aliases => [$::fqdn, $::hostname, $::ipaddress],
@@ -74,7 +77,7 @@ servers=$::hostname
 usage=dataAndMetadata
         "
       }
-      EOS
+      PP
       apply_manifest(pp, catch_failures: true)
       shell 'cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys'
       # shell "mmcrcluster -N #{fact('hostname')}:quorum:manager -C test -U #{fact('domain')}"
@@ -90,12 +93,12 @@ usage=dataAndMetadata
       if mmlslicense.exit_code != 0
         shell "mmchlicense server --accept -N #{fact('hostname')}"
       end
-      # stanza =<<-EOS
+      # stanza =<<-PP
       # %nsd: device=loop0
       # nsd=loop0
       # servers=#{fact('hostname')}
       # usage=dataAndMetadata
-      # EOS
+      # PP
       # create_remote_file(hosts, '/tmp/test.lst', stanza)
       mmlsnsd = shell("mmlsnsd -d #{disk} | grep #{fact('hostname')}", accept_all_exit_codes: true)
       if mmlsnsd.exit_code != 0

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 hosts.each do |h|
   install_puppet_module_via_pmt_on(h, module_name: 'puppetlabs-inifile')
 end
@@ -7,7 +9,7 @@ RSpec.configure do |c|
   c.gpfs_repo_url = ENV['BEAKER_gpfs_repo_url']
 end
 hosts.each do |h|
-  puppet_pp = <<-EOF
+  puppet_pp = <<-PP
   ini_setting { 'puppet.conf/main/show_diff':
     ensure  => 'present',
     section => 'main',
@@ -15,9 +17,9 @@ hosts.each do |h|
     setting => 'show_diff',
     value   => 'true',
   }
-EOF
+  PP
   apply_manifest_on(h, puppet_pp, catch_failures: true)
-  yumrepo_pp = <<-EOS
+  yumrepo_pp = <<-PP
   yumrepo { 'gpfs':
     ensure    => 'present',
     baseurl   => '#{RSpec.configuration.gpfs_repo_url}',
@@ -25,7 +27,7 @@ EOF
     enabled   => '1',
     gpgcheck  => '0',
   }
-  EOS
+  PP
   if RSpec.configuration.gpfs_repo_url
     apply_manifest_on(h, yumrepo_pp, catch_failures: true)
   end

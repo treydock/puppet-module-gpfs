@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'spec_helper_acceptance'
 
 describe 'gpfs_fileset_quota type:' do
-  context 'create quota' do
+  context 'when create quota' do
     it 'runs successfully' do
-      pp = <<-EOS
+      pp = <<-PP
       class { 'gpfs':
         packages => [
           'gpfs.adv',
@@ -30,16 +32,16 @@ describe 'gpfs_fileset_quota type:' do
         files_soft_limit => 400000,
         files_hard_limit => 400000,
       }
-      EOS
+      PP
 
       apply_manifest(pp, catch_failures: true)
       apply_manifest(pp, catch_changes: true)
     end
   end
 
-  context 'quota with decimal' do
+  context 'when quota with decimal' do
     it 'runs successfully' do
-      pp = <<-EOS
+      pp = <<-PP
       class { 'gpfs':
         packages => [
           'gpfs.adv',
@@ -66,16 +68,16 @@ describe 'gpfs_fileset_quota type:' do
         files_soft_limit => 400000,
         files_hard_limit => 400000,
       }
-      EOS
+      PP
 
       apply_manifest(pp, catch_failures: true)
       apply_manifest(pp, catch_changes: true)
     end
   end
 
-  context 'modify quota' do
+  context 'when modify quota' do
     it 'runs successfully' do
-      pp = <<-EOS
+      pp = <<-PP
       class { 'gpfs':
         packages => [
           'gpfs.adv',
@@ -102,16 +104,16 @@ describe 'gpfs_fileset_quota type:' do
         files_soft_limit => 1000000,
         files_hard_limit => 1000000,
       }
-      EOS
+      PP
 
       apply_manifest(pp, catch_failures: true)
       apply_manifest(pp, catch_changes: true)
     end
   end
 
-  context 'delete quota' do
+  context 'when delete quota' do
     it 'runs successfully' do
-      pp = <<-EOS
+      pp = <<-PP
       class { 'gpfs':
         packages => [
           'gpfs.adv',
@@ -128,7 +130,7 @@ describe 'gpfs_fileset_quota type:' do
         ensure      => 'absent',
         filesystem  => 'test',
       }
-      EOS
+      PP
 
       apply_manifest(pp, catch_failures: true)
       apply_manifest(pp, catch_changes: true)

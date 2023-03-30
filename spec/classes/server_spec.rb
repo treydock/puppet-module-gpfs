@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'gpfs::server' do
   on_supported_os(supported_os: [
                     {
                       'operatingsystem' => 'RedHat',
-                      'operatingsystemrelease' => ['6', '7'],
-                    },
+                      'operatingsystemrelease' => ['6', '7']
+                    }
                   ]).each do |os, facts|
     context "on #{os}" do
       let(:facts) { facts }
@@ -18,8 +20,7 @@ describe 'gpfs::server' do
       it { is_expected.to contain_class('gpfs::server::install').that_comes_before('Class[gpfs::server::config]') }
 
       # Test validate_bool parameters
-      [
-      ].each do |param|
+      [].each do |param|
         context "with #{param} => 'foo'" do
           let(:params) { { param.to_sym => 'foo' } }
 
@@ -28,6 +29,6 @@ describe 'gpfs::server' do
           end
         end
       end
-    end # end context
-  end # end on_supported_os loop
-end # end describe
+    end
+  end
+end

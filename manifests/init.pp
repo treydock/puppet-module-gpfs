@@ -19,9 +19,10 @@
 class gpfs (
   Boolean $manage_repo = true,
   Optional[String] $repo_baseurl = undef,
-  Boolean $manage_packages  = true,
-  String $package_ensure    = 'present',
-  Array $packages           = [ "gpfs.gplbin-${facts['kernelrelease']}",
+  Boolean $manage_packages = true,
+  String $package_ensure = 'present',
+  Array $packages = [
+    "gpfs.gplbin-${facts['kernelrelease']}",
     'gpfs.adv',
     'gpfs.base',
     'gpfs.crypto',
@@ -33,7 +34,6 @@ class gpfs (
   ],
   Optional[Array] $config_filesystems = undef,
 ) {
-
   $osfamily = dig($facts, 'os', 'family')
   if ! ($osfamily in ['RedHat']) {
     fail("Unsupported OS: ${osfamily}, module ${module_name} only supports RedHat")

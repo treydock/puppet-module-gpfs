@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require File.expand_path(File.join(File.dirname(__FILE__), '..', 'gpfs'))
 
 Puppet::Type.type(:gpfs_fileset_quota).provide(:rest_v2, parent: Puppet::Provider::Gpfs) do
@@ -12,7 +14,7 @@ Puppet::Type.type(:gpfs_fileset_quota).provide(:rest_v2, parent: Puppet::Provide
     quotas = []
     params = {
       'entityType' => 'FILESET',
-      'fields' => ':all:',
+      'fields' => ':all:'
     }
     data = get_request('v2/filesystems/:all:/quotas', params)
     unless data.key?('quotas')
@@ -21,7 +23,7 @@ Puppet::Type.type(:gpfs_fileset_quota).provide(:rest_v2, parent: Puppet::Provide
 
     data['quotas'].map do |q|
       quota = {
-        ensure: :present,
+        ensure: :present
       }
       quota[:filesystem] = q['filesystemName']
       quota[:fileset] = q['objectName']
@@ -39,13 +41,14 @@ Puppet::Type.type(:gpfs_fileset_quota).provide(:rest_v2, parent: Puppet::Provide
 
   def self.prefetch(resources)
     quotas = instances
-    resources.keys.each do |name|
+    resources.each_key do |name|
       provider = quotas.find do |quota|
         quota.fileset == resources[name][:fileset] &&
           quota.filesystem == resources[name][:filesystem] &&
           quota.object_name == resources[name][:object_name]
       end
       next unless provider
+
       resources[name].provider = provider
     end
   end
@@ -125,6 +128,7 @@ Puppet::Type.type(:gpfs_fileset_quota).provide(:rest_v2, parent: Puppet::Provide
 
   def flush
     raise("Filesystem is mandatory for #{resource.type} #{resource.name}") if resource[:filesystem].nil?
+
     unless @property_flush.empty?
       data = {}
       data[:operationType] = 'setQuota'

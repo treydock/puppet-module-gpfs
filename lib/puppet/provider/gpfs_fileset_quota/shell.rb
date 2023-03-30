@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require File.expand_path(File.join(File.dirname(__FILE__), '..', 'gpfs'))
 
 Puppet::Type.type(:gpfs_fileset_quota).provide(:shell, parent: Puppet::Provider::Gpfs) do
@@ -19,6 +21,7 @@ Puppet::Type.type(:gpfs_fileset_quota).provide(:shell, parent: Puppet::Provider:
         quota = {}
         l = line.strip.split(':')
         next if l[2] == 'HEADER'
+
         type = l[7].downcase
         quota[:ensure] = :present
         quota[:filesystem] = filesystem
@@ -42,7 +45,7 @@ Puppet::Type.type(:gpfs_fileset_quota).provide(:shell, parent: Puppet::Provider:
 
   def self.prefetch(resources)
     quotas = instances
-    resources.keys.each do |name|
+    resources.each_key do |name|
       provider = quotas.find do |quota|
         quota.fileset == resources[name][:fileset] &&
           quota.filesystem == resources[name][:filesystem] &&
@@ -50,6 +53,7 @@ Puppet::Type.type(:gpfs_fileset_quota).provide(:shell, parent: Puppet::Provider:
           quota.type == resources[name][:type]
       end
       next unless provider
+
       resources[name].provider = provider
     end
   end
@@ -133,6 +137,7 @@ Puppet::Type.type(:gpfs_fileset_quota).provide(:shell, parent: Puppet::Provider:
 
   def flush
     raise("Filesystem is mandatory for #{resource.type} #{resource.name}") if resource[:filesystem].nil?
+
     unless @property_flush.empty?
       mmsetquota_args = ["#{resource[:filesystem]}:#{resource[:fileset]}"]
       if resource[:type] == :usr

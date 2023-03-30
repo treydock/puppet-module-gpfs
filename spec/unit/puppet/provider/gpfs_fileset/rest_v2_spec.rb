@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Puppet::Type.type(:gpfs_fileset).provider(:rest_v2) do
@@ -16,12 +18,12 @@ describe Puppet::Type.type(:gpfs_fileset).provider(:rest_v2) do
       'filesets' => [
         { 'config' => { 'filesetName' => 'test1', 'filesystemName' => 'project', 'maxNumInodes' => 1000, 'path' => '/fs/project/test1' } },
         { 'config' => { 'filesetName' => 'test2', 'filesystemName' => 'project', 'maxNumInodes' => 2000, 'path' => '/fs/project/test2' } },
-        { 'config' => { 'filesetName' => 'test1', 'filesystemName' => 'scratch', 'maxNumInodes' => 2000, 'path' => '/fs/scratch/test1' } },
+        { 'config' => { 'filesetName' => 'test1', 'filesystemName' => 'scratch', 'maxNumInodes' => 2000, 'path' => '/fs/scratch/test1' } }
       ],
       'status' => {
         'code' => 200,
-        'message' => 'The request finished successfully',
-      },
+        'message' => 'The request finished successfully'
+      }
     }
   end
 
@@ -32,7 +34,7 @@ describe Puppet::Type.type(:gpfs_fileset).provider(:rest_v2) do
       { ensure: :present, name: 'project/test2', fileset: 'test2', filesystem: 'project', path: '/fs/project/test2',
         max_num_inodes: 2000, owner: nil },
       { ensure: :present, name: 'scratch/test1', fileset: 'test1', filesystem: 'scratch', path: '/fs/scratch/test1',
-        max_num_inodes: 2000, owner: nil },
+        max_num_inodes: 2000, owner: nil }
     ]
   end
 
@@ -68,7 +70,7 @@ describe Puppet::Type.type(:gpfs_fileset).provider(:rest_v2) do
     end
 
     it 'prefetches' do
-      resources.keys.each do |r|
+      resources.each_key do |r|
         expect(resources[r]).to receive(:provider=).with(described_class)
       end
       described_class.prefetch(resources)
@@ -80,7 +82,7 @@ describe Puppet::Type.type(:gpfs_fileset).provider(:rest_v2) do
       expected_data = {
         filesetName: resource[:fileset],
         path: resource[:path],
-        inodeSpace: 'new',
+        inodeSpace: 'new'
       }
       expect(resource.provider).to receive(:post_request).with("v2/filesystems/#{resource[:filesystem]}/filesets", expected_data)
       resource.provider.create

@@ -18,7 +18,6 @@ class gpfs::server (
   Array $packages           = [],
   Array[Stdlib::Absolutepath] $bin_paths = ['/usr/lpp/mmfs/bin'],
 ) {
-
   contain gpfs
   contain gpfs::server::install
   contain gpfs::server::config
@@ -26,5 +25,4 @@ class gpfs::server (
   Class['gpfs']
   ->Class['gpfs::server::install']
   ->Class['gpfs::server::config']
-
 }

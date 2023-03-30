@@ -24,7 +24,6 @@ class gpfs::ces::config {
     content        => [
       'Defaults!/usr/lpp/mmfs/lib/ctdb/statd-callout   !requiretty',
       'rpcuser         ALL=(ALL)       NOPASSWD: /usr/lpp/mmfs/lib/ctdb/statd-callout',
-    ]
+    ],
   }
-
 }

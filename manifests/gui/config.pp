@@ -7,7 +7,7 @@ class gpfs::gui::config {
     ensure => 'file',
     owner  => 'root',
     group  => 'root',
-    mode   => '0440'
+    mode   => '0440',
   }
 
   if $gpfs::gui::manage_firewall {
@@ -66,7 +66,7 @@ class gpfs::gui::config {
         }
       }
       false: {
-      # Do nothing
+        # Do nothing
       }
       default: {
         firewall { '47443 *:47443':
@@ -130,5 +130,4 @@ class gpfs::gui::config {
       }
     }
   }
-
 }

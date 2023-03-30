@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require File.expand_path(File.join(File.dirname(__FILE__), '..', 'gpfs'))
 require 'etc'
 require 'uri'
@@ -27,6 +29,7 @@ Puppet::Type.type(:gpfs_fileset).provide(:shell, parent: Puppet::Provider::Gpfs)
         fileset = {}
         l = line.strip.split(':')
         next if l[2] == 'HEADER'
+
         status = l[10]
         fileset[:ensure] = if status == 'Unlinked'
                              :unlinked
@@ -66,11 +69,12 @@ Puppet::Type.type(:gpfs_fileset).provide(:shell, parent: Puppet::Provider::Gpfs)
 
   def self.prefetch(resources)
     filesets = instances
-    resources.keys.each do |name|
+    resources.each_key do |name|
       provider = filesets.find do |fileset|
         fileset.fileset == resources[name][:fileset] && fileset.filesystem == resources[name][:filesystem]
       end
       next unless provider
+
       resources[name].provider = provider
     end
   end
@@ -81,20 +85,19 @@ Puppet::Type.type(:gpfs_fileset).provide(:shell, parent: Puppet::Provider::Gpfs)
     mmlsfs_out.each_line do |line|
       l = line.strip.split(':')
       next if l[2] == 'HEADER'
+
       mountpoint = URI.decode_www_form_component(l[8])
     end
     raise("Unable to determine filesystem mount point for filesystem #{filesystem}") if mountpoint.nil?
-    path = File.join(mountpoint, fileset)
-    path
+
+    File.join(mountpoint, fileset)
   end
 
   def create
     mmcrfileset_args = [resource[:filesystem], resource[:fileset]]
-    if resource[:afm_attributes]
-      resource[:afm_attributes].each_pair do |k, v|
-        mmcrfileset_args << '-p'
-        mmcrfileset_args << "#{k}=#{v}"
-      end
+    resource[:afm_attributes]&.each_pair do |k, v|
+      mmcrfileset_args << '-p'
+      mmcrfileset_args << "#{k}=#{v}"
     end
     if resource[:inode_space]
       mmcrfileset_args << '--inode-space'
@@ -108,11 +111,7 @@ Puppet::Type.type(:gpfs_fileset).provide(:shell, parent: Puppet::Provider::Gpfs)
       mmcrfileset_args << resource[:max_num_inodes]
     end
 
-    path = if resource[:path]
-             resource[:path]
-           else
-             default_path(resource[:filesystem], resource[:fileset])
-           end
+    path = resource[:path] || default_path(resource[:filesystem], resource[:fileset])
 
     mmlinkfileset_args = [resource[:filesystem], resource[:fileset]]
     mmlinkfileset_args << '-J'
@@ -223,18 +222,14 @@ Puppet::Type.type(:gpfs_fileset).provide(:shell, parent: Puppet::Provider::Gpfs)
     end
 
     # Sanity check max_num_inodes is not lower than allocated inodes
-    if @property_flush[:max_num_inodes]
-      if @property_hash[:alloc_inodes].to_i > @property_flush[:max_num_inodes].to_i
-        Puppet.warning("Fileset #{resource[:name]}: Decreasing max inodes (#{@property_flush[:max_num_inodes]}) to be less than allocated inodes (#{@property_hash[:alloc_inodes]}) is not permitted")
-        @property_flush.delete(:max_num_inodes)
-      end
+    if @property_flush[:max_num_inodes] && (@property_hash[:alloc_inodes].to_i > @property_flush[:max_num_inodes].to_i)
+      Puppet.warning("Fileset #{resource[:name]}: Decreasing max inodes (#{@property_flush[:max_num_inodes]}) to be less than allocated inodes (#{@property_hash[:alloc_inodes]}) is not permitted")
+      @property_flush.delete(:max_num_inodes)
     end
     # Sanity check alloc_inodes is not lower than previous value
-    if @property_flush[:alloc_inodes]
-      if @property_hash[:alloc_inodes].to_i > @property_flush[:alloc_inodes].to_i
-        Puppet.warning("Fileset #{resource[:name]}: decreasing allocated inodes from #{@property_hash[:alloc_inodes]} to #{@property_flush[:alloc_inodes]} is not permitted")
-        @property_flush.delete(:alloc_inodes)
-      end
+    if @property_flush[:alloc_inodes] && (@property_hash[:alloc_inodes].to_i > @property_flush[:alloc_inodes].to_i)
+      Puppet.warning("Fileset #{resource[:name]}: decreasing allocated inodes from #{@property_hash[:alloc_inodes]} to #{@property_flush[:alloc_inodes]} is not permitted")
+      @property_flush.delete(:alloc_inodes)
     end
 
     if @property_flush[:max_num_inodes] || @property_flush[:alloc_inodes]

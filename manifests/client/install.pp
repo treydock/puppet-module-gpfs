@@ -10,5 +10,4 @@ class gpfs::client::install {
       }
     }
   }
-
 }

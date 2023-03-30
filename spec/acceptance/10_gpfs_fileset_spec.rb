@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require 'spec_helper_acceptance'
 
 describe 'gpfs_fileset type:' do
-  context 'create fileset' do
+  context 'when create fileset' do
     it 'runs successfully' do
-      pp = <<-EOS
+      pp = <<-PP
       class { 'gpfs':
         packages => [
           'gpfs.adv',
@@ -23,7 +25,7 @@ describe 'gpfs_fileset type:' do
         max_num_inodes  => 400000,
         alloc_inodes    => 400000,
       }
-      EOS
+      PP
 
       apply_manifest(pp, catch_failures: true)
       apply_manifest(pp, catch_changes: true)
@@ -38,9 +40,9 @@ describe 'gpfs_fileset type:' do
     end
   end
 
-  context 'modify fileset max_num_inodes' do
+  context 'when modify fileset max_num_inodes' do
     it 'runs successfully' do
-      pp = <<-EOS
+      pp = <<-PP
       class { 'gpfs':
         packages => [
           'gpfs.adv',
@@ -60,16 +62,16 @@ describe 'gpfs_fileset type:' do
         max_num_inodes  => 1000000,
         alloc_inodes    => 1000000,
       }
-      EOS
+      PP
 
       apply_manifest(pp, catch_failures: true)
       apply_manifest(pp, catch_changes: true)
     end
   end
 
-  context 'modify fileset owner' do
+  context 'when modify fileset owner' do
     it 'runs successfully' do
-      pp = <<-EOS
+      pp = <<-PP
       class { 'gpfs':
         packages => [
           'gpfs.adv',
@@ -89,7 +91,7 @@ describe 'gpfs_fileset type:' do
         max_num_inodes  => 1000000,
         alloc_inodes    => 1000000,
       }
-      EOS
+      PP
 
       apply_manifest(pp, catch_failures: true)
       apply_manifest(pp, catch_changes: true)
@@ -103,9 +105,9 @@ describe 'gpfs_fileset type:' do
     end
   end
 
-  context 'decreasing alloc_inodes' do
+  context 'when decreasing alloc_inodes' do
     it 'runs successfully' do
-      pp = <<-EOS
+      pp = <<-PP
       class { 'gpfs':
         packages => [
           'gpfs.adv',
@@ -125,15 +127,15 @@ describe 'gpfs_fileset type:' do
         max_num_inodes  => 800000,
         alloc_inodes    => 800000,
       }
-      EOS
+      PP
 
       apply_manifest(pp, catch_failures: true)
     end
   end
 
-  context 'change fileset junction path' do
+  context 'when change fileset junction path' do
     it 'runs successfully' do
-      pp = <<-EOS
+      pp = <<-PP
       class { 'gpfs':
         packages => [
           'gpfs.adv',
@@ -154,7 +156,7 @@ describe 'gpfs_fileset type:' do
         max_num_inodes  => 800000,
         alloc_inodes    => 800000,
       }
-      EOS
+      PP
 
       apply_manifest(pp, catch_failures: true)
     end
@@ -168,9 +170,9 @@ describe 'gpfs_fileset type:' do
     end
   end
 
-  context 'unlink fileset' do
+  context 'when unlink fileset' do
     it 'runs successfully' do
-      pp = <<-EOS
+      pp = <<-PP
       class { 'gpfs':
         packages => [
           'gpfs.adv',
@@ -192,7 +194,7 @@ describe 'gpfs_fileset type:' do
         max_num_inodes  => 800000,
         alloc_inodes    => 800000,
       }
-      EOS
+      PP
 
       apply_manifest(pp, catch_failures: true)
     end
@@ -203,9 +205,9 @@ describe 'gpfs_fileset type:' do
     end
   end
 
-  context 'delete fileset' do
+  context 'when delete fileset' do
     it 'runs successfully' do
-      pp = <<-EOS
+      pp = <<-PP
       class { 'gpfs':
         packages => [
           'gpfs.adv',
@@ -230,7 +232,7 @@ describe 'gpfs_fileset type:' do
         ensure      => 'absent',
         filesystem  => 'test',
       }
-      EOS
+      PP
 
       apply_manifest(pp, catch_failures: true)
       apply_manifest(pp, catch_changes: true)

@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'gpfs::gui' do
   on_supported_os(supported_os: [
                     {
                       'operatingsystem' => 'RedHat',
-                      'operatingsystemrelease' => ['7'],
-                    },
+                      'operatingsystemrelease' => ['7']
+                    }
                   ]).each do |os, facts|
     context "on #{os}" do
       let(:facts) { facts }
@@ -24,6 +26,6 @@ describe 'gpfs::gui' do
 
         it { is_expected.not_to contain_firewall('47443 *:47443') }
       end
-    end # end context
-  end # end on_supported_os loop
-end # end describe
+    end
+  end
+end

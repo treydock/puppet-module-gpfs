@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'gpfs::client::rkm' do
   on_supported_os(supported_os: [
                     {
                       'operatingsystem' => 'RedHat',
-                      'operatingsystemrelease' => ['6', '7'],
-                    },
+                      'operatingsystemrelease' => ['6', '7']
+                    }
                   ]).each do |os, facts|
     context "on #{os}" do
       let(:facts) do
@@ -22,7 +24,7 @@ describe 'gpfs::client::rkm' do
           key_store_source: 'puppet:///some/path',
           passphrase: 'changeme',
           client_cert_label: 'test',
-          tenant_name: 'tenant',
+          tenant_name: 'tenant'
         }
       end
 
@@ -39,7 +41,7 @@ describe 'gpfs::client::rkm' do
                                                 '  connectionTimeout = 5',
                                                 '  connectionAttempts = 3',
                                                 '  retrySleep = 50000',
-                                                '}',
+                                                '}'
                                               ])
       end
 

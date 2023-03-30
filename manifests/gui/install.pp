@@ -11,5 +11,4 @@ class gpfs::gui::install {
       }
     }
   }
-
 }
