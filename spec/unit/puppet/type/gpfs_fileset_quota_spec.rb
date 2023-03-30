@@ -75,6 +75,11 @@ describe Puppet::Type.type(:gpfs_fileset_quota) do
     expect(quota[:block_soft_limit]).to eq('1.8T')
   end
 
+  it 'accepts block_soft_limit 1.8P' do
+    quota[:block_soft_limit] = '1.8P'
+    expect(quota[:block_soft_limit]).to eq('1.8P')
+  end
+
   it 'accepts block_soft_limit 0' do
     quota[:block_soft_limit] = '0'
     expect(quota[:block_soft_limit]).to eq('0')
@@ -94,6 +99,11 @@ describe Puppet::Type.type(:gpfs_fileset_quota) do
   it 'accepts block_hard_limit 1.8T' do
     quota[:block_hard_limit] = '1.8T'
     expect(quota[:block_hard_limit]).to eq('1.8T')
+  end
+
+  it 'accepts block_hard_limit 1.8P' do
+    quota[:block_hard_limit] = '1.8P'
+    expect(quota[:block_hard_limit]).to eq('1.8P')
   end
 
   it 'accepts block_hard_limit 0' do
