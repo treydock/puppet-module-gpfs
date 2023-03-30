@@ -1,6 +1,6 @@
 {
   "name": "treydock-gpfs",
-  "version": "2.3.1",
+  "version": "2.3.2",
   "author": "treydock",
   "summary": "GPFS Puppet module",
   "license": "Apache-2.0",

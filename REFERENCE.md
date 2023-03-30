@@ -103,7 +103,8 @@ Data type: `Array`
 
 GPFS base packages
 
-Default value: `[ "gpfs.gplbin-${facts['kernelrelease']}",
+Default value: `[
+    "gpfs.gplbin-${facts['kernelrelease']}",
     'gpfs.adv',
     'gpfs.base',
     'gpfs.crypto',
@@ -208,7 +209,7 @@ Default value: ``true``
 
 ##### <a name="package_ensure"></a>`package_ensure`
 
-Data type: `Any`
+Data type: `String[1]`
 
 GPFS client package ensure property
 
@@ -216,7 +217,7 @@ Default value: `'present'`
 
 ##### <a name="packages"></a>`packages`
 
-Data type: `Any`
+Data type: `Array[String[1]]`
 
 GPFS client packages
 
@@ -240,7 +241,7 @@ Default value: ``true``
 
 ##### <a name="ssh_user"></a>`ssh_user`
 
-Data type: `Any`
+Data type: `String[1]`
 
 SSH user for GPFS
 
@@ -248,7 +249,7 @@ Default value: `'root'`
 
 ##### <a name="ssh_authorized_keys"></a>`ssh_authorized_keys`
 
-Data type: `Any`
+Data type: `Hash`
 
 SSH authorized keys for NSDs
 
@@ -256,7 +257,7 @@ Default value: `{}`
 
 ##### <a name="rkms"></a>`rkms`
 
-Data type: `Any`
+Data type: `Hash`
 
 Hash to define gpfs::client::rkm resources
 
@@ -439,7 +440,7 @@ The following parameters are available in the `gpfs::client::rkm` defined type:
 
 ##### <a name="rkm_id"></a>`rkm_id`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -447,7 +448,7 @@ Default value: `$name`
 
 ##### <a name="type"></a>`type`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -463,7 +464,7 @@ Default value: `[]`
 
 ##### <a name="key_store"></a>`key_store`
 
-Data type: `Any`
+Data type: `Stdlib::Absolutepath`
 
 
 
@@ -471,7 +472,7 @@ Default value: `'/var/mmfs/etc/RKMcerts/ISKLM.proj2'`
 
 ##### <a name="key_store_source"></a>`key_store_source`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 
 
@@ -479,7 +480,7 @@ Default value: ``undef``
 
 ##### <a name="passphrase"></a>`passphrase`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 
 
@@ -487,7 +488,7 @@ Default value: ``undef``
 
 ##### <a name="client_cert_label"></a>`client_cert_label`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 
 
@@ -495,7 +496,7 @@ Default value: ``undef``
 
 ##### <a name="tenant_name"></a>`tenant_name`
 
-Data type: `Any`
+Data type: `Optional[String[1]]`
 
 
 
@@ -503,7 +504,7 @@ Default value: ``undef``
 
 ##### <a name="connection_timeout"></a>`connection_timeout`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -511,7 +512,7 @@ Default value: `'5'`
 
 ##### <a name="connection_attempts"></a>`connection_attempts`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -519,7 +520,7 @@ Default value: `'3'`
 
 ##### <a name="retry_sleep"></a>`retry_sleep`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
@@ -527,7 +528,7 @@ Default value: `'50000'`
 
 ##### <a name="order"></a>`order`
 
-Data type: `Any`
+Data type: `String[1]`
 
 
 
