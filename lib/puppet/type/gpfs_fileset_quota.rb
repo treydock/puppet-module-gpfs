@@ -61,8 +61,8 @@ Puppet::Type.newtype(:gpfs_fileset_quota) do
     desc 'blockSoftLimit of quota'
 
     validate do |value|
-      unless value =~ %r{^0$|^([0-9.]+)(M|G|T)$}
-        raise ArgumentError, "Invalid block_soft_limit: #{value}, must be in format of [0-9]+(M|G|T)"
+      unless value =~ %r{^0$|^([0-9.]+)(M|G|T|P)$}
+        raise ArgumentError, "Invalid block_soft_limit: #{value}, must be in format of [0-9]+(M|G|T|P)"
       end
     end
   end
@@ -71,8 +71,8 @@ Puppet::Type.newtype(:gpfs_fileset_quota) do
     desc 'blockHardLimit of quota'
 
     validate do |value|
-      unless value =~ %r{^0$|^([0-9.]+)(M|G|T)$}
-        raise ArgumentError, "Invalid block_hard_limit: #{value}, must be in format of [0-9]+(M|G|T)"
+      unless value =~ %r{^0$|^([0-9.]+)(M|G|T|P)$}
+        raise ArgumentError, "Invalid block_hard_limit: #{value}, must be in format of [0-9]+(M|G|T|P)"
       end
     end
   end
