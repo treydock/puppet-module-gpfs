@@ -19,22 +19,22 @@ Puppet::Type.newtype(:gpfs_fileset_quota) do
 
   ensurable
 
-  newparam(:name) do
+  newparam(:name, namevar: true) do
     desc 'The default namevar'
   end
 
-  newparam(:filesystem) do
+  newparam(:filesystem, namevar: true) do
     desc 'The GPFS filesystem name.'
   end
 
-  newparam(:fileset) do
+  newparam(:fileset, namevar: true) do
     desc 'The GPFS fileset name.'
     defaultto do
       @resource[:name]
     end
   end
 
-  newparam(:object_name) do
+  newparam(:object_name, namevar: true) do
     desc 'The GPFS quota object name'
     defaultto do
       @resource[:name]
@@ -130,5 +130,26 @@ Puppet::Type.newtype(:gpfs_fileset_quota) do
     else
       value
     end
+  end
+
+  def self.title_patterns
+    [
+      [
+        %r{^((\S+) (\S+) for (\S+) on (\S+))$},
+        [
+          [:name],
+          [:type],
+          [:object_name],
+          [:fileset],
+          [:filesystem]
+        ]
+      ],
+      [
+        %r{(.*)},
+        [
+          [:name]
+        ]
+      ]
+    ]
   end
 end

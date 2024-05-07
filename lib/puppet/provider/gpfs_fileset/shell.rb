@@ -38,7 +38,7 @@ Puppet::Type.type(:gpfs_fileset).provide(:shell, parent: Puppet::Provider::Gpfs)
                            end
         fileset[:filesystem] = l[6]
         fileset[:fileset] = l[7]
-        fileset[:name] = "#{fileset[:filesystem]}/#{fileset[:fileset]}"
+        fileset[:name] = "#{fileset[:fileset]} on #{fileset[:filesystem]}"
         fileset[:path] = URI.decode_www_form_component(l[11]) unless l[11].nil?
         fileset[:max_num_inodes] = l[32].to_i
         fileset[:alloc_inodes] = l[33].to_i

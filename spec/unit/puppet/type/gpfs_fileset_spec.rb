@@ -37,6 +37,13 @@ describe Puppet::Type.type(:gpfs_fileset) do
     expect(fileset[:name]).to eq('test')
   end
 
+  it 'accepts title patterns' do
+    fileset = described_class.new(name: 'foo on test')
+    expect(fileset[:name]).to eq('foo on test')
+    expect(fileset[:fileset]).to eq('foo')
+    expect(fileset[:filesystem]).to eq('test')
+  end
+
   it 'requires a name' do
     expect {
       Puppet::Type.type(:gpfs_fileset).new({})

@@ -21,6 +21,15 @@ describe Puppet::Type.type(:gpfs_fileset_quota) do
     }.to raise_error(Puppet::Error, 'Title or name must be provided')
   end
 
+  it 'accepts title patterns' do
+    quota = described_class.new(name: 'fileset foo for foo on test')
+    expect(quota[:name]).to eq('fileset foo for foo on test')
+    expect(quota[:type]).to eq(:fileset)
+    expect(quota[:object_name]).to eq('foo')
+    expect(quota[:fileset]).to eq('foo')
+    expect(quota[:filesystem]).to eq('test')
+  end
+
   it 'name should be set' do
     expect(quota[:name]).to eq('test')
   end

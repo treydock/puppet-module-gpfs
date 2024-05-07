@@ -32,7 +32,7 @@ Puppet::Type.type(:gpfs_fileset_quota).provide(:shell, parent: Puppet::Provider:
                           end
         quota[:type] = type.to_sym
         quota[:object_name] = l[9]
-        quota[:name] = "#{quota[:filesystem]}/#{quota[:fileset]}/#{type}/#{quota[:object_name]}"
+        quota[:name] = "#{type} #{quota[:object_name]} for #{quota[:fileset]} on #{quota[:filesystem]}"
         quota[:block_soft_limit] = human_readable_kilobytes(l[11].to_i)
         quota[:block_hard_limit] = human_readable_kilobytes(l[12].to_i)
         quota[:files_soft_limit] = l[16].to_i

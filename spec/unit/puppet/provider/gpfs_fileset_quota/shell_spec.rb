@@ -27,23 +27,23 @@ mmlsfs::0:1:::test:defaultMountPoint:%2Ffs%2Ftest::"
 
   let(:all_quotas) do
     [
-      { ensure: :present, name: 'test/root/usr/root', fileset: 'root', filesystem: 'test', object_name: 'root', type: :usr,
+      { ensure: :present, name: 'usr root for root on test', fileset: 'root', filesystem: 'test', object_name: 'root', type: :usr,
         block_soft_limit: '0', block_hard_limit: '0', files_soft_limit: 0, files_hard_limit: 0 },
-      { ensure: :present, name: 'test/qtest1/usr/root', fileset: 'qtest1', filesystem: 'test', object_name: 'root', type: :usr,
+      { ensure: :present, name: 'usr root for qtest1 on test', fileset: 'qtest1', filesystem: 'test', object_name: 'root', type: :usr,
         block_soft_limit: '0', block_hard_limit: '0', files_soft_limit: 0, files_hard_limit: 0 },
-      { ensure: :present, name: 'test/test3/usr/root', fileset: 'test3', filesystem: 'test', object_name: 'root', type: :usr,
+      { ensure: :present, name: 'usr root for test3 on test', fileset: 'test3', filesystem: 'test', object_name: 'root', type: :usr,
         block_soft_limit: '0', block_hard_limit: '0', files_soft_limit: 0, files_hard_limit: 0 },
-      { ensure: :present, name: 'test/root/grp/root', fileset: 'root', filesystem: 'test', object_name: 'root', type: :grp,
+      { ensure: :present, name: 'grp root for root on test', fileset: 'root', filesystem: 'test', object_name: 'root', type: :grp,
         block_soft_limit: '0', block_hard_limit: '0', files_soft_limit: 0, files_hard_limit: 0 },
-      { ensure: :present, name: 'test/qtest1/grp/root', fileset: 'qtest1', filesystem: 'test', object_name: 'root', type: :grp,
+      { ensure: :present, name: 'grp root for qtest1 on test', fileset: 'qtest1', filesystem: 'test', object_name: 'root', type: :grp,
         block_soft_limit: '0', block_hard_limit: '0', files_soft_limit: 0, files_hard_limit: 0 },
-      { ensure: :present, name: 'test/test3/grp/root', fileset: 'test3', filesystem: 'test', object_name: 'root', type: :grp,
+      { ensure: :present, name: 'grp root for test3 on test', fileset: 'test3', filesystem: 'test', object_name: 'root', type: :grp,
         block_soft_limit: '0', block_hard_limit: '0', files_soft_limit: 0, files_hard_limit: 0 },
-      { ensure: :present, name: 'test/root/fileset/root', fileset: 'root', filesystem: 'test', object_name: 'root', type: :fileset,
+      { ensure: :present, name: 'fileset root for root on test', fileset: 'root', filesystem: 'test', object_name: 'root', type: :fileset,
         block_soft_limit: '0', block_hard_limit: '0', files_soft_limit: 0, files_hard_limit: 0 },
-      { ensure: :present, name: 'test/test3/fileset/test3', fileset: 'test3', filesystem: 'test', object_name: 'test3', type: :fileset,
+      { ensure: :present, name: 'fileset test3 for test3 on test', fileset: 'test3', filesystem: 'test', object_name: 'test3', type: :fileset,
         block_soft_limit: '0', block_hard_limit: '0', files_soft_limit: 0, files_hard_limit: 0 },
-      { ensure: :present, name: 'test/qtest1/fileset/qtest1', fileset: 'qtest1', filesystem: 'test', object_name: 'qtest1', type: :fileset,
+      { ensure: :present, name: 'fileset qtest1 for qtest1 on test', fileset: 'qtest1', filesystem: 'test', object_name: 'qtest1', type: :fileset,
         block_soft_limit: '1T', block_hard_limit: '1T', files_soft_limit: 400_000, files_hard_limit: 400_000 }
     ]
   end
