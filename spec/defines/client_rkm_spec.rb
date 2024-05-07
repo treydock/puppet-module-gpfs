@@ -9,7 +9,7 @@ describe 'gpfs::client::rkm' do
                       'operatingsystemrelease' => ['6', '7']
                     }
                   ]).each do |os, facts|
-    context "on #{os}" do
+    context "when #{os}" do
       let(:facts) do
         facts.merge(concat_basedir: '/dne')
       end

@@ -9,7 +9,7 @@ describe 'gpfs::ces' do
                       'operatingsystemrelease' => ['6', '7']
                     }
                   ]).each do |os, facts|
-    context "on #{os}" do
+    context "when #{os}" do
       let(:facts) { facts }
 
       it { is_expected.to compile.with_all_deps }
