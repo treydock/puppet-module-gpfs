@@ -20,10 +20,6 @@ jobs:
             puppet: 7
             fixtures: .fixtures.yml
             allow_failure: false
-          - ruby: 3.2.2
-            puppet: 8
-            fixtures: .fixtures.yml
-            allow_failure: false
     env:
       BUNDLE_WITHOUT: system_tests:release
       PUPPET_GEM_VERSION: "~> ${{ matrix.puppet }}.0"

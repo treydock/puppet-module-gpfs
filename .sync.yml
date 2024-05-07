@@ -1,5 +1,7 @@
 ---
 .github/workflows/ci.yaml:
+  unit_excludes:
+    puppet: '8'
   acceptance_matrix: false
 .gitlab-ci.yml:
   delete: true
