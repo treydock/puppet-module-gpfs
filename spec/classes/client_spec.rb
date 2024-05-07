@@ -9,7 +9,7 @@ describe 'gpfs::client' do
                       'operatingsystemrelease' => ['6', '7']
                     }
                   ]).each do |os, facts|
-    context "on #{os}" do
+    context "when #{os}" do
       let(:facts) { facts }
 
       let(:kernel) do

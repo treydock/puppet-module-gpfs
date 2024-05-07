@@ -1,5 +1,7 @@
 ---
 .github/workflows/ci.yaml:
+  unit_excludes:
+    puppet: '8'
   acceptance_matrix: false
 .gitlab-ci.yml:
   delete: true
@@ -22,6 +24,8 @@ spec/acceptance/nodesets/el9.yml:
 spec/acceptance/nodesets/debian-10.yml:
   delete: true
 spec/acceptance/nodesets/debian-11.yml:
+  delete: true
+spec/acceptance/nodesets/debian-12.yml:
   delete: true
 spec/acceptance/nodesets/ubuntu-1804.yml:
   delete: true

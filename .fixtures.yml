@@ -6,6 +6,7 @@ fixtures:
       repo: puppetlabs/concat
     firewall:
       repo: puppetlabs/firewall
+      ref: '6.0.0'
     yumrepo_core:
       repo: puppetlabs/yumrepo_core
     sudo:

@@ -50,11 +50,11 @@ Puppet::Type.newtype(:gpfs_fileset) do
     end
   end
 
-  newparam(:name) do
+  newparam(:name, namevar: true) do
     desc 'The default namevar.'
   end
 
-  newparam(:fileset) do
+  newparam(:fileset, namevar: true) do
     desc 'The GPFS fileset name.'
 
     defaultto do
@@ -62,7 +62,7 @@ Puppet::Type.newtype(:gpfs_fileset) do
     end
   end
 
-  newparam(:filesystem) do
+  newparam(:filesystem, namevar: true) do
     desc 'The GPFS filesystem name.'
   end
 
@@ -221,5 +221,24 @@ Puppet::Type.newtype(:gpfs_fileset) do
 
   def pre_run_check
     raise('Filesystem is required.') if self[:filesystem].nil?
+  end
+
+  def self.title_patterns
+    [
+      [
+        %r{^((\S+) on (\S+))$},
+        [
+          [:name],
+          [:fileset],
+          [:filesystem]
+        ]
+      ],
+      [
+        %r{(.*)},
+        [
+          [:name]
+        ]
+      ]
+    ]
   end
 end
