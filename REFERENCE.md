@@ -9,10 +9,10 @@
 #### Public Classes
 
 * [`gpfs`](#gpfs): base GPFS class
-* [`gpfs::ces`](#gpfsces): GPFS CES class
-* [`gpfs::client`](#gpfsclient): GPFS client class
-* [`gpfs::gui`](#gpfsgui): GPFS GUI class
-* [`gpfs::server`](#gpfsserver): GPFS server class
+* [`gpfs::ces`](#gpfs--ces): GPFS CES class
+* [`gpfs::client`](#gpfs--client): GPFS client class
+* [`gpfs::gui`](#gpfs--gui): GPFS GUI class
+* [`gpfs::server`](#gpfs--server): GPFS server class
 
 #### Private Classes
 
@@ -30,7 +30,7 @@
 
 ### Defined types
 
-* [`gpfs::client::rkm`](#gpfsclientrkm): Manage GPFS client ISKLM configuration
+* [`gpfs::client::rkm`](#gpfs--client--rkm): Manage GPFS client ISKLM configuration
 
 ### Resource types
 
@@ -58,38 +58,38 @@ include ::gpfs
 
 The following parameters are available in the `gpfs` class:
 
-* [`manage_repo`](#manage_repo)
-* [`repo_baseurl`](#repo_baseurl)
-* [`manage_packages`](#manage_packages)
-* [`package_ensure`](#package_ensure)
-* [`packages`](#packages)
-* [`config_filesystems`](#config_filesystems)
+* [`manage_repo`](#-gpfs--manage_repo)
+* [`repo_baseurl`](#-gpfs--repo_baseurl)
+* [`manage_packages`](#-gpfs--manage_packages)
+* [`package_ensure`](#-gpfs--package_ensure)
+* [`packages`](#-gpfs--packages)
+* [`config_filesystems`](#-gpfs--config_filesystems)
 
-##### <a name="manage_repo"></a>`manage_repo`
+##### <a name="-gpfs--manage_repo"></a>`manage_repo`
 
 Data type: `Boolean`
 
 Sets if GPFS repo should be managed
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="repo_baseurl"></a>`repo_baseurl`
+##### <a name="-gpfs--repo_baseurl"></a>`repo_baseurl`
 
 Data type: `Optional[String]`
 
 The GPFS repo baseurl
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="manage_packages"></a>`manage_packages`
+##### <a name="-gpfs--manage_packages"></a>`manage_packages`
 
 Data type: `Boolean`
 
 Determines if GPFS packages should be managed
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="package_ensure"></a>`package_ensure`
+##### <a name="-gpfs--package_ensure"></a>`package_ensure`
 
 Data type: `String`
 
@@ -97,13 +97,16 @@ GPFS package ensure property
 
 Default value: `'present'`
 
-##### <a name="packages"></a>`packages`
+##### <a name="-gpfs--packages"></a>`packages`
 
 Data type: `Array`
 
 GPFS base packages
 
-Default value: `[
+Default value:
+
+```puppet
+[
     "gpfs.gplbin-${facts['kernelrelease']}",
     'gpfs.adv',
     'gpfs.base',
@@ -113,17 +116,18 @@ Default value: `[
     'gpfs.gpl',
     'gpfs.gskit',
     'gpfs.msg.en_US',
-  ]`
+  ]
+```
 
-##### <a name="config_filesystems"></a>`config_filesystems`
+##### <a name="-gpfs--config_filesystems"></a>`config_filesystems`
 
 Data type: `Optional[Array]`
 
 Filesystems where filesets are managed by Puppet
 
-Default value: ``undef``
+Default value: `undef`
 
-### <a name="gpfsces"></a>`gpfs::ces`
+### <a name="gpfs--ces"></a>`gpfs::ces`
 
 GPFS CES class
 
@@ -139,19 +143,19 @@ include ::gpfs::ces
 
 The following parameters are available in the `gpfs::ces` class:
 
-* [`manage_packages`](#manage_packages)
-* [`package_ensure`](#package_ensure)
-* [`packages`](#packages)
+* [`manage_packages`](#-gpfs--ces--manage_packages)
+* [`package_ensure`](#-gpfs--ces--package_ensure)
+* [`packages`](#-gpfs--ces--packages)
 
-##### <a name="manage_packages"></a>`manage_packages`
+##### <a name="-gpfs--ces--manage_packages"></a>`manage_packages`
 
 Data type: `Boolean`
 
 Determines if GPFS CES packages should be managed
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="package_ensure"></a>`package_ensure`
+##### <a name="-gpfs--ces--package_ensure"></a>`package_ensure`
 
 Data type: `String`
 
@@ -159,21 +163,25 @@ GPFS CES package ensure property
 
 Default value: `'present'`
 
-##### <a name="packages"></a>`packages`
+##### <a name="-gpfs--ces--packages"></a>`packages`
 
 Data type: `Array`
 
 GPFS CES packages
 
-Default value: `[
+Default value:
+
+```puppet
+[
     'gpfs.java',
     'gpfs.smb',
     'nfs-ganesha',
     'nfs-ganesha-gpfs',
     'nfs-ganesha-utils',
-  ]`
+  ]
+```
 
-### <a name="gpfsclient"></a>`gpfs::client`
+### <a name="gpfs--client"></a>`gpfs::client`
 
 GPFS client class
 
@@ -189,25 +197,25 @@ include ::gpfs::client
 
 The following parameters are available in the `gpfs::client` class:
 
-* [`manage_packages`](#manage_packages)
-* [`package_ensure`](#package_ensure)
-* [`packages`](#packages)
-* [`manage_service_files`](#manage_service_files)
-* [`manage_ssh_authorized_keys`](#manage_ssh_authorized_keys)
-* [`ssh_user`](#ssh_user)
-* [`ssh_authorized_keys`](#ssh_authorized_keys)
-* [`rkms`](#rkms)
-* [`bin_paths`](#bin_paths)
+* [`manage_packages`](#-gpfs--client--manage_packages)
+* [`package_ensure`](#-gpfs--client--package_ensure)
+* [`packages`](#-gpfs--client--packages)
+* [`manage_service_files`](#-gpfs--client--manage_service_files)
+* [`manage_ssh_authorized_keys`](#-gpfs--client--manage_ssh_authorized_keys)
+* [`ssh_user`](#-gpfs--client--ssh_user)
+* [`ssh_authorized_keys`](#-gpfs--client--ssh_authorized_keys)
+* [`rkms`](#-gpfs--client--rkms)
+* [`bin_paths`](#-gpfs--client--bin_paths)
 
-##### <a name="manage_packages"></a>`manage_packages`
+##### <a name="-gpfs--client--manage_packages"></a>`manage_packages`
 
 Data type: `Boolean`
 
 Determines if GPFS client packages should be managed
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="package_ensure"></a>`package_ensure`
+##### <a name="-gpfs--client--package_ensure"></a>`package_ensure`
 
 Data type: `String[1]`
 
@@ -215,7 +223,7 @@ GPFS client package ensure property
 
 Default value: `'present'`
 
-##### <a name="packages"></a>`packages`
+##### <a name="-gpfs--client--packages"></a>`packages`
 
 Data type: `Array[String[1]]`
 
@@ -223,23 +231,23 @@ GPFS client packages
 
 Default value: `[]`
 
-##### <a name="manage_service_files"></a>`manage_service_files`
+##### <a name="-gpfs--client--manage_service_files"></a>`manage_service_files`
 
 Data type: `Boolean`
 
 Determines if GPFS service files are managed
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="manage_ssh_authorized_keys"></a>`manage_ssh_authorized_keys`
+##### <a name="-gpfs--client--manage_ssh_authorized_keys"></a>`manage_ssh_authorized_keys`
 
 Data type: `Boolean`
 
 Determines if SSH authorized_keys should be managed
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="ssh_user"></a>`ssh_user`
+##### <a name="-gpfs--client--ssh_user"></a>`ssh_user`
 
 Data type: `String[1]`
 
@@ -247,7 +255,7 @@ SSH user for GPFS
 
 Default value: `'root'`
 
-##### <a name="ssh_authorized_keys"></a>`ssh_authorized_keys`
+##### <a name="-gpfs--client--ssh_authorized_keys"></a>`ssh_authorized_keys`
 
 Data type: `Hash`
 
@@ -255,7 +263,7 @@ SSH authorized keys for NSDs
 
 Default value: `{}`
 
-##### <a name="rkms"></a>`rkms`
+##### <a name="-gpfs--client--rkms"></a>`rkms`
 
 Data type: `Hash`
 
@@ -263,7 +271,7 @@ Hash to define gpfs::client::rkm resources
 
 Default value: `{}`
 
-##### <a name="bin_paths"></a>`bin_paths`
+##### <a name="-gpfs--client--bin_paths"></a>`bin_paths`
 
 Data type: `Array[Stdlib::Absolutepath]`
 
@@ -271,7 +279,7 @@ Paths to add to PATH
 
 Default value: `[]`
 
-### <a name="gpfsgui"></a>`gpfs::gui`
+### <a name="gpfs--gui"></a>`gpfs::gui`
 
 GPFS GUI class
 
@@ -287,24 +295,24 @@ include ::gpfs::gui
 
 The following parameters are available in the `gpfs::gui` class:
 
-* [`manage_packages`](#manage_packages)
-* [`package_ensure`](#package_ensure)
-* [`packages`](#packages)
-* [`manage_firewall`](#manage_firewall)
-* [`firewall_source`](#firewall_source)
-* [`firewall_https_only`](#firewall_https_only)
-* [`manage_services`](#manage_services)
-* [`manage_initgui`](#manage_initgui)
+* [`manage_packages`](#-gpfs--gui--manage_packages)
+* [`package_ensure`](#-gpfs--gui--package_ensure)
+* [`packages`](#-gpfs--gui--packages)
+* [`manage_firewall`](#-gpfs--gui--manage_firewall)
+* [`firewall_source`](#-gpfs--gui--firewall_source)
+* [`firewall_https_only`](#-gpfs--gui--firewall_https_only)
+* [`manage_services`](#-gpfs--gui--manage_services)
+* [`manage_initgui`](#-gpfs--gui--manage_initgui)
 
-##### <a name="manage_packages"></a>`manage_packages`
+##### <a name="-gpfs--gui--manage_packages"></a>`manage_packages`
 
 Data type: `Boolean`
 
 Determines if GPFS GUI packages should be managed
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="package_ensure"></a>`package_ensure`
+##### <a name="-gpfs--gui--package_ensure"></a>`package_ensure`
 
 Data type: `String`
 
@@ -312,57 +320,61 @@ GPFS GUI package ensure property
 
 Default value: `'present'`
 
-##### <a name="packages"></a>`packages`
+##### <a name="-gpfs--gui--packages"></a>`packages`
 
 Data type: `Array`
 
 GPFS GUI packages
 
-Default value: `[
-    'gpfs.gui',
-  ]`
+Default value:
 
-##### <a name="manage_firewall"></a>`manage_firewall`
+```puppet
+[
+    'gpfs.gui',
+  ]
+```
+
+##### <a name="-gpfs--gui--manage_firewall"></a>`manage_firewall`
 
 Data type: `Boolean`
 
 Determines if firewall should be managed
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="firewall_source"></a>`firewall_source`
+##### <a name="-gpfs--gui--firewall_source"></a>`firewall_source`
 
 Data type: `Optional[Variant[String, Array, Boolean]]`
 
 Firewall source value
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="firewall_https_only"></a>`firewall_https_only`
+##### <a name="-gpfs--gui--firewall_https_only"></a>`firewall_https_only`
 
 Data type: `Boolean`
 
 Only manage firewall rules for HTTPS
 
-Default value: ``false``
+Default value: `false`
 
-##### <a name="manage_services"></a>`manage_services`
+##### <a name="-gpfs--gui--manage_services"></a>`manage_services`
 
 Data type: `Boolean`
 
 Determines if services are managed
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="manage_initgui"></a>`manage_initgui`
+##### <a name="-gpfs--gui--manage_initgui"></a>`manage_initgui`
 
 Data type: `Boolean`
 
 Determines if manage Exec to initialize GUI
 
-Default value: ``true``
+Default value: `true`
 
-### <a name="gpfsserver"></a>`gpfs::server`
+### <a name="gpfs--server"></a>`gpfs::server`
 
 GPFS server class
 
@@ -378,20 +390,20 @@ include ::gpfs::server
 
 The following parameters are available in the `gpfs::server` class:
 
-* [`manage_packages`](#manage_packages)
-* [`package_ensure`](#package_ensure)
-* [`packages`](#packages)
-* [`bin_paths`](#bin_paths)
+* [`manage_packages`](#-gpfs--server--manage_packages)
+* [`package_ensure`](#-gpfs--server--package_ensure)
+* [`packages`](#-gpfs--server--packages)
+* [`bin_paths`](#-gpfs--server--bin_paths)
 
-##### <a name="manage_packages"></a>`manage_packages`
+##### <a name="-gpfs--server--manage_packages"></a>`manage_packages`
 
 Data type: `Boolean`
 
 Determines if GPFS server packages should be managed
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="package_ensure"></a>`package_ensure`
+##### <a name="-gpfs--server--package_ensure"></a>`package_ensure`
 
 Data type: `String`
 
@@ -399,7 +411,7 @@ GPFS server package ensure property
 
 Default value: `'present'`
 
-##### <a name="packages"></a>`packages`
+##### <a name="-gpfs--server--packages"></a>`packages`
 
 Data type: `Array`
 
@@ -407,7 +419,7 @@ GPFS server packages
 
 Default value: `[]`
 
-##### <a name="bin_paths"></a>`bin_paths`
+##### <a name="-gpfs--server--bin_paths"></a>`bin_paths`
 
 Data type: `Array[Stdlib::Absolutepath]`
 
@@ -417,7 +429,7 @@ Default value: `['/usr/lpp/mmfs/bin']`
 
 ## Defined types
 
-### <a name="gpfsclientrkm"></a>`gpfs::client::rkm`
+### <a name="gpfs--client--rkm"></a>`gpfs::client::rkm`
 
 Manage GPFS client ISKLM configuration
 
@@ -425,20 +437,20 @@ Manage GPFS client ISKLM configuration
 
 The following parameters are available in the `gpfs::client::rkm` defined type:
 
-* [`rkm_id`](#rkm_id)
-* [`type`](#type)
-* [`kmip_server_uris`](#kmip_server_uris)
-* [`key_store`](#key_store)
-* [`key_store_source`](#key_store_source)
-* [`passphrase`](#passphrase)
-* [`client_cert_label`](#client_cert_label)
-* [`tenant_name`](#tenant_name)
-* [`connection_timeout`](#connection_timeout)
-* [`connection_attempts`](#connection_attempts)
-* [`retry_sleep`](#retry_sleep)
-* [`order`](#order)
+* [`rkm_id`](#-gpfs--client--rkm--rkm_id)
+* [`type`](#-gpfs--client--rkm--type)
+* [`kmip_server_uris`](#-gpfs--client--rkm--kmip_server_uris)
+* [`key_store`](#-gpfs--client--rkm--key_store)
+* [`key_store_source`](#-gpfs--client--rkm--key_store_source)
+* [`passphrase`](#-gpfs--client--rkm--passphrase)
+* [`client_cert_label`](#-gpfs--client--rkm--client_cert_label)
+* [`tenant_name`](#-gpfs--client--rkm--tenant_name)
+* [`connection_timeout`](#-gpfs--client--rkm--connection_timeout)
+* [`connection_attempts`](#-gpfs--client--rkm--connection_attempts)
+* [`retry_sleep`](#-gpfs--client--rkm--retry_sleep)
+* [`order`](#-gpfs--client--rkm--order)
 
-##### <a name="rkm_id"></a>`rkm_id`
+##### <a name="-gpfs--client--rkm--rkm_id"></a>`rkm_id`
 
 Data type: `String[1]`
 
@@ -446,7 +458,7 @@ Data type: `String[1]`
 
 Default value: `$name`
 
-##### <a name="type"></a>`type`
+##### <a name="-gpfs--client--rkm--type"></a>`type`
 
 Data type: `String[1]`
 
@@ -454,7 +466,7 @@ Data type: `String[1]`
 
 Default value: `'ISKLM'`
 
-##### <a name="kmip_server_uris"></a>`kmip_server_uris`
+##### <a name="-gpfs--client--rkm--kmip_server_uris"></a>`kmip_server_uris`
 
 Data type: `Array`
 
@@ -462,7 +474,7 @@ Data type: `Array`
 
 Default value: `[]`
 
-##### <a name="key_store"></a>`key_store`
+##### <a name="-gpfs--client--rkm--key_store"></a>`key_store`
 
 Data type: `Stdlib::Absolutepath`
 
@@ -470,39 +482,39 @@ Data type: `Stdlib::Absolutepath`
 
 Default value: `'/var/mmfs/etc/RKMcerts/ISKLM.proj2'`
 
-##### <a name="key_store_source"></a>`key_store_source`
+##### <a name="-gpfs--client--rkm--key_store_source"></a>`key_store_source`
 
 Data type: `Optional[String[1]]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="passphrase"></a>`passphrase`
-
-Data type: `Optional[String[1]]`
-
-
-
-Default value: ``undef``
-
-##### <a name="client_cert_label"></a>`client_cert_label`
+##### <a name="-gpfs--client--rkm--passphrase"></a>`passphrase`
 
 Data type: `Optional[String[1]]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="tenant_name"></a>`tenant_name`
+##### <a name="-gpfs--client--rkm--client_cert_label"></a>`client_cert_label`
 
 Data type: `Optional[String[1]]`
 
 
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="connection_timeout"></a>`connection_timeout`
+##### <a name="-gpfs--client--rkm--tenant_name"></a>`tenant_name`
+
+Data type: `Optional[String[1]]`
+
+
+
+Default value: `undef`
+
+##### <a name="-gpfs--client--rkm--connection_timeout"></a>`connection_timeout`
 
 Data type: `String[1]`
 
@@ -510,7 +522,7 @@ Data type: `String[1]`
 
 Default value: `'5'`
 
-##### <a name="connection_attempts"></a>`connection_attempts`
+##### <a name="-gpfs--client--rkm--connection_attempts"></a>`connection_attempts`
 
 Data type: `String[1]`
 
@@ -518,7 +530,7 @@ Data type: `String[1]`
 
 Default value: `'3'`
 
-##### <a name="retry_sleep"></a>`retry_sleep`
+##### <a name="-gpfs--client--rkm--retry_sleep"></a>`retry_sleep`
 
 Data type: `String[1]`
 
@@ -526,7 +538,7 @@ Data type: `String[1]`
 
 Default value: `'50000'`
 
-##### <a name="order"></a>`order`
+##### <a name="-gpfs--client--rkm--order"></a>`order`
 
 Data type: `String[1]`
 
@@ -544,14 +556,14 @@ GPFS config
 
 The following parameters are available in the `gpfs_config` type.
 
-* [`filesystems`](#filesystems)
-* [`name`](#name)
+* [`filesystems`](#-gpfs_config--filesystems)
+* [`name`](#-gpfs_config--name)
 
-##### <a name="filesystems"></a>`filesystems`
+##### <a name="-gpfs_config--filesystems"></a>`filesystems`
 
 Filesystems to manage
 
-##### <a name="name"></a>`name`
+##### <a name="-gpfs_config--name"></a>`name`
 
 namevar
 
@@ -613,54 +625,54 @@ Permissions of fileset.
 
 The following parameters are available in the `gpfs_fileset` type.
 
-* [`afm_attributes`](#afm_attributes)
-* [`enforce_permissions`](#enforce_permissions)
-* [`fileset`](#fileset)
-* [`filesystem`](#filesystem)
-* [`inode_space`](#inode_space)
-* [`inode_tolerance`](#inode_tolerance)
-* [`name`](#name)
-* [`provider`](#provider)
+* [`afm_attributes`](#-gpfs_fileset--afm_attributes)
+* [`enforce_permissions`](#-gpfs_fileset--enforce_permissions)
+* [`fileset`](#-gpfs_fileset--fileset)
+* [`filesystem`](#-gpfs_fileset--filesystem)
+* [`inode_space`](#-gpfs_fileset--inode_space)
+* [`inode_tolerance`](#-gpfs_fileset--inode_tolerance)
+* [`name`](#-gpfs_fileset--name)
+* [`provider`](#-gpfs_fileset--provider)
 
-##### <a name="afm_attributes"></a>`afm_attributes`
+##### <a name="-gpfs_fileset--afm_attributes"></a>`afm_attributes`
 
 AFM attributes
 
-##### <a name="enforce_permissions"></a>`enforce_permissions`
+##### <a name="-gpfs_fileset--enforce_permissions"></a>`enforce_permissions`
 
-Valid values: ``true``, ``false``
+Valid values: `true`, `false`
 
 Enforce POSIX permissions after creation
 
-Default value: ``false``
+Default value: `false`
 
-##### <a name="fileset"></a>`fileset`
+##### <a name="-gpfs_fileset--fileset"></a>`fileset`
 
 The GPFS fileset name.
 
-##### <a name="filesystem"></a>`filesystem`
+##### <a name="-gpfs_fileset--filesystem"></a>`filesystem`
 
 The GPFS filesystem name.
 
-##### <a name="inode_space"></a>`inode_space`
+##### <a name="-gpfs_fileset--inode_space"></a>`inode_space`
 
 inodeSpace of fileset.
 
 Default value: `new`
 
-##### <a name="inode_tolerance"></a>`inode_tolerance`
+##### <a name="-gpfs_fileset--inode_tolerance"></a>`inode_tolerance`
 
 Number of inodes to allow GPFS to adjust max or allocated inodes without triggering a Puppet change
 
 Default value: `32`
 
-##### <a name="name"></a>`name`
+##### <a name="-gpfs_fileset--name"></a>`name`
 
 namevar
 
 The default namevar.
 
-##### <a name="provider"></a>`provider`
+##### <a name="-gpfs_fileset--provider"></a>`provider`
 
 The specific backend to use for this `gpfs_fileset` resource. You will seldom need to specify this --- Puppet will
 usually discover the appropriate provider for your platform.
@@ -716,37 +728,37 @@ filesSoftLimit of quota
 
 The following parameters are available in the `gpfs_fileset_quota` type.
 
-* [`fileset`](#fileset)
-* [`filesystem`](#filesystem)
-* [`name`](#name)
-* [`object_name`](#object_name)
-* [`provider`](#provider)
-* [`type`](#type)
+* [`fileset`](#-gpfs_fileset_quota--fileset)
+* [`filesystem`](#-gpfs_fileset_quota--filesystem)
+* [`name`](#-gpfs_fileset_quota--name)
+* [`object_name`](#-gpfs_fileset_quota--object_name)
+* [`provider`](#-gpfs_fileset_quota--provider)
+* [`type`](#-gpfs_fileset_quota--type)
 
-##### <a name="fileset"></a>`fileset`
+##### <a name="-gpfs_fileset_quota--fileset"></a>`fileset`
 
 The GPFS fileset name.
 
-##### <a name="filesystem"></a>`filesystem`
+##### <a name="-gpfs_fileset_quota--filesystem"></a>`filesystem`
 
 The GPFS filesystem name.
 
-##### <a name="name"></a>`name`
+##### <a name="-gpfs_fileset_quota--name"></a>`name`
 
 namevar
 
 The default namevar
 
-##### <a name="object_name"></a>`object_name`
+##### <a name="-gpfs_fileset_quota--object_name"></a>`object_name`
 
 The GPFS quota object name
 
-##### <a name="provider"></a>`provider`
+##### <a name="-gpfs_fileset_quota--provider"></a>`provider`
 
 The specific backend to use for this `gpfs_fileset_quota` resource. You will seldom need to specify this --- Puppet will
 usually discover the appropriate provider for your platform.
 
-##### <a name="type"></a>`type`
+##### <a name="-gpfs_fileset_quota--type"></a>`type`
 
 Quota type
 
@@ -760,30 +772,30 @@ scalemgmt config
 
 The following parameters are available in the `scalemgmt_config` type.
 
-* [`api_password`](#api_password)
-* [`api_user`](#api_user)
-* [`base_url`](#base_url)
-* [`name`](#name)
+* [`api_password`](#-scalemgmt_config--api_password)
+* [`api_user`](#-scalemgmt_config--api_user)
+* [`base_url`](#-scalemgmt_config--base_url)
+* [`name`](#-scalemgmt_config--name)
 
-##### <a name="api_password"></a>`api_password`
+##### <a name="-scalemgmt_config--api_password"></a>`api_password`
 
 API password
 
 Default value: `admin001`
 
-##### <a name="api_user"></a>`api_user`
+##### <a name="-scalemgmt_config--api_user"></a>`api_user`
 
 API user
 
 Default value: `admin`
 
-##### <a name="base_url"></a>`base_url`
+##### <a name="-scalemgmt_config--base_url"></a>`base_url`
 
 Base URL of GPFS API
 
 Default value: `https://localhost:443/scalemgmt/`
 
-##### <a name="name"></a>`name`
+##### <a name="-scalemgmt_config--name"></a>`name`
 
 namevar
 
@@ -813,57 +825,57 @@ Default value: `present`
 
 The following parameters are available in the `scalemgmt_conn_validator` type.
 
-* [`api_password`](#api_password)
-* [`api_user`](#api_user)
-* [`name`](#name)
-* [`provider`](#provider)
-* [`scalemgmt_port`](#scalemgmt_port)
-* [`scalemgmt_server`](#scalemgmt_server)
-* [`test_url`](#test_url)
-* [`timeout`](#timeout)
+* [`api_password`](#-scalemgmt_conn_validator--api_password)
+* [`api_user`](#-scalemgmt_conn_validator--api_user)
+* [`name`](#-scalemgmt_conn_validator--name)
+* [`provider`](#-scalemgmt_conn_validator--provider)
+* [`scalemgmt_port`](#-scalemgmt_conn_validator--scalemgmt_port)
+* [`scalemgmt_server`](#-scalemgmt_conn_validator--scalemgmt_server)
+* [`test_url`](#-scalemgmt_conn_validator--test_url)
+* [`timeout`](#-scalemgmt_conn_validator--timeout)
 
-##### <a name="api_password"></a>`api_password`
+##### <a name="-scalemgmt_conn_validator--api_password"></a>`api_password`
 
 API password
 
 Default value: `admin001`
 
-##### <a name="api_user"></a>`api_user`
+##### <a name="-scalemgmt_conn_validator--api_user"></a>`api_user`
 
 API user name
 
 Default value: `admin`
 
-##### <a name="name"></a>`name`
+##### <a name="-scalemgmt_conn_validator--name"></a>`name`
 
 namevar
 
 An arbitrary name used as the identity of the resource.
 
-##### <a name="provider"></a>`provider`
+##### <a name="-scalemgmt_conn_validator--provider"></a>`provider`
 
 The specific backend to use for this `scalemgmt_conn_validator` resource. You will seldom need to specify this ---
 Puppet will usually discover the appropriate provider for your platform.
 
-##### <a name="scalemgmt_port"></a>`scalemgmt_port`
+##### <a name="-scalemgmt_conn_validator--scalemgmt_port"></a>`scalemgmt_port`
 
 The port that the scalemgmt server should be listening on.
 
 Default value: `443`
 
-##### <a name="scalemgmt_server"></a>`scalemgmt_server`
+##### <a name="-scalemgmt_conn_validator--scalemgmt_server"></a>`scalemgmt_server`
 
 The DNS name or IP address of the server where scalemgmt should be running.
 
 Default value: `localhost`
 
-##### <a name="test_url"></a>`test_url`
+##### <a name="-scalemgmt_conn_validator--test_url"></a>`test_url`
 
 URL to use for testing if the scalemgmt API is up
 
 Default value: `/scalemgmt/v2/info`
 
-##### <a name="timeout"></a>`timeout`
+##### <a name="-scalemgmt_conn_validator--timeout"></a>`timeout`
 
 The max number of seconds that the validator should wait before giving up and deciding that scalemgmt is not running;
 defaults to 30 seconds.

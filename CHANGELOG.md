@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [v2.4.0](https://github.com/treydock/puppet-module-gpfs/tree/v2.4.0) (2024-05-07)
+
+[Full Changelog](https://github.com/treydock/puppet-module-gpfs/compare/v2.3.3...v2.4.0)
+
+### Added
+
+- Use title patterns for fileset and fileset quota names [\#32](https://github.com/treydock/puppet-module-gpfs/pull/32) ([treydock](https://github.com/treydock))
+
 ## [v2.3.3](https://github.com/treydock/puppet-module-gpfs/tree/v2.3.3) (2023-03-30)
 
 [Full Changelog](https://github.com/treydock/puppet-module-gpfs/compare/v2.3.2...v2.3.3)
