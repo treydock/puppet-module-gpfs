@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [v2.5.0](https://github.com/treydock/puppet-module-gpfs/tree/v2.5.0) (2024-05-20)
+
+[Full Changelog](https://github.com/treydock/puppet-module-gpfs/compare/v2.4.0...v2.5.0)
+
+### Added
+
+- Add gpfs\_audit type and provider [\#33](https://github.com/treydock/puppet-module-gpfs/pull/33) ([treydock](https://github.com/treydock))
+
 ## [v2.4.0](https://github.com/treydock/puppet-module-gpfs/tree/v2.4.0) (2024-05-07)
 
 [Full Changelog](https://github.com/treydock/puppet-module-gpfs/compare/v2.3.3...v2.4.0)

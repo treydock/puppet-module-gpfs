@@ -34,6 +34,7 @@
 
 ### Resource types
 
+* [`gpfs_audit`](#gpfs_audit): Manage a GPFS filesystem audit
 * [`gpfs_config`](#gpfs_config): GPFS config
 * [`gpfs_fileset`](#gpfs_fileset): Manage a GPFS fileset
 * [`gpfs_fileset_quota`](#gpfs_fileset_quota): Set a GPFS fileset quota
@@ -547,6 +548,94 @@ Data type: `String[1]`
 Default value: `'10'`
 
 ## Resource types
+
+### <a name="gpfs_audit"></a>`gpfs_audit`
+
+Manage a GPFS filesystem audit
+
+#### Examples
+
+##### Enable audit on `test` filesystem
+
+```puppet
+gpfs_audit { 'test':
+  filesystem  => 'test',
+  retention   => 25,
+  filesets    => ['foo'],
+}
+```
+
+#### Properties
+
+The following properties are available in the `gpfs_audit` type.
+
+##### `ensure`
+
+Valid values: `present`, `absent`
+
+The basic property that the resource should be in.
+
+Default value: `present`
+
+##### `events`
+
+Audit events
+
+Default value: `['ALL']`
+
+##### `filesets`
+
+Filesets to audit
+
+##### `skip_filesets`
+
+Filesets to skip audit
+
+#### Parameters
+
+The following parameters are available in the `gpfs_audit` type.
+
+* [`compliant`](#-gpfs_audit--compliant)
+* [`filesystem`](#-gpfs_audit--filesystem)
+* [`log_fileset`](#-gpfs_audit--log_fileset)
+* [`name`](#-gpfs_audit--name)
+* [`provider`](#-gpfs_audit--provider)
+* [`retention`](#-gpfs_audit--retention)
+
+##### <a name="-gpfs_audit--compliant"></a>`compliant`
+
+Valid values: `true`, `false`
+
+Set audit fileset as compliant
+
+Default value: `false`
+
+##### <a name="-gpfs_audit--filesystem"></a>`filesystem`
+
+The GPFS filesystem name.
+
+##### <a name="-gpfs_audit--log_fileset"></a>`log_fileset`
+
+The GPFS audit log fileset.
+
+Default value: `.audit_log`
+
+##### <a name="-gpfs_audit--name"></a>`name`
+
+namevar
+
+The default namevar.
+
+##### <a name="-gpfs_audit--provider"></a>`provider`
+
+The specific backend to use for this `gpfs_audit` resource. You will seldom need to specify this --- Puppet will usually
+discover the appropriate provider for your platform.
+
+##### <a name="-gpfs_audit--retention"></a>`retention`
+
+The retention in days
+
+Default value: `365`
 
 ### <a name="gpfs_config"></a>`gpfs_config`
 
