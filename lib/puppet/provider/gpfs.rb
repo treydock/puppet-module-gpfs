@@ -18,6 +18,14 @@ class Puppet::Provider::Gpfs < Puppet::Provider
 
   commands mmlsfs: '/usr/lpp/mmfs/bin/mmlsfs'
 
+  def self.type_properties
+    resource_type.validproperties.reject { |p| [:ensure, :custom_properties].include? p.to_sym }
+  end
+
+  def type_properties
+    self.class.type_properties
+  end
+
   def self.mmlsfs_filesystems
     filesystems = []
     mmlsfs_output = mmlsfs('all', '-T', '-Y')

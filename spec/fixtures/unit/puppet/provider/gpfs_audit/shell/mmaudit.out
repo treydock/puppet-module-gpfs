@@ -1,0 +1,4 @@
+mmaudit::HEADER:version:RESERVED:RESERVED:complianceType:auditDeviceName:clusterID:auditFilesetDeviceName:auditFilesetName:auditRetention:topicGenNum:eventTypes:partitionMultiplier:auditType:filesets:
+mmaudit:::3::::ess:6784847688324913833:ess:.audit_log:365:1691601915:ACCESS_DENIED,ACLCHANGE,CLOSE,CREATE,GPFSATTRCHANGE,OPEN,RENAME,RMDIR,UNLINK,XATTRCHANGE:2:FSYS::
+mmaudit:::3:::noncompliant:scratch:6784847688324913833:scratch:audit:25:1715776627:ACCESS_DENIED,ACLCHANGE,CLOSE,CREATE,GPFSATTRCHANGE,OPEN,RENAME,RMDIR,UNLINK,XATTRCHANGE:2:FILESET:fastest1,fastest2:
+mmaudit:::3:::noncompliant:test:6784847688324913833:scratch:audit:25:1715862540:ACCESS_DENIED,ACLCHANGE,CLOSE,CREATE,GPFSATTRCHANGE,OPEN:2:SKIPFILESET:faltest2:
