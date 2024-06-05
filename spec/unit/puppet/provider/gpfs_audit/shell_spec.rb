@@ -101,7 +101,17 @@ describe Puppet::Type.type(:gpfs_audit).provider(:shell) do
       resource.provider.flush
     end
 
-    it 'remove filesets' do
+    it 'does not remove filesets' do
+      hash = resource.to_hash
+      hash[:filesets] = ['foo', 'bar', 'baz']
+      resource.provider.instance_variable_set(:@property_hash, hash)
+      expect(resource.provider).not_to receive(:mmaudit).with(['test', 'update', '--disable-filesets', 'baz'])
+      resource.provider.filesets = ['foo', 'bar']
+      resource.provider.flush
+    end
+
+    it 'remove filesets when disable_missing' do
+      resource[:disable_missing] = true
       hash = resource.to_hash
       hash[:filesets] = ['foo', 'bar', 'baz']
       resource.provider.instance_variable_set(:@property_hash, hash)

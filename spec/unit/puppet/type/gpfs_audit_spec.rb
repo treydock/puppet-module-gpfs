@@ -93,6 +93,15 @@ describe Puppet::Type.type(:gpfs_audit) do
     expect(audit[:skip_filesets]).to eq(['test1', 'test2'])
   end
 
+  it 'has default disable_missing' do
+    expect(audit[:disable_missing]).to eq(:false)
+  end
+
+  it 'allows disable_missing' do
+    audit[:disable_missing] = true
+    expect(audit[:disable_missing]).to eq(:true)
+  end
+
   it 'does not allow filesets and skip_filesets' do
     audit[:filesets] = ['foo']
     audit[:skip_filesets] = ['bar']
