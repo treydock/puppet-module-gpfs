@@ -88,6 +88,30 @@ describe Puppet::Type.type(:gpfs_audit) do
     expect(audit[:filesets]).to eq(['test1', 'test2'])
   end
 
+  describe 'filesets insync?' do
+    it 'is insync without auto_disable' do
+      audit[:filesets] = ['test1', 'test2']
+      expect(audit.property(:filesets).insync?(['test1', 'test2', 'test3'])).to eq(true)
+    end
+
+    it 'is not insync without auto_disable' do
+      audit[:filesets] = ['test1', 'test2']
+      expect(audit.property(:filesets).insync?(['test2', 'test3'])).to eq(false)
+    end
+
+    it 'is insync with auto_disable' do
+      audit[:filesets] = ['test1', 'test2']
+      audit[:auto_disable] = true
+      expect(audit.property(:filesets).insync?(['test1', 'test2'])).to eq(true)
+    end
+
+    it 'is not insync with auto_disable' do
+      audit[:filesets] = ['test1', 'test2']
+      audit[:auto_disable] = true
+      expect(audit.property(:filesets).insync?(['test1', 'test2', 'test3'])).to eq(false)
+    end
+  end
+
   it 'allows skip_filesets' do
     audit[:skip_filesets] = ['test1', 'test2']
     expect(audit[:skip_filesets]).to eq(['test1', 'test2'])

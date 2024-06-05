@@ -60,6 +60,17 @@ Puppet::Type.newtype(:gpfs_audit) do
 
   newproperty(:filesets, array_matching: :all, parent: PuppetX::GPFS::ArrayProperty) do
     desc 'Filesets to audit'
+
+    def insync?(is)
+      current = Array(is).sort
+      should = Array(@should).sort
+      if @resource[:auto_disable].to_sym == :true
+        current == should
+      else
+        difference = should - current
+        difference.empty?
+      end
+    end
   end
 
   newproperty(:skip_filesets, array_matching: :all, parent: PuppetX::GPFS::ArrayProperty) do
