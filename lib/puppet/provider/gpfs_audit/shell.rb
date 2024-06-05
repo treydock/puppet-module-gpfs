@@ -117,9 +117,11 @@ Puppet::Type.type(:gpfs_audit).provide(:shell, parent: Puppet::Provider::Gpfs) d
       unless enable_filesets.empty?
         mmaudit([resource[:filesystem], 'update', '--enable-filesets', enable_filesets.join(',')])
       end
-      disable_filesets = @property_hash[:filesets] - @property_flush[:filesets]
-      unless disable_filesets.empty?
-        mmaudit([resource[:filesystem], 'update', '--disable-filesets', disable_filesets.join(',')])
+      if resource[:auto_disable].to_sym == :true
+        disable_filesets = @property_hash[:filesets] - @property_flush[:filesets]
+        unless disable_filesets.empty?
+          mmaudit([resource[:filesystem], 'update', '--disable-filesets', disable_filesets.join(',')])
+        end
       end
     end
     if @property_flush[:skip_filesets]

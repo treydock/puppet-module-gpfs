@@ -93,6 +93,15 @@ describe Puppet::Type.type(:gpfs_audit) do
     expect(audit[:skip_filesets]).to eq(['test1', 'test2'])
   end
 
+  it 'has default auto_disable' do
+    expect(audit[:auto_disable]).to eq(:false)
+  end
+
+  it 'allows auto_disable' do
+    audit[:auto_disable] = true
+    expect(audit[:auto_disable]).to eq(:true)
+  end
+
   it 'does not allow filesets and skip_filesets' do
     audit[:filesets] = ['foo']
     audit[:skip_filesets] = ['bar']
