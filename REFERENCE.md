@@ -595,12 +595,21 @@ Filesets to skip audit
 
 The following parameters are available in the `gpfs_audit` type.
 
+* [`auto_disable`](#-gpfs_audit--auto_disable)
 * [`compliant`](#-gpfs_audit--compliant)
 * [`filesystem`](#-gpfs_audit--filesystem)
 * [`log_fileset`](#-gpfs_audit--log_fileset)
 * [`name`](#-gpfs_audit--name)
 * [`provider`](#-gpfs_audit--provider)
 * [`retention`](#-gpfs_audit--retention)
+
+##### <a name="-gpfs_audit--auto_disable"></a>`auto_disable`
+
+Valid values: `true`, `false`
+
+Automatically disable filesets missing from `filesets` array
+
+Default value: `false`
 
 ##### <a name="-gpfs_audit--compliant"></a>`compliant`
 
