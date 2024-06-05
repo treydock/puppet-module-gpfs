@@ -66,6 +66,12 @@ Puppet::Type.newtype(:gpfs_audit) do
     desc 'Filesets to skip audit'
   end
 
+  newparam(:auto_disable, boolean: true) do
+    desc 'Automatically disable filesets missing from `filesets` array'
+    newvalues(:true, :false)
+    defaultto :false
+  end
+
   validate do
     raise('Filesystem is required.') if self[:filesystem].nil?
     if !self[:filesets].nil? && !self[:skip_filesets].nil?
