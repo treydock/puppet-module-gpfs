@@ -94,7 +94,7 @@ class Puppet::Provider::Gpfs < Puppet::Provider
     uri = URI.join(base_url, uri_path)
     header = {
       'Content-Type' => 'application/json',
-      'Accept' => 'application/json'
+      'Accept' => 'application/json',
     }
     body = nil
 
@@ -254,7 +254,7 @@ class Puppet::Provider::Gpfs < Puppet::Provider
       'M' => 1024**2,
       'G' => 1024**3,
       'T' => 1024**4,
-      'P' => 1024**5
+      'P' => 1024**5,
     }.each_pair do |suffix, factor|
       next unless value < factor
 
@@ -272,9 +272,9 @@ class Puppet::Provider::Gpfs < Puppet::Provider
       'M' => 1024,
       'G' => 1024**2,
       'T' => 1024**3,
-      'P' => 1024**4
+      'P' => 1024**4,
     }
-    if value =~ %r{^([0-9.]+)(P|T|G|M)$}
+    if value.to_s =~ %r{^([0-9.]+)(P|T|G|M)$}
       v = Regexp.last_match(1).to_f
       f = Regexp.last_match(2)
       factor = factors[f]

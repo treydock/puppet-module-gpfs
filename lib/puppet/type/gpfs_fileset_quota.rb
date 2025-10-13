@@ -61,7 +61,7 @@ Puppet::Type.newtype(:gpfs_fileset_quota) do
     desc 'blockSoftLimit of quota'
 
     validate do |value|
-      unless value =~ %r{^0$|^([0-9.]+)(M|G|T|P)$}
+      unless value.to_s =~ %r{^0$|^([0-9.]+)(M|G|T|P)$}
         raise ArgumentError, "Invalid block_soft_limit: #{value}, must be in format of [0-9]+(M|G|T|P)"
       end
     end
@@ -71,7 +71,7 @@ Puppet::Type.newtype(:gpfs_fileset_quota) do
     desc 'blockHardLimit of quota'
 
     validate do |value|
-      unless value =~ %r{^0$|^([0-9.]+)(M|G|T|P)$}
+      unless value.to_s =~ %r{^0$|^([0-9.]+)(M|G|T|P)$}
         raise ArgumentError, "Invalid block_hard_limit: #{value}, must be in format of [0-9]+(M|G|T|P)"
       end
     end
@@ -105,9 +105,9 @@ Puppet::Type.newtype(:gpfs_fileset_quota) do
     factors = {
       'M' => 1024,
       'G' => 1024**2,
-      'T' => 1024**3
+      'T' => 1024**3,
     }
-    if value =~ %r{^([0-9.])(T|G|M)$}
+    if value.to_s =~ %r{^([0-9.])(T|G|M)$}
       v = Regexp.last_match(1).to_f
       f = Regexp.last_match(2)
       factor = factors[f]
@@ -120,9 +120,9 @@ Puppet::Type.newtype(:gpfs_fileset_quota) do
   def self.convert_files(value)
     factors = {
       'M' => 10**6,
-      'K' => 10**3
+      'K' => 10**3,
     }
-    if value =~ %r{^(\d+)(M|K)$}
+    if value.to_s =~ %r{^(\d+)(M|K)$}
       v = Regexp.last_match(1).to_i
       f = Regexp.last_match(2)
       factor = factors[f]
@@ -141,15 +141,15 @@ Puppet::Type.newtype(:gpfs_fileset_quota) do
           [:type],
           [:object_name],
           [:fileset],
-          [:filesystem]
-        ]
+          [:filesystem],
+        ],
       ],
       [
         %r{(.*)},
         [
-          [:name]
-        ]
-      ]
+          [:name],
+        ],
+      ],
     ]
   end
 end

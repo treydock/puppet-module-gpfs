@@ -70,7 +70,7 @@ Puppet::Type.type(:gpfs_audit).provide(:shell, parent: Puppet::Provider::Gpfs) d
       resource[:filesystem], 'enable',
       '--log-fileset', resource[:log_fileset],
       '--retention', resource[:retention].to_s,
-      '--events', resource[:events].join(',')
+      '--events', resource[:events].join(','),
     ]
     if resource[:compliant].to_sym == :true
       mmaudit_args << '--compliant'

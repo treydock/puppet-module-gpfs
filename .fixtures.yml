@@ -13,9 +13,11 @@ fixtures:
       repo: saz/sudo
     logrotate:
       repo: puppet/logrotate
+    systemd:
+      repo: puppet/systemd
     augeasproviders_core:
-      repo: herculesteam/augeasproviders_core
+      repo: puppet/augeasproviders_core
     augeasproviders_shellvar:
-      repo: herculesteam/augeasproviders_shellvar
+      repo: puppet/augeasproviders_shellvar
   symlinks:
     gpfs: "#{source_dir}"

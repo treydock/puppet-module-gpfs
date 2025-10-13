@@ -17,7 +17,7 @@ Puppet::Type.type(:gpfs_fileset).provide(:rest_v2, parent: Puppet::Provider::Gpf
   def self.instances
     filesets = []
     params = {
-      'fields' => ':all:'
+      'fields' => ':all:',
     }
     data = get_request('v2/filesystems/:all:/filesets', params)
     unless data.key?('filesets')

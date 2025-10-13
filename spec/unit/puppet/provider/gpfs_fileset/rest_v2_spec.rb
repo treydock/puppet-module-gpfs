@@ -10,7 +10,7 @@ describe Puppet::Type.type(:gpfs_fileset).provider(:rest_v2) do
     type.new(name: 'test',
              filesystem: 'project',
              path: '/fs/project/test',
-             provider: 'rest_v2')
+             provider: 'rest_v2',)
   end
 
   let(:all_filesets_data) do
@@ -18,39 +18,39 @@ describe Puppet::Type.type(:gpfs_fileset).provider(:rest_v2) do
       'filesets' => [
         { 'config' => { 'filesetName' => 'test1', 'filesystemName' => 'project', 'maxNumInodes' => 1000, 'path' => '/fs/project/test1' } },
         { 'config' => { 'filesetName' => 'test2', 'filesystemName' => 'project', 'maxNumInodes' => 2000, 'path' => '/fs/project/test2' } },
-        { 'config' => { 'filesetName' => 'test1', 'filesystemName' => 'scratch', 'maxNumInodes' => 2000, 'path' => '/fs/scratch/test1' } }
+        { 'config' => { 'filesetName' => 'test1', 'filesystemName' => 'scratch', 'maxNumInodes' => 2000, 'path' => '/fs/scratch/test1' } },
       ],
       'status' => {
         'code' => 200,
-        'message' => 'The request finished successfully'
-      }
+        'message' => 'The request finished successfully',
+      },
     }
   end
 
   let(:all_filesets) do
     [
       { ensure: :present, name: 'project/test1', fileset: 'test1', filesystem: 'project', path: '/fs/project/test1',
-        max_num_inodes: 1000, owner: nil },
+        max_num_inodes: 1000, owner: nil, },
       { ensure: :present, name: 'project/test2', fileset: 'test2', filesystem: 'project', path: '/fs/project/test2',
-        max_num_inodes: 2000, owner: nil },
+        max_num_inodes: 2000, owner: nil, },
       { ensure: :present, name: 'scratch/test1', fileset: 'test1', filesystem: 'scratch', path: '/fs/scratch/test1',
-        max_num_inodes: 2000, owner: nil }
+        max_num_inodes: 2000, owner: nil, },
     ]
   end
 
   describe 'self.instances' do
     it 'creates instances' do
-      allow(described_class).to receive(:get_request).with('v2/filesystems/:all:/filesets', 'fields' => ':all:').and_return(all_filesets_data)
+      allow(described_class).to receive(:get_request).with('v2/filesystems/:all:/filesets', { 'fields' => ':all:' }).and_return(all_filesets_data)
       expect(described_class.instances.length).to eq(3)
     end
 
     it 'creates no instance when no filesets returned' do
-      allow(described_class).to receive(:get_request).with('v2/filesystems/:all:/filesets', 'fields' => ':all:').and_return('filesets' => [])
+      allow(described_class).to receive(:get_request).with('v2/filesystems/:all:/filesets', { 'fields' => ':all:' }).and_return('filesets' => [])
       expect(described_class.instances.length).to be_zero
     end
 
     it 'returns the resource for a fileset' do
-      allow(described_class).to receive(:get_request).with('v2/filesystems/:all:/filesets', 'fields' => ':all:').and_return(all_filesets_data)
+      allow(described_class).to receive(:get_request).with('v2/filesystems/:all:/filesets', { 'fields' => ':all:' }).and_return(all_filesets_data)
       expect(described_class.instances[0].instance_variable_get('@property_hash')).to eq(all_filesets[0])
     end
   end
@@ -82,7 +82,7 @@ describe Puppet::Type.type(:gpfs_fileset).provider(:rest_v2) do
       expected_data = {
         filesetName: resource[:fileset],
         path: resource[:path],
-        inodeSpace: 'new'
+        inodeSpace: 'new',
       }
       expect(resource.provider).to receive(:post_request).with("v2/filesystems/#{resource[:filesystem]}/filesets", expected_data)
       resource.provider.create

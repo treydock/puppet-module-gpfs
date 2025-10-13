@@ -10,7 +10,7 @@ describe Puppet::Type.type(:gpfs_fileset).provider(:shell) do
     type.new(name: 'test1',
              filesystem: 'test',
              path: '/fs/test/test1',
-             provider: 'shell')
+             provider: 'shell',)
   end
 
   let(:mmlsfs_header) do
@@ -35,9 +35,9 @@ mmlsfs::0:1:::test:defaultMountPoint:%2Ffs%2Ftest::"
   let(:all_filesets) do
     [
       { ensure: :present, name: 'root on test', fileset: 'root', filesystem: 'test', path: '/fs/test',
-        max_num_inodes: 65_792, alloc_inodes: 65_792, owner: nil },
+        max_num_inodes: 65_792, alloc_inodes: 65_792, owner: nil, },
       { ensure: :present, name: 'test3 on test', fileset: 'test3', filesystem: 'test', path: '/fs/test/test3',
-        max_num_inodes: 2_000_000, alloc_inodes: 1_000_000, owner: nil }
+        max_num_inodes: 2_000_000, alloc_inodes: 1_000_000, owner: nil, },
     ]
   end
 

@@ -13,14 +13,14 @@ describe Puppet::Type.type(:gpfs_audit).provider(:shell) do
   let(:mmaudits) do
     [
       { ensure: :present, name: 'ess', filesystem: 'ess', compliant: :true,
-        log_fileset: '.audit_log', retention: 365, events: ['ALL'] },
+        log_fileset: '.audit_log', retention: 365, events: ['ALL'], },
       { ensure: :present, name: 'scratch', filesystem: 'scratch', compliant: :false,
         log_fileset: 'audit', retention: 25,
-        events: ['ALL'], filesets: ['fastest1', 'fastest2'] },
+        events: ['ALL'], filesets: ['fastest1', 'fastest2'], },
       { ensure: :present, name: 'test', filesystem: 'test', compliant: :false,
         log_fileset: 'audit', retention: 25,
         events: ['ACCESS_DENIED', 'ACLCHANGE', 'CLOSE', 'CREATE', 'GPFSATTRCHANGE', 'OPEN'],
-        skip_filesets: ['faltest2'] }
+        skip_filesets: ['faltest2'], },
     ]
   end
 
@@ -67,7 +67,7 @@ describe Puppet::Type.type(:gpfs_audit).provider(:shell) do
         'test', 'enable',
         '--log-fileset', '.audit_log',
         '--retention', '365',
-        '--events', 'ALL'
+        '--events', 'ALL',
       ]
       expect(resource.provider).to receive(:mmaudit).with(expected)
       resource.provider.create

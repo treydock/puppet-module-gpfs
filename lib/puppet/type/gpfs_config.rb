@@ -16,7 +16,7 @@ Puppet::Type.newtype(:gpfs_config) do
   def generate
     [
       :gpfs_fileset,
-      :gpfs_fileset_quota
+      :gpfs_fileset_quota,
     ].each do |res_type|
       provider_class = Puppet::Type.type(res_type).provider(:shell)
       provider_class.filesystems = self[:filesystems]
