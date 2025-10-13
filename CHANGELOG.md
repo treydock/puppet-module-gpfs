@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [v3.0.0](https://github.com/treydock/puppet-module-gpfs/tree/v3.0.0) (2025-10-13)
+
+[Full Changelog](https://github.com/treydock/puppet-module-gpfs/compare/v2.6.1...v3.0.0)
+
+### Changed
+
+- Major Updates [\#37](https://github.com/treydock/puppet-module-gpfs/pull/37) ([treydock](https://github.com/treydock))
+
 ## [v2.6.1](https://github.com/treydock/puppet-module-gpfs/tree/v2.6.1) (2024-06-05)
 
 [Full Changelog](https://github.com/treydock/puppet-module-gpfs/compare/v2.6.0...v2.6.1)
