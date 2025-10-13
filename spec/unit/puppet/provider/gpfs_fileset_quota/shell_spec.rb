@@ -9,7 +9,7 @@ describe Puppet::Type.type(:gpfs_fileset_quota).provider(:shell) do
   let(:resource) do
     type.new(name: 'test1',
              filesystem: 'test',
-             provider: 'shell')
+             provider: 'shell',)
   end
 
   let(:mmlsfs_header) do
@@ -28,23 +28,23 @@ mmlsfs::0:1:::test:defaultMountPoint:%2Ffs%2Ftest::"
   let(:all_quotas) do
     [
       { ensure: :present, name: 'usr root for root on test', fileset: 'root', filesystem: 'test', object_name: 'root', type: :usr,
-        block_soft_limit: '0', block_hard_limit: '0', files_soft_limit: 0, files_hard_limit: 0 },
+        block_soft_limit: '0', block_hard_limit: '0', files_soft_limit: 0, files_hard_limit: 0, },
       { ensure: :present, name: 'usr root for qtest1 on test', fileset: 'qtest1', filesystem: 'test', object_name: 'root', type: :usr,
-        block_soft_limit: '0', block_hard_limit: '0', files_soft_limit: 0, files_hard_limit: 0 },
+        block_soft_limit: '0', block_hard_limit: '0', files_soft_limit: 0, files_hard_limit: 0, },
       { ensure: :present, name: 'usr root for test3 on test', fileset: 'test3', filesystem: 'test', object_name: 'root', type: :usr,
-        block_soft_limit: '0', block_hard_limit: '0', files_soft_limit: 0, files_hard_limit: 0 },
+        block_soft_limit: '0', block_hard_limit: '0', files_soft_limit: 0, files_hard_limit: 0, },
       { ensure: :present, name: 'grp root for root on test', fileset: 'root', filesystem: 'test', object_name: 'root', type: :grp,
-        block_soft_limit: '0', block_hard_limit: '0', files_soft_limit: 0, files_hard_limit: 0 },
+        block_soft_limit: '0', block_hard_limit: '0', files_soft_limit: 0, files_hard_limit: 0, },
       { ensure: :present, name: 'grp root for qtest1 on test', fileset: 'qtest1', filesystem: 'test', object_name: 'root', type: :grp,
-        block_soft_limit: '0', block_hard_limit: '0', files_soft_limit: 0, files_hard_limit: 0 },
+        block_soft_limit: '0', block_hard_limit: '0', files_soft_limit: 0, files_hard_limit: 0, },
       { ensure: :present, name: 'grp root for test3 on test', fileset: 'test3', filesystem: 'test', object_name: 'root', type: :grp,
-        block_soft_limit: '0', block_hard_limit: '0', files_soft_limit: 0, files_hard_limit: 0 },
+        block_soft_limit: '0', block_hard_limit: '0', files_soft_limit: 0, files_hard_limit: 0, },
       { ensure: :present, name: 'fileset root for root on test', fileset: 'root', filesystem: 'test', object_name: 'root', type: :fileset,
-        block_soft_limit: '0', block_hard_limit: '0', files_soft_limit: 0, files_hard_limit: 0 },
+        block_soft_limit: '0', block_hard_limit: '0', files_soft_limit: 0, files_hard_limit: 0, },
       { ensure: :present, name: 'fileset test3 for test3 on test', fileset: 'test3', filesystem: 'test', object_name: 'test3', type: :fileset,
-        block_soft_limit: '0', block_hard_limit: '0', files_soft_limit: 0, files_hard_limit: 0 },
+        block_soft_limit: '0', block_hard_limit: '0', files_soft_limit: 0, files_hard_limit: 0, },
       { ensure: :present, name: 'fileset qtest1 for qtest1 on test', fileset: 'qtest1', filesystem: 'test', object_name: 'qtest1', type: :fileset,
-        block_soft_limit: '1T', block_hard_limit: '1T', files_soft_limit: 400_000, files_hard_limit: 400_000 }
+        block_soft_limit: '1T', block_hard_limit: '1T', files_soft_limit: 400_000, files_hard_limit: 400_000, },
     ]
   end
 
@@ -99,7 +99,7 @@ mmlsfs::0:1:::test:defaultMountPoint:%2Ffs%2Ftest::"
                           block_hard_limit: '1T',
                           files_soft_limit: 400_000,
                           files_hard_limit: 400_000,
-                          provider: 'shell')
+                          provider: 'shell',)
       expect(resource.provider).to receive(:mmsetquota).with(['test:test1', '--block', '1073741824K:1073741824K', '--files', '400000:400000'])
       resource.provider.create
       property_hash = resource.provider.instance_variable_get('@property_hash')

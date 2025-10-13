@@ -14,7 +14,7 @@ Puppet::Type.type(:gpfs_fileset_quota).provide(:rest_v2, parent: Puppet::Provide
     quotas = []
     params = {
       'entityType' => 'FILESET',
-      'fields' => ':all:'
+      'fields' => ':all:',
     }
     data = get_request('v2/filesystems/:all:/quotas', params)
     unless data.key?('quotas')
@@ -23,7 +23,7 @@ Puppet::Type.type(:gpfs_fileset_quota).provide(:rest_v2, parent: Puppet::Provide
 
     data['quotas'].map do |q|
       quota = {
-        ensure: :present
+        ensure: :present,
       }
       quota[:filesystem] = q['filesystemName']
       quota[:fileset] = q['objectName']

@@ -6,8 +6,8 @@ describe 'gpfs::client::rkm' do
   on_supported_os(supported_os: [
                     {
                       'operatingsystem' => 'RedHat',
-                      'operatingsystemrelease' => ['6', '7']
-                    }
+                      'operatingsystemrelease' => ['6', '7'],
+                    },
                   ]).each do |os, facts|
     context "when #{os}" do
       let(:facts) do
@@ -24,7 +24,7 @@ describe 'gpfs::client::rkm' do
           key_store_source: 'puppet:///some/path',
           passphrase: 'changeme',
           client_cert_label: 'test',
-          tenant_name: 'tenant'
+          tenant_name: 'tenant',
         }
       end
 
@@ -41,15 +41,15 @@ describe 'gpfs::client::rkm' do
                                                 '  connectionTimeout = 5',
                                                 '  connectionAttempts = 3',
                                                 '  retrySleep = 50000',
-                                                '}'
-                                              ])
+                                                '}',
+                                              ],)
       end
 
       it 'manages key store parent directory' do
         is_expected.to contain_file('/var/mmfs/etc/RKMcerts').with(ensure: 'directory',
                                                                    owner: 'root',
                                                                    group: 'root',
-                                                                   mode: '0755')
+                                                                   mode: '0755',)
       end
 
       it 'manages key store' do
@@ -57,7 +57,7 @@ describe 'gpfs::client::rkm' do
                                                                                owner: 'root',
                                                                                group: 'root',
                                                                                mode: '0600',
-                                                                               source: 'puppet:///some/path')
+                                                                               source: 'puppet:///some/path',)
       end
     end
   end

@@ -6,20 +6,19 @@ describe 'gpfs::client' do
   on_supported_os(supported_os: [
                     {
                       'operatingsystem' => 'RedHat',
-                      'operatingsystemrelease' => ['6', '7']
-                    }
-                  ]).each do |os, facts|
+                      'operatingsystemrelease' => ['8', '9'],
+                    },
+                  ]).each do |os, os_facts|
     context "when #{os}" do
-      let(:facts) { facts }
-
       let(:kernel) do
-        case facts[:operatingsystemmajrelease].to_i
-        when 7
-          '3.10.0-957.12.2.el7.x86_64'
-        when 6
-          '2.6.32-754.18.2.el6.x86_64'
+        case os_facts[:os]['release']['major'].to_i
+        when 9
+          '5.10'
+        when 8
+          '4.11'
         end
       end
+      let(:facts) { os_facts.merge!({ 'kernelrelease' => kernel }) }
 
       it { is_expected.to compile.with_all_deps }
 

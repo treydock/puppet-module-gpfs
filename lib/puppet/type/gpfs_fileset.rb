@@ -230,15 +230,15 @@ Puppet::Type.newtype(:gpfs_fileset) do
         [
           [:name],
           [:fileset],
-          [:filesystem]
-        ]
+          [:filesystem],
+        ],
       ],
       [
         %r{(.*)},
         [
-          [:name]
-        ]
-      ]
+          [:name],
+        ],
+      ],
     ]
   end
 end

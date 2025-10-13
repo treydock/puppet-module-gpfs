@@ -6,8 +6,8 @@ describe 'gpfs::gui' do
   on_supported_os(supported_os: [
                     {
                       'operatingsystem' => 'RedHat',
-                      'operatingsystemrelease' => ['7']
-                    }
+                      'operatingsystemrelease' => ['8', '9'],
+                    },
                   ]).each do |os, facts|
     context "when #{os}" do
       let(:facts) { facts }
