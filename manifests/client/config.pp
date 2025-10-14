@@ -79,7 +79,7 @@ class gpfs::client::config {
       unit          => 'gpfs.service',
       service_entry => {
         'TasksMax'     => 'infinity',
-        'ExecStartPre' => "-/bin/sh -c 'targetLink=\$(/bin/readlink -f /var/mmfs/run) ; [ -n \"\$targetLink\" ] && /bin/mkdir -p -m 755 \$targetLink",
+        'ExecStartPre' => "-/bin/sh -c 'targetLink=\$(/bin/readlink -f /var/mmfs/run) ; [ -n \"\$targetLink\" ] && /bin/mkdir -p -m 755 \$targetLink'",
       },
     }
     file { '/etc/systemd/system/gpfs.service':
