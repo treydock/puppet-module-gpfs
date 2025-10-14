@@ -65,13 +65,22 @@ class gpfs::client::config {
   create_resources('gpfs::client::rkm', $gpfs::client::rkms)
 
   # Hack to properly install systemd service
-  if $facts['service_provider'] == 'systemd' and $gpfs::client::manage_service_files {
+  if $gpfs::client::manage_service_files {
     file { '/usr/lib/systemd/system/gpfs.service':
       ensure => 'file',
       owner  => 'root',
       group  => 'root',
       mode   => '0444',
       source => 'file:///usr/lpp/mmfs/lib/systemd/gpfs.service',
+    }
+    # Changes made to unit in gpfs.base RPM
+    systemd::manage_dropin { 'custom.conf':
+      ensure        => 'present',
+      unit          => 'gpfs.service',
+      service_entry => {
+        'TasksMax'     => 'infinity',
+        'ExecStartPre' => "-/bin/sh -c 'targetLink=\$(/bin/readlink -f /var/mmfs/run) ; [ -n \"\$targetLink\" ] && /bin/mkdir -p -m 755 \$targetLink",
+      },
     }
     file { '/etc/systemd/system/gpfs.service':
       ensure => 'absent',
